@@ -1,0 +1,12 @@
+<Context reloadable="true">
+    <Resource
+        name="jdbc/Comparador"
+        auth="Container"
+        type="javax.sql.DataSource"
+        username="23_comwebg_03"
+        password="E6QmKZD9"
+        driverClassName="com.mysql.jdbc.Driver"
+        url="jdbc:mysql://mysql.lab.it.uc3m.es/23_comwebg_03b"
+        maxActive="8"
+        maxIdle="4"/>
+</Context>

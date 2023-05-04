@@ -1,0 +1,9 @@
+//AÑADIR USUARIO
+
+INSERT INTO usuarios (nombre, contrasena, correo) VALUES ('user', PASSWORD('con'), 'cor');
+
+//COMPROBAR SI EXISTE LA CUENTA
+
+SELECT * FROM usuarios WHERE nombre =‘b@a.com’ AND PWDCOMPARE(‘123456’, contrasena)= 1
+
+(Si devuelve un registro es que la cuenta existe y si no devuelve nada es que no existe dicha cuenta)

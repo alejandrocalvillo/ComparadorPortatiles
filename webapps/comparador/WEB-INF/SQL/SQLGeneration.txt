@@ -1,0 +1,42 @@
+CREATE TABLE marcas (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE procesadores (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE memorias (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  tipo VARCHAR(255) NOT NULL,
+  capacidad INT NOT NULL
+);
+
+CREATE TABLE discos (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  tipo VARCHAR(255) NOT NULL,
+  capacidad INT NOT NULL
+);
+
+CREATE TABLE ordenadores (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  modelo VARCHAR(255) NOT NULL,
+  marca_id INT,
+  procesador_id INT,
+  memoria_id INT,
+  disco_id INT,
+  FOREIGN KEY (marca_id) REFERENCES marcas (id),
+  FOREIGN KEY (procesador_id) REFERENCES procesadores (id),
+  FOREIGN KEY (memoria_id) REFERENCES memorias (id),
+  FOREIGN KEY (disco_id) REFERENCES discos (id)
+);
+
+CREATE TABLE puntos_de_venta (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  ordenador_id INT,
+  tienda VARCHAR(255) NOT NULL,
+  precio DECIMAL(10, 2) NOT NULL,
+  FOREIGN KEY (ordenador_id) REFERENCES ordenadores (id)
+);

@@ -1,0 +1,62 @@
+INSERT INTO marcas (nombre) VALUES ('ASUS'), ('LG'), ('DELL'), ('TOSHIBA'), ('HP'), ('LENOVO');
+
+INSERT INTO procesadores (nombre) VALUES ('Intel Core i5-11600K'), ('Intel Core i7-10700K'), ('AMD Ryzen 5 5600X'), ('AMD Ryzen 7 5800X'), ('Intel Core i9-11900K'), ('AMD Ryzen 9 5900X');
+
+INSERT INTO memorias (tipo, capacidad) VALUES ('RAM', 8), ('RAM', 16), ('RAM', 32), ('RAM', 64);
+
+INSERT INTO discos (tipo, capacidad) VALUES ('SSD', 256), ('SSD', 512), ('HDD', 1024), ('HDD', 2048);
+
+INSERT INTO ordenadores (modelo, marca_id, procesador_id, memoria_id, disco_id) VALUES
+  ('Asus VivoBook', 1, 1, 1, 1),
+  ('LG Gram', 2, 2, 2, 2),
+  ('Dell XPS 13', 3, 3, 3, 3),
+  ('Toshiba Portege', 4, 1, 1, 2),
+  ('HP Spectre x360', 5, 2, 2, 1),
+  ('Lenovo ThinkPad X1 Carbon', 6, 3, 3, 3),
+  ('Asus ROG Strix', 1, 4, 4, 4),
+  ('LG UltraGear', 2, 5, 1, 3),
+  ('Dell Alienware', 3, 6, 2, 2),
+  ('Toshiba Tecra', 4, 4, 3, 1),
+  ('HP Pavilion', 5, 5, 4, 4),
+  ('Lenovo Legion', 6, 6, 1, 3);
+
+
+
+INSERT INTO puntos_de_venta (ordenador_id, tienda, direccion, precio) VALUES
+  (13, 'Media Mark', 'Calle Almansa 123, Badalona', 599.99),
+  (19, 'PC Componentes', 'Avenida de Atocha, Madrid', 1299.99),
+  (14, 'Worten', 'Plaza del Sol 789, Badalona', 999.99),
+  (20, 'PC World', 'Gran Vía 13, Alicante', 849.99),
+  (15, 'Tech Things', 'Paseo del Mar 246, Valencia', 1199.99),
+  (21, 'El Corte Ingles', 'Calle Alfonso X el Sabio, Huelva', 1399.99),
+  (16, 'La Villa del PC', 'Calle del Rosario, Sevilla', 1599.99),
+  (22, 'TodoMoviles', 'Avenida de la Paz, Cáceres', 1699.99),
+  (17, 'Ikea', 'Plaza de los Olivos, Girona', 1799.99),
+  (23, 'Media Mark', 'Gran Vía 135, Madrid', 899.99),
+  (18, 'El Corte Ingles', 'Paseo de la Castellana, Madrid',1598.98)
+
+  INSERT INTO puntos_de_venta (ordenador_id, tienda, direccion, precio) VALUES
+  (18, 'Media Mark', 'Calle Almansa 123, Badalona', 599.99),
+  (13, 'PC Componentes', 'Avenida de Atocha, Madrid', 1299.99),
+  (19, 'Worten', 'Plaza del Sol 789, Badalona', 999.99),
+  (14, 'PC World', 'Gran Vía 13, Alicante', 849.99),
+  (20, 'Tech Things', 'Paseo del Mar 246, Valencia', 1199.99),
+  (15, 'El Corte Ingles', 'Calle Alfonso X el Sabio, Huelva', 1399.99),
+  (21, 'La Villa del PC', 'Calle del Rosario, Sevilla', 1599.99),
+  (16, 'TodoMoviles', 'Avenida de la Paz, Cáceres', 1699.99),
+  (22, 'Ikea', 'Plaza de los Olivos, Girona', 1799.99),
+  (17, 'Media Mark', 'Gran Vía 135, Madrid', 899.99),
+  (23, 'El Corte Ingles', 'Paseo de la Castellana, Madrid',1598.98)
+
+  INSERT INTO puntos_de_venta (ordenador_id, tienda, direccion, precio) VALUES
+  (23, 'Media Mark', 'Calle Almansa 123, Badalona', 599.99),
+  (18, 'PC Componentes', 'Avenida de Atocha, Madrid', 1299.99),
+  (13, 'Worten', 'Plaza del Sol 789, Badalona', 999.99),
+  (19, 'PC World', 'Gran Vía 13, Alicante', 849.99),
+  (14, 'Tech Things', 'Paseo del Mar 246, Valencia', 1199.99),
+  (20, 'El Corte Ingles', 'Calle Alfonso X el Sabio, Huelva', 1399.99),
+  (15, 'La Villa del PC', 'Calle del Rosario, Sevilla', 1599.99),
+  (21, 'TodoMoviles', 'Avenida de la Paz, Cáceres', 1699.99),
+  (16, 'Ikea', 'Plaza de los Olivos, Girona', 1799.99),
+  (22, 'Media Mark', 'Gran Vía 135, Madrid', 899.99),
+  (17, 'El Corte Ingles', 'Paseo de la Castellana, Madrid',1598.98);

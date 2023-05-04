@@ -1,0 +1,187 @@
+package comparador;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.PreparedStatement;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+public class DBManager implements AutoCloseable {
+
+    private Connection connection;
+
+    public DBManager() throws SQLException, NamingException {
+        connect();
+    }
+
+    private void connect() throws SQLException, NamingException {
+        Context initCtx = new InitialContext();
+        Context envCtx = (Context) initCtx.lookup("java:comp/env");
+        DataSource ds = (DataSource) envCtx.lookup("jdbc/Comparador");
+        connection = ds.getConnection();
+    }
+
+    /**
+     * Close the connection to the database if it is still open.
+     *
+     */
+    public void close() throws SQLException {
+        if (connection != null) {
+            connection.close();
+        }
+        connection = null;
+    }
+
+    /**
+     * Return a Computer from his id
+     *
+     * @param id The id of the computer.
+     * @return A computer from the database.
+     * @throws SQLException If something fails with the DB.
+     */
+    public Ordenador getOrdenadorById(int id) throws SQLException{
+        Ordenador ordenador = null;
+        String query = "SELECT ordenadores.modelo, marcas.nombre AS marca_nombre, procesadores.nombre AS procesador_nombre, memorias.tipo, memorias.capacidad AS capacidad_ram, discos.tipo, discos.capacidad AS capacidad_disco FROM ordenadores INNER JOIN marcas ON marca_id = marcas.id INNER JOIN procesadores ON procesador_id = procesadores.id INNER JOIN discos ON disco_id = discos.id INNER JOIN memorias ON memoria_id = memorias.id WHERE ordenadores.id = "+id;
+
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet resultSet = stmt.executeQuery(query);
+            while (resultSet.next()) {
+                String modelo = resultSet.getString("modelo");
+                String marca = resultSet.getString("marca_nombre");
+                String procesador = resultSet.getString("procesador_nombre");
+                String memoria = resultSet.getString("memorias.tipo");
+                String capacidad_ram = resultSet.getString("capacidad_ram");
+                String disco = resultSet.getString("discos.tipo");
+                String capacidad_disco = resultSet.getString("capacidad_disco");
+
+
+                ordenador = new Ordenador();
+                ordenador.setId(id);
+                ordenador.setModelo(modelo);
+                ordenador.setMarca(marca);
+                ordenador.setProcesador(procesador);
+                ordenador.setMemoriaTipo(memoria);
+                ordenador.setMemoriaCapacidad(Integer.parseInt(capacidad_ram));
+                ordenador.setDiscoTipo(disco);
+                ordenador.setDiscoCapacidad(Integer.parseInt(capacidad_disco));
+
+                return ordenador;
+            }
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println("VendorError: " + ex.getErrorCode());
+            System.out.println("SQLState: " + ex.getSQLState());
+        }
+
+        return null;
+    }
+
+   /**
+     * Return a list with all the computers from a brand.
+     *
+     * @return List with all the books.
+     * @throws SQLException If something fails with the DB.
+     */
+    public List<Ordenador> listOrdenadoresPorMarca(String brand) throws SQLException {
+        String query = "SELECT ordenadores.id AS id, ordenadores.modelo, marcas.nombre AS marca_nombre FROM ordenadores INNER JOIN marcas ON marca_id = marcas.id WHERE marcas.nombre = '"+brand+"'";
+
+        try(Statement stmt = connection.createStatement()){
+            ResultSet resultSet = stmt.executeQuery(query);
+            List<Ordenador> ordenadores = new ArrayList<Ordenador>();
+            while(resultSet.next()){
+                int id = resultSet.getInt("id");
+                String modelo = resultSet.getString("modelo");
+                String marca = resultSet.getString("marca_nombre");
+                Ordenador ordenador = new Ordenador();
+
+                ordenador.setId(id);
+                ordenador.setModelo(modelo);
+                ordenador.setMarca(marca);
+                ordenadores.add(ordenador);
+            }
+            return ordenadores;
+        } catch (SQLException ex) {
+            System.out.println (" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println (" VendorError : " + ex.getErrorCode());
+            System.out.println (" SQLState : " + ex.getSQLState());
+
+        }
+        return new ArrayList<Ordenador>();
+    }
+
+
+    /**
+     * Return a User account checking the name and the password
+     *
+     * @param contraseña and name of the user.
+     * @return The user from the database.
+     * @throws SQLException If something fails with the DB.
+     */
+
+    public Usuario getUsuarioDB(String nombre, String contrasena) throws SQLException {
+        
+        String query = "SELECT usuarios.id, usuarios.nombre, usuarios.correo, usuarios.contrasena FROM usuarios WHERE nombre =? AND PWDCOMPARE(?, contrasena)= 1";
+        Usuario usuario=new Usuario();
+        PreparedStatement stmt=null;
+        try
+        {
+            stmt= connection.prepareStatement(query);
+            stmt.setString(1, nombre);
+            stmt.setString(2, contrasena);
+            ResultSet resultSet = stmt.executeQuery(query);
+            
+            if(resultSet.next()){
+                int id = resultSet.getInt("id");
+                String nom = resultSet.getString("nombre");
+                String cor= resultSet.getString("correo");
+                String con = resultSet.getString("contrasena");
+                
+                usuario.setNombre(nom);
+                usuario.setCorreo(cor);
+                usuario.setCorreo(con);
+                usuario.setId(id);
+            }
+            return usuario;
+        } catch (SQLException ex) {
+            System.out.println (" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println (" VendorError : " + ex.getErrorCode());
+            System.out.println (" SQLState : " + ex.getSQLState());
+
+        }
+        return new Usuario();
+    } 
+
+    public void insertUsuarioDB(String nombre, String contrasena, String email) throws SQLException {
+        
+        String query = "INSERT INTO usuarios (nombre, contrasena, correo) VALUES (?, PASSWORD(?), ?)";
+        
+        PreparedStatement stmt=null;
+        try
+        {
+            stmt= connection.prepareStatement(query);
+            stmt.setString(1, nombre);
+            stmt.setString(2, contrasena);
+            stmt.setString(3,  email);
+            stmt.executeUpdate();
+         
+        } catch (SQLException ex) {
+            System.out.println (" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println (" VendorError : " + ex.getErrorCode());
+            System.out.println (" SQLState : " + ex.getSQLState());
+
+        }
+        
+    } 
+
+
+}

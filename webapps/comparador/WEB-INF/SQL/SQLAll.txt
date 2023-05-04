@@ -1,0 +1,6 @@
+SELECT ordenadores.modelo, marcas.nombre, procesadores.nombre, memorias.tipo, memorias.capacidad AS Capacidad_RAM, discos.tipo, discos.capacidad AS Capacidad_Disco  FROM ordenadores 
+INNER JOIN marcas ON marca_id = marcas.id 
+INNER JOIN procesadores ON procesador_id = procesadores.id
+INNER JOIN discos ON disco_id = discos.id
+INNER JOIN memorias ON memoria_id = memorias.id 
+INNER JOIN discos d ON disco_id = discos.id 
