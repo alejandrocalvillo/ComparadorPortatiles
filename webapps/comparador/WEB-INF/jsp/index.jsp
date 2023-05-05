@@ -18,7 +18,7 @@
       <header>
         <h1 id="title">Comparador de portátiles</h1>
 	<div>
-          <a >
+          <a href="/comparador/login">
             <input id="IniciarSesion" type="button" value="Iniciar Sesion"></input>
           </a>
         </div>
