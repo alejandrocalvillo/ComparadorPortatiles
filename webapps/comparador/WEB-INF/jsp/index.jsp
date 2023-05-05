@@ -18,7 +18,7 @@
       <header>
         <h1 id="title">Comparador de portátiles</h1>
 	<div>
-          <a href="/comparador/login">
+          <a >
             <input id="IniciarSesion" type="button" value="Iniciar Sesion"></input>
           </a>
         </div>
@@ -123,7 +123,7 @@
           <div id="filtros">
             <div class="filtro">
               <p class="centered-text-filtro">Marca:
-                <select class="seleccionador" name="marca">
+                <select id="marca" class="seleccionador" name="marca">
                   <option value="1">Las cosas</option>
                   <option value="2">Puffer</option>
                   <option value="3" selected>LG</option>
@@ -134,7 +134,7 @@
             </div>
             <div class="filtro">
               <p class="centered-text-filtro">Memoria:
-                <select class="seleccionador" name="memoria">
+                <select id="memoria" class="seleccionador" name="memoria">
                   <option value="1">Las cosas</option>
                   <option value="2">Puffer</option>
                   <option value="3" selected>LG</option>
@@ -145,7 +145,7 @@
             </div>
             <div class="filtro">
               <p class="centered-text-filtro">Procesador:
-                <select class="seleccionador" name="procesador">
+                <select id="procesador" class="seleccionador" name="procesador">
                   <option value="1">Las cosas</option>
                   <option value="2">Puffer</option>
                   <option value="3" selected>LG</option>
@@ -156,7 +156,7 @@
             </div>
             <div class="filtro">
               <p class="centered-text-filtro">Capacidad Disco:
-                <select class="seleccionador" name="capacidadDisco">
+                <select id="capacidadDisco" class="seleccionador" name="capacidadDisco">
                   <option value="1">Las cosas</option>
                   <option value="2">Puffer</option>
                   <option value="3" selected>LG</option>
@@ -167,7 +167,7 @@
             </div>
             <div class="filtro">
               <p class="centered-text-filtro">Tipo Memoria:
-                <select class="seleccionador" name="tipoMemoria">
+                <select id="tipoMemoria" class="seleccionador" name="tipoMemoria">
                   <option value="1">Las cosas</option>
                   <option value="2">Puffer</option>
                   <option value="3" selected>LG</option>
@@ -178,7 +178,7 @@
             </div>
             <div class="filtro">
               <p class="centered-text-filtro">Tipo Disco:
-                <select class="seleccionador" name="tipoDisco">
+                <select id="tipoDisco" class="seleccionador" name="tipoDisco">
                   <option value="1">Las cosas</option>
                   <option value="2">Puffer</option>
                   <option value="3" selected>LG</option>
@@ -190,6 +190,11 @@
           </div>
           <div><input id="buscar" type="button" value="Buscar"></input></div>
         </section>
+
+        <section id="tabla-container">        
+          <div id="tabla"></div>
+        </section>
+
       </main>
 
 

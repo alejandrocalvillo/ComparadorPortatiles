@@ -1,3 +1,7 @@
+
+<%@ page language='java' contentType='text/html;charset=utf-8' %>
+<%@ page import='comparador.Usuario' %>
+<%@ page import='comparador.DBManager' %>
 <!DOCTYPE html>
 <html>
  	<head>
@@ -30,7 +34,26 @@
 			</p>
       		
     	</form>
+		
+
+
+		<%	
+		DBManager db = new DBManager();
+		Usuario usuario= new Usuario();
+		String contrasena;
+        String email;
+		String usuarioForm = request.getParameter("usuario");
+		String contrasenaForm = request.getParameter("contrasena");
+		String emailForm=request.getParameter("email");
+		if (usuarioForm != null && contrasenaForm != null && emailForm!= null) { 
+		  Usuario usuarioBD = db.getUsuarioDB(usuarioForm, contrasenaForm); 
+	
+		  
+		} else {%>
+		  <p>No hay usuario</p> 
+		<%}
+		
+		%>
 		</div>
 	</body>
 </html>
-

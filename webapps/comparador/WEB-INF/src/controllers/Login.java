@@ -26,13 +26,13 @@ public class Login extends HttpServlet {
         // Obtiene un unico ordenador.
         HttpSession session = request.getSession(false);
 
-
+        /* 
       	if (session != null && session.getAttribute("usuario") != null) {
             // El usuario ya inició sesión, redireccionar a la página index.jsp
-            response.sendRedirect("WEB-INF/jsp/index.jsp");
+            response.sendRedirect("/comparador/index");
             return;
         }
-
+*/
         try (DBManager db = new DBManager()) {
             //Empezamos contando marcas en el index
        // String nextpage="/login";
@@ -42,27 +42,29 @@ public class Login extends HttpServlet {
 
 		System.out.println(usuario_str+" "+contrasena_str);
 
-        usuario =db.getUsuarioDB(usuario_str, contrasena_str);
+        
 
-       /* if(usuario==null)
+         if(usuario_str!=null && contrasena_str!=null  )
             {
-            // Guardar el objeto usuario en la sesión
-            session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            //ssesion
-            }  */
-
-		if(session==null) {
-            //nextpage="jsp/index.jsp";
-            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/index");
-       rd.forward(request, response);
+            usuario =db.getUsuarioDB(usuario_str, contrasena_str);
+            System.out.println(usuario.getNombre()+" "+usuario.getContrasena());
+            if(usuario.getNombre().equals(usuario_str))
+                {
+                //asociar la sesion al usuario creado
+                // Guardar el objeto usuario en la sesión
+                session = request.getSession();
+                session.setAttribute("usuario", usuario);
+                //ssesion y te manda al index
+                RequestDispatcher rd = request.getRequestDispatcher("/index");
+                rd.forward(request, response);
+                } 
             
+            
+            }  else{
 
-		} 
-  
-       RequestDispatcher rd = request.getRequestDispatcher("html/inicio_sesion.html");
+       RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/inicio_sesion.jsp");
        rd.forward(request, response);
-       
+            } 
 
 	
         } catch (SQLException | NamingException e) {

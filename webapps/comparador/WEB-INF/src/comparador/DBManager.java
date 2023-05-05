@@ -117,6 +117,41 @@ public class DBManager implements AutoCloseable {
         return new ArrayList<Ordenador>();
     }
 
+           /**
+     * Return a list with all the computers that the user is searching.
+     *
+     * @return List with all the books.
+     * @throws SQLException If something fails with the DB.
+     */
+
+    public List<Ordenador> BuscarOrdenadores(String marca , String memoria , String procesador , String capacidadDisco , String tipoMemoria , String tipoDisco) throws SQLException {
+        String query = "SELECT ordenadores.id AS id, ordenadores.modelo, marcas.nombre AS marca_nombre FROM ordenadores INNER JOIN marcas ON marca_id = marcas.id WHERE marcas.nombre = '"+marca+"'";
+
+        try(Statement stmt = connection.createStatement()){
+            ResultSet resultSet = stmt.executeQuery(query);
+            List<Ordenador> ordenadores = new ArrayList<Ordenador>();
+            while(resultSet.next()){
+                int id = resultSet.getInt("id");
+                String modelo1 = resultSet.getString("modelo");
+                String marca1 = resultSet.getString("marca_nombre");
+                Ordenador ordenador = new Ordenador();
+
+                ordenador.setId(id);
+                ordenador.setModelo(modelo1);
+                ordenador.setMarca(marca1);
+                ordenadores.add(ordenador);
+            }
+            return ordenadores;
+        } catch (SQLException ex) {
+            System.out.println (" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println (" VendorError : " + ex.getErrorCode());
+            System.out.println (" SQLState : " + ex.getSQLState());
+
+        }
+        return new ArrayList<Ordenador>();
+    }
+
 
     /**
      * Return a User account checking the name and the password
@@ -128,26 +163,32 @@ public class DBManager implements AutoCloseable {
 
     public Usuario getUsuarioDB(String nombre, String contrasena) throws SQLException {
         
-        String query = "SELECT usuarios.id, usuarios.nombre, usuarios.correo, usuarios.contrasena FROM usuarios WHERE nombre =? AND PWDCOMPARE(?, contrasena)= 1";
+        String query = "SELECT usuarios.id, usuarios.nombre, usuarios.correo, usuarios.contrasena FROM usuarios WHERE nombre = ? AND contrasena=PASSWORD(?)";
         Usuario usuario=new Usuario();
         PreparedStatement stmt=null;
         try
         {
+        
             stmt= connection.prepareStatement(query);
             stmt.setString(1, nombre);
             stmt.setString(2, contrasena);
-            ResultSet resultSet = stmt.executeQuery(query);
+       
+            ResultSet resultSet = stmt.executeQuery();
+            
+
             
             if(resultSet.next()){
                 int id = resultSet.getInt("id");
                 String nom = resultSet.getString("nombre");
                 String cor= resultSet.getString("correo");
                 String con = resultSet.getString("contrasena");
-                
+                System.out.println ("nombre : "+ nom+ "contraseña: "+ con);
                 usuario.setNombre(nom);
                 usuario.setCorreo(cor);
-                usuario.setCorreo(con);
-                usuario.setId(id);
+                usuario.setContrasena(con);
+                usuario.setId(id); 
+                System.out.println ("nombre : "+ usuario.getNombre()+ "contraseña: "+ usuario.getContrasena());
+
             }
             return usuario;
         } catch (SQLException ex) {
@@ -160,8 +201,9 @@ public class DBManager implements AutoCloseable {
         return new Usuario();
     } 
 
-    public void insertUsuarioDB(String nombre, String contrasena, String email) throws SQLException {
-        
+    //hacer que devuelva un usuario si todo okey
+    public Usuario insertUsuarioDB(String nombre, String contrasena, String email) throws SQLException {
+        Usuario usuario=new Usuario();;
         String query = "INSERT INTO usuarios (nombre, contrasena, correo) VALUES (?, PASSWORD(?), ?)";
         
         PreparedStatement stmt=null;
@@ -180,6 +222,12 @@ public class DBManager implements AutoCloseable {
             System.out.println (" SQLState : " + ex.getSQLState());
 
         }
+        usuario.setNombre(nombre);
+        usuario.setCorreo(email);
+        usuario.setContrasena(contrasena);
+        usuario.setId(20);
+       //cuando la otra funcion vaya llamamos a la consulta de usuario para que nos devuelva un usuario completo con id correspondiente en vez de hacer nosotros los set
+        return usuario;
         
     } 
 

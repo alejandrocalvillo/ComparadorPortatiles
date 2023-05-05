@@ -67,4 +67,34 @@ public class Index extends HttpServlet {
             response.sendError(500);
         }
     }
+
+    // public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {       
+
+    //     try (DBManager db = new DBManager()) {
+
+    //         List<Ordenador> ordenadoresBuscados = new ArrayList<Ordenador>();
+
+    //         String marca = request.getParameter("marca");
+    //         String memoria = request.getParameter("memoria");
+    //         String procesador = request.getParameter("procesador");
+    //         String capacidadDisco = request.getParameter("capacidadDisco");
+    //         String tipoMemoria = request.getParameter("tipoMemoria");
+    //         String tipoDisco = request.getParameter("tipoDisco");
+
+    //         ordenadoresBuscados = db.BuscarOrdenadores(marca, memoria, procesador, capacidadDisco, tipoMemoria, tipoDisco);
+    //         // Redirigir al usuario a la página de inicio
+    //         RequestDispatcher rd = request.getRequestDispatcher("/index");
+
+    //         request.setAttribute("ordenadoresBuscados", ordenadoresBuscados);
+    //         System.out.println("Paso por aqui");
+    //         rd.forward(request, response);
+    //         System.out.println("Por aqui?");
+
+    //     } catch (SQLException | NamingException e) {
+    //         e.printStackTrace();
+    //         response.sendError(500);
+    //     }
+
+    // }
+
 }
