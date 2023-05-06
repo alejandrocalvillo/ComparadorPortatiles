@@ -183,6 +183,30 @@ public class DBManager implements AutoCloseable {
         }
         return new ArrayList<Ordenador>();
     }
+
+    public List<Ordenador> tiposProcesador(){
+        String query = "SELECT * FROM procesadores";
+
+        try(Statement stmt = connection.createStatement()){
+            ResultSet resultSet = stmt.executeQuery(query);
+            List<Ordenador> ordenadores = new ArrayList<Ordenador>();
+
+            while(resultSet.next()){
+                String tipo = resultSet.getString("nombre");
+                Ordenador ordenador = new Ordenador();
+
+                ordenador.setProcesador(tipo);
+                ordenadores.add(ordenador);
+            }
+            return ordenadores;
+        }catch (SQLException ex) {
+            System.out.println (" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println (" VendorError : " + ex.getErrorCode());
+            System.out.println (" SQLState : " + ex.getSQLState());
+        }
+        return new ArrayList<Ordenador>();
+    }
     /**
      * Return a User account checking the name and the password
      *

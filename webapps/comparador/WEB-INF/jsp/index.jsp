@@ -148,11 +148,10 @@
             <div class="filtro">
               <p class="centered-text-filtro">Procesador:
                 <select id="procesador" class="seleccionador" name="procesador">
-                  <option value="1">Las cosas</option>
-                  <option value="2">Puffer</option>
-                  <option value="3" selected>LG</option>
-                  <option value="4">Max</option>
-                  <option value="5">Firebot</option>
+                  <% List<Ordenador> ordenadores = (List<Ordenador>)request.getAttribute("tiposProcesador"); %>
+                    <% for (Ordenador ordenador : ordenadores) { %>
+                      <option value="<%= ordenador.getProcesador() %>"><%= ordenador.getProcesador() %></option>
+                      <% } %>
                 </select>
               </p>
             </div>
