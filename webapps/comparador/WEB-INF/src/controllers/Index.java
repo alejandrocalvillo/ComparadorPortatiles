@@ -70,6 +70,11 @@ public class Index extends HttpServlet {
             request.setAttribute("tiposProcesador", ordenadores);
             //ordenadores.clear();
 
+            ordenadores = new ArrayList<Ordenador>();
+            ordenadores = db.tiposDisco();
+            request.setAttribute("tiposDisco", ordenadores);
+            //ordenadores.clear();
+
             RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
             rd.forward(request, response);
         } catch (SQLException | NamingException e) {

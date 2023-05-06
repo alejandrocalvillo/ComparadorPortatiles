@@ -158,11 +158,10 @@
             <div class="filtro">
               <p class="centered-text-filtro">Capacidad Disco:
                 <select id="capacidadDisco" class="seleccionador" name="capacidadDisco">
-                  <option value="1">Las cosas</option>
-                  <option value="2">Puffer</option>
-                  <option value="3" selected>LG</option>
-                  <option value="4">Max</option>
-                  <option value="5">Firebot</option>
+                  <% List<Ordenador> discos = (List<Ordenador>)request.getAttribute("tiposDisco"); %>
+                    <% for (Ordenador ordenador : discos) { %>
+                      <option value="<%= ordenador.getDiscoTipo() + ordenador.getDiscoCapacidad() %>"><%= ordenador.getDiscoTipo() + " de " + ordenador.getDiscoCapacidad() %></option>
+                      <% } %>
                 </select>
               </p>
             </div>

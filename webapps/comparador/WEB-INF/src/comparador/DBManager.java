@@ -184,6 +184,12 @@ public class DBManager implements AutoCloseable {
         return new ArrayList<Ordenador>();
     }
 
+    /**
+     * Return a list with all the processors in the DB.
+     *
+     * @return List with all the books.
+     * @throws SQLException If something fails with the DB.
+     */
     public List<Ordenador> tiposProcesador(){
         String query = "SELECT * FROM procesadores";
 
@@ -207,6 +213,33 @@ public class DBManager implements AutoCloseable {
         }
         return new ArrayList<Ordenador>();
     }
+
+    public List<Ordenador> tiposDisco(){
+        String query = "SELECT * FROM discos";
+
+        try(Statement stmt = connection.createStatement()){
+            ResultSet resultSet = stmt.executeQuery(query);
+            List<Ordenador> ordenadores = new ArrayList<Ordenador>();
+
+            while(resultSet.next()){
+                String tipo = resultSet.getString("tipo");
+                String capacidad = resultSet.getString("capacidad");
+                Ordenador ordenador = new Ordenador();
+
+                ordenador.setDiscoTipo(tipo);
+                ordenador.setDiscoCapacidad(Integer.parseInt(capacidad));
+                ordenadores.add(ordenador);
+            }
+            return ordenadores;
+        }catch (SQLException ex) {
+            System.out.println (" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println (" VendorError : " + ex.getErrorCode());
+            System.out.println (" SQLState : " + ex.getSQLState());
+        }
+        return new ArrayList<Ordenador>();
+    }
+    
     /**
      * Return a User account checking the name and the password
      *
