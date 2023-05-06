@@ -60,10 +60,11 @@ public class Index extends HttpServlet {
             ordenadores.clear();
             // Reenvía la petición a una plantilla JSP, pasando el catálogo como atributo
             
+            ordenadores = new ArrayList<Ordenador>();
             ordenadores = db.tiposMemoria();
             request.setAttribute("tiposMemoria", ordenadores);
             ordenadores.clear();
-            
+
             RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
             rd.forward(request, response);
         } catch (SQLException | NamingException e) {
