@@ -29,7 +29,8 @@
       </header>
       <main>
         <section>
-          <div id="contenedor1"><!--Empieza primera linea de cajas--->
+          <!--Empieza primera linea de cajas--->
+          <div id="contenedor1">
             <div class="rectangle">
               <p class="centered-text">ASUS</p>
               <% int ASUSCount=(Integer)request.getAttribute("ASUSCount"); %>
@@ -66,8 +67,8 @@
                     <% } %>
             </div>
           </div>
-
-          <div id="contenedor2"><!--Empieza segunda linea de cajas--->
+          <!--Empieza segunda linea de cajas--->
+          <div id="contenedor2">
             <div class="rectangle">
               <p class="centered-text">TOSHIBA</p>
               <% int TOSHIBACount=(Integer)request.getAttribute("TOSHIBACount"); %>
@@ -107,8 +108,8 @@
         </section>
 
 
-
-        <section><!--Donde vemos los portatiles-->
+        <!--Donde vemos los portatiles-->
+        <section>
           <div id="PortatilesSeleccionadosTEXT">
             <p class="centered-text">Portatiles Seleccionados</p>
           </div>
@@ -124,22 +125,22 @@
             <div class="filtro">
               <p class="centered-text-filtro">Marca:
                 <select id="marca" class="seleccionador" name="marca">
-                  <option value="1">Las cosas</option>
-                  <option value="2">Puffer</option>
-                  <option value="3" selected>LG</option>
-                  <option value="4">Max</option>
-                  <option value="5">Firebot</option>
+                  <option value="ASUS">ASUS</option>
+                  <option value="LG">LG</option>
+                  <option value="DELL" selected>DELL</option>
+                  <option value="TOSHIBA">TOSHIBA</option>
+                  <option value="HP">HP</option>
+                  <option value="LENOVO">LENOVO</option>
                 </select>
               </p>
             </div>
             <div class="filtro">
               <p class="centered-text-filtro">Memoria:
                 <select id="memoria" class="seleccionador" name="memoria">
-                  <option value="1">Las cosas</option>
-                  <option value="2">Puffer</option>
-                  <option value="3" selected>LG</option>
-                  <option value="4">Max</option>
-                  <option value="5">Firebot</option>
+                  <% List<Ordenador> ordenadores = (List<Ordenador>)reques.getAttribute("tiposMemoria"); %>
+                    <% for (Ordenador ordenador : ordenadores) { %>
+                      <option value="<%= ordenador.getMemoriaTipo()+ordenador.getMemoriaCapacidad() %>"><%= ordenador.getMemoriaTipo() %> de <%= ordenador.getMemoriaCapacidad()></option>
+                      <% } %>
                 </select>
               </p>
             </div>
