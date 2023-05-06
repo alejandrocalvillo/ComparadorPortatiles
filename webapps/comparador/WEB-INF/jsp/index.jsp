@@ -138,8 +138,8 @@
             <div class="filtro">
               <p class="centered-text-filtro">Memoria:
                 <select id="memoria" class="seleccionador" name="memoria">
-                  <% List<Ordenador> ordenadores = (List<Ordenador>)request.getAttribute("tiposMemoria"); %>
-                    <% for (Ordenador ordenador : ordenadores) { %>
+                  <% List<Ordenador> memorias = (List<Ordenador>)request.getAttribute("tiposMemoria"); %>
+                    <% for (Ordenador ordenador : memorias) { %>
                       <option value="<%= ordenador.getMemoriaTipo() + ordenador.getMemoriaCapacidad() %>"><%= ordenador.getMemoriaTipo() + " de " + ordenador.getMemoriaCapacidad() %></option>
                       <% } %>
                 </select>
@@ -148,8 +148,8 @@
             <div class="filtro">
               <p class="centered-text-filtro">Procesador:
                 <select id="procesador" class="seleccionador" name="procesador">
-                  <% List<Ordenador> ordenadores = (List<Ordenador>)request.getAttribute("tiposProcesador"); %>
-                    <% for (Ordenador ordenador : ordenadores) { %>
+                  <% List<Ordenador> procesadores = (List<Ordenador>)request.getAttribute("tiposProcesador"); %>
+                    <% for (Ordenador ordenador : procesadores) { %>
                       <option value="<%= ordenador.getProcesador() %>"><%= ordenador.getProcesador() %></option>
                       <% } %>
                 </select>
