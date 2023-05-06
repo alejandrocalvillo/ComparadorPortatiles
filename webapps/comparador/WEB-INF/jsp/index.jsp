@@ -136,11 +136,19 @@
               </p>
             </div>
             <div class="filtro">
-              <p class="centered-text-filtro">Memoria:
-                <select id="memoria" class="seleccionador" name="memoria">
+              <div class="filtro">
+                <p class="centered-text-filtro">Tipo de Memoria:
                   <% List<Ordenador> memorias = (List<Ordenador>)request.getAttribute("tiposMemoria"); %>
                     <% for (Ordenador ordenador : memorias) { %>
-                      <option value="<%= ordenador.getMemoriaTipo() + ordenador.getMemoriaCapacidad() %>"><%= ordenador.getMemoriaTipo() + " de " + ordenador.getMemoriaCapacidad() %></option>
+                      <option value="<%= ordenador.getMemoriaTipo() %>"><%= ordenador.getMemoriaTipo() %></option>
+                      <% } %>
+                  </select>
+                </p>
+              </div>
+              <p class="centered-text-filtro">Capacidad de Memoria:
+                <select id="memoria" class="seleccionador" name="memoria">
+                    <% for (Ordenador ordenador : memorias) { %>
+                      <option value="<%= ordenador.getMemoriaCapacidad() %>"><%= ordenador.getMemoriaCapacidad() %></option>
                       <% } %>
                 </select>
               </p>
@@ -156,37 +164,25 @@
               </p>
             </div>
             <div class="filtro">
-              <p class="centered-text-filtro">Capacidad Disco:
-                <select id="capacidadDisco" class="seleccionador" name="capacidadDisco">
+              <p class="centered-text-filtro">Tipo del Disco:
+                <select id="tipoDisco" class="seleccionador" name="tipoDisco">
                   <% List<Ordenador> discos = (List<Ordenador>)request.getAttribute("tiposDisco"); %>
                     <% for (Ordenador ordenador : discos) { %>
-                      <option value="<%= ordenador.getDiscoTipo() + ordenador.getDiscoCapacidad() %>"><%= ordenador.getDiscoTipo() + " de " + ordenador.getDiscoCapacidad() %></option>
+                      <option value="<%= ordenador.getDiscoTipo() %>"><%= ordenador.getDiscoTipo() %></option>
                       <% } %>
                 </select>
               </p>
             </div>
             <div class="filtro">
-              <p class="centered-text-filtro">Tipo Memoria:
-                <select id="tipoMemoria" class="seleccionador" name="tipoMemoria">
-                  <option value="1">Las cosas</option>
-                  <option value="2">Puffer</option>
-                  <option value="3" selected>LG</option>
-                  <option value="4">Max</option>
-                  <option value="5">Firebot</option>
+              <p class="centered-text-filtro">Capacidad del Disco:
+                <select id="capacidadDisco" class="seleccionador" name="capacidadDisco">
+                    <% for (Ordenador ordenador : discos) { %>
+                      <option value="<%= ordenador.getDiscoCapacidad() %>"><%= ordenador.getDiscoCapacidad() %></option>
+                      <% } %>
                 </select>
               </p>
             </div>
-            <div class="filtro">
-              <p class="centered-text-filtro">Tipo Disco:
-                <select id="tipoDisco" class="seleccionador" name="tipoDisco">
-                  <option value="1">Las cosas</option>
-                  <option value="2">Puffer</option>
-                  <option value="3" selected>LG</option>
-                  <option value="4">Max</option>
-                  <option value="5">Firebot</option>
-                </select>
-              </p>
-            </div>
+            
           </div>
           <div><input id="buscar" type="button" value="Buscar"></input></div>
         </section>
