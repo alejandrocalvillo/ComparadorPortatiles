@@ -144,6 +144,7 @@
               </div>
               <p class="centered-text-filtro">Capacidad de Memoria:
                 <select id="memoria" class="seleccionador" name="memoria">
+                  <% List<Ordenador> memorias = (List<Ordenador>)request.getAttribute("tiposMemoria"); %>
                     <% for (Ordenador ordenador : memorias) { %>
                       <option value="<%= ordenador.getMemoriaCapacidad() %>"><%= ordenador.getMemoriaCapacidad() %></option>
                       <% } %>
