@@ -138,10 +138,7 @@
             <div class="filtro">
               <div class="filtro">
                 <p class="centered-text-filtro">Tipo de Memoria:
-                  <% List<Ordenador> memorias = (List<Ordenador>)request.getAttribute("tiposMemoria"); %>
-                    <% for (Ordenador ordenador : memorias) { %>
-                      <option value="<%= ordenador.getMemoriaTipo() %>"><%= ordenador.getMemoriaTipo() %></option>
-                      <% } %>
+                  <option value = "name">RAM</option>
                   </select>
                 </p>
               </div>
