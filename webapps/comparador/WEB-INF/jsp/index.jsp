@@ -1,6 +1,7 @@
 <%@ page language='java' contentType='text/html;charset=utf-8' %>
-  <%@ page import='comparador.Ordenador' %>
-
+<%@ page import='comparador.Ordenador' %>
+<%@ page import='java.util.ArrayList;' %>
+<%@ page import='java.util.List;' %>
     <!DOCTYPE html>
     <html>
 
