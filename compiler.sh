@@ -1,4 +1,6 @@
 git pull
 
-sh webapps/comparador/WEB-INF/src/compile.sh
+cd webapps/comparador/WEB-INF/src/
+sh compile.sh
+cd ../../../../
 cp -r webapps/ ../
