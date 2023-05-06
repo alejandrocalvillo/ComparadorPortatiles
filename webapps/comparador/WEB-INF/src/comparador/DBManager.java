@@ -152,6 +152,12 @@ public class DBManager implements AutoCloseable {
         return new ArrayList<Ordenador>();
     }
 
+    /**
+     * Return a list with all the RAMs in the DB.
+     *
+     * @return List with all the books.
+     * @throws SQLException If something fails with the DB.
+     */
     public List<Ordenador> tiposMemoria(){
         String query = "SELECT * FROM memorias";
 
