@@ -1,7 +1,6 @@
 
-$(document).ready(function () {
 
-    function searchOrdenadores() {
+ function searchOrdenadores() {
         // Get form data
         const formData = new FormData(document.getElementById('searchForm'));
 
@@ -47,7 +46,6 @@ $(document).ready(function () {
         });
     }
 
-});
 	// console.log("ready!");
 
 	// var tablaCreada = false; // variable para controlar si la tabla ya ha sido creada
