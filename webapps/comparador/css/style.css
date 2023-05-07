@@ -206,26 +206,22 @@ body {
 }
 
 #buscar {
-    box-sizing: border-box;
-
-    position: absolute;
-    width: 217px;
-    height: 43px;
-    left: 1110px;
-    top:850px;
-    
-    background: #D9D9D9;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 25px;
-    line-height: 30px;
-    
-    color: #000000;
-}
-
+    box-sizing: border-box !important;
+    position: absolute !important;
+    width: 217px !important;
+    height: 43px !important;
+    left: 1110px !important;
+    top: 850px !important;
+    background: #D9D9D9 !important;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
+    font-family: 'Inter' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 25px !important;
+    line-height: 30px !important;
+    color: #000000 !important;
+  }
+  
 #tabla {
     position: absolute;
     margin: auto;
