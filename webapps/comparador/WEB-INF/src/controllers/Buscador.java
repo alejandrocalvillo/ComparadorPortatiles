@@ -15,10 +15,14 @@ import java.util.List;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import comparador.*;
 
 @WebServlet("/buscar")
-public class SearchServlet extends HttpServlet {
+public class Buscador extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -36,9 +40,22 @@ public class SearchServlet extends HttpServlet {
             request.setAttribute("ordenadores", ordenadores);
             request.getRequestDispatcher("index.jsp").forward(request, response);
 
-            // Convert list to JSON
-            Gson gson = new Gson();
-            String ordenadoresJson = gson.toJson(ordenadores);
+            JSONArray ordenadoresJsonArray = new JSONArray();
+            for (Ordenador ordenador : ordenadores) {
+                JSONObject ordenadorJson = new JSONObject();
+                ordenadorJson.put("id", ordenador.getId());
+                ordenadorJson.put("modelo", ordenador.getModelo());
+                ordenadorJson.put("marca", ordenador.getMarca());
+                ordenadorJson.put("procesador", ordenador.getProcesador());
+                ordenadorJson.put("memoriaTipo", ordenador.getMemoriaTipo());
+                ordenadorJson.put("memoriaCapacidad", ordenador.getMemoriaCapacidad());
+                ordenadorJson.put("discoTipo", ordenador.getDiscoTipo());
+                ordenadorJson.put("discoCapacidad", ordenador.getDiscoCapacidad());
+                ordenadoresJsonArray.put(ordenadorJson);
+            }
+
+            String ordenadoresJson = ordenadoresJsonArray.toString();
+
             // Set response content type and charset
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
