@@ -28,33 +28,29 @@ public class Buscador extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        System.out.println("Entro en el Post"); 
 
-        System.out.println("Content Type: " + request.getContentType());     
+        System.out.println("Entro en el Post");
+        HttpSession session = request.getSession();
+
+        System.out.println("Content Type: " + session.getContentType());
         String marca = request.getParameter("marca");
         System.out.println("Marca: " + marca);
-       
-        String memoriaTipo = request.getParameter("tipoMemoria");
-        System.out.println("Memoria Tipo: " + memoriaTipo);
-        
-        try {
-            int memoriaCapacidad = Integer.parseInt(request.getParameter("capacidadMemoria"));
-            System.out.println("Memoria Capacidad: " + memoriaCapacidad);
-        } catch (Exception e) {
-            int memoriaCapacidad = 0;
-        }
-        
 
-        String procesador = request.getParameter("procesador");
+        String memoriaTipo = session.getParameter("tipoMemoria");
+        System.out.println("Memoria Tipo: " + memoriaTipo);
+
+        int memoriaCapacidad = Integer.parseInt(session.getParameter("capacidadMemoria"));
+        System.out.println("Memoria Capacidad: " + memoriaCapacidad);
+
+        String procesador = session.getParameter("procesador");
         System.out.println("Procesador: " + procesador);
 
-        String discoTipo = request.getParameter("tipoDisco");
+        String discoTipo = session.getParameter("tipoDisco");
         System.out.println("Disco Tipo: " + discoTipo);
 
-        int discoCapacidad = Integer.parseInt(request.getParameter("capacidadDisco"));
+        int discoCapacidad = Integer.parseInt(session.getParameter("capacidadDisco"));
         System.out.println("Disco Capacidad: " + discoCapacidad);
-        
+
         try (DBManager dbManager = new DBManager()) {
             System.out.println("Holita estoy aqui");
             List<Ordenador> ordenadores = dbManager.searchOrdenadores(marca, procesador, memoriaTipo, memoriaCapacidad,
