@@ -45,9 +45,10 @@ public class DBManager implements AutoCloseable {
      * @return A computer from the database.
      * @throws SQLException If something fails with the DB.
      */
-    public Ordenador getOrdenadorById(int id) throws SQLException{
+    public Ordenador getOrdenadorById(int id) throws SQLException {
         Ordenador ordenador = null;
-        String query = "SELECT ordenadores.modelo, marcas.nombre AS marca_nombre, procesadores.nombre AS procesador_nombre, memorias.tipo, memorias.capacidad AS capacidad_ram, discos.tipo, discos.capacidad AS capacidad_disco FROM ordenadores INNER JOIN marcas ON marca_id = marcas.id INNER JOIN procesadores ON procesador_id = procesadores.id INNER JOIN discos ON disco_id = discos.id INNER JOIN memorias ON memoria_id = memorias.id WHERE ordenadores.id = "+id;
+        String query = "SELECT ordenadores.modelo, marcas.nombre AS marca_nombre, procesadores.nombre AS procesador_nombre, memorias.tipo, memorias.capacidad AS capacidad_ram, discos.tipo, discos.capacidad AS capacidad_disco FROM ordenadores INNER JOIN marcas ON marca_id = marcas.id INNER JOIN procesadores ON procesador_id = procesadores.id INNER JOIN discos ON disco_id = discos.id INNER JOIN memorias ON memoria_id = memorias.id WHERE ordenadores.id = "
+                + id;
 
         try (Statement stmt = connection.createStatement()) {
             ResultSet resultSet = stmt.executeQuery(query);
@@ -59,7 +60,6 @@ public class DBManager implements AutoCloseable {
                 String capacidad_ram = resultSet.getString("capacidad_ram");
                 String disco = resultSet.getString("discos.tipo");
                 String capacidad_disco = resultSet.getString("capacidad_disco");
-
 
                 ordenador = new Ordenador();
                 ordenador.setId(id);
@@ -83,19 +83,20 @@ public class DBManager implements AutoCloseable {
         return null;
     }
 
-   /**
+    /**
      * Return a list with all the computers from a brand.
      *
      * @return List with all the books.
      * @throws SQLException If something fails with the DB.
      */
     public List<Ordenador> listOrdenadoresPorMarca(String brand) throws SQLException {
-        String query = "SELECT ordenadores.id AS id, ordenadores.modelo, marcas.nombre AS marca_nombre FROM ordenadores INNER JOIN marcas ON marca_id = marcas.id WHERE marcas.nombre = '"+brand+"'";
+        String query = "SELECT ordenadores.id AS id, ordenadores.modelo, marcas.nombre AS marca_nombre FROM ordenadores INNER JOIN marcas ON marca_id = marcas.id WHERE marcas.nombre = '"
+                + brand + "'";
 
-        try(Statement stmt = connection.createStatement()){
+        try (Statement stmt = connection.createStatement()) {
             ResultSet resultSet = stmt.executeQuery(query);
             List<Ordenador> ordenadores = new ArrayList<Ordenador>();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String modelo = resultSet.getString("modelo");
                 String marca = resultSet.getString("marca_nombre");
@@ -108,29 +109,37 @@ public class DBManager implements AutoCloseable {
             }
             return ordenadores;
         } catch (SQLException ex) {
-            System.out.println (" SQLException : " + ex.getMessage());
+            System.out.println(" SQLException : " + ex.getMessage());
             ex.printStackTrace();
-            System.out.println (" VendorError : " + ex.getErrorCode());
-            System.out.println (" SQLState : " + ex.getSQLState());
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
 
         }
         return new ArrayList<Ordenador>();
     }
 
-           /**
+    /**
      * Return a list with all the computers that the user is searching.
      *
      * @return List with all the books.
      * @throws SQLException If something fails with the DB.
      */
 
-     public List<Ordenador> searchOrdenadores(String marca, String procesador, String memoriaTipo, int memoriaCapacidad, String discoTipo, int discoCapacidad) throws SQLException {
+    public List<Ordenador> searchOrdenadores(String marca, String procesador, String memoriaTipo, int memoriaCapacidad,
+            String discoTipo, int discoCapacidad) throws SQLException {
         List<Ordenador> ordenadores = new ArrayList<>();
-        
+
         String query = "SELECT ordenadores.id AS id, ordenadores.modelo, marcas.nombre AS marca_nombre, procesadores.nombre AS procesador_nombre, memorias.tipo AS memoria_tipo, memorias.capacidad AS capacidad_ram, discos.tipo AS disco_tipo, discos.capacidad AS capacidad_disco FROM ordenadores INNER JOIN marcas ON marca_id = marcas.id INNER JOIN procesadores ON procesador_id = procesadores.id INNER JOIN discos ON disco_id = discos.id INNER JOIN memorias ON memoria_id = memorias.id WHERE marcas.nombre = ? AND procesadores.nombre = ? AND memorias.tipo = ? AND memorias.capacidad = ? AND discos.tipo = ? AND discos.capacidad = ?";
-        
+
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-    
+
+            //Esto es por no value specified for parameter 1 indica que no has establecido valores para los parámetros de la consulta en tu función searchOrdenadores. Antes de ejecutar la consulta con stmt.executeQuery(), debes establecer los valores para los parámetros utilizando el método set correspondiente de PreparedStatement.
+            stmt.setString(1, marca);
+            stmt.setString(2, procesador);
+            stmt.setString(3, memoriaTipo);
+            stmt.setInt(4, memoriaCapacidad);
+            stmt.setString(5, discoTipo);
+            stmt.setInt(6, discoCapacidad);
             ResultSet resultSet = stmt.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
@@ -141,7 +150,7 @@ public class DBManager implements AutoCloseable {
                 int capacidad_ram = resultSet.getInt("capacidad_ram");
                 String disco_tipo = resultSet.getString("disco_tipo");
                 int capacidad_disco = resultSet.getInt("capacidad_disco");
-    
+
                 Ordenador ordenador = new Ordenador();
                 ordenador.setId(id);
                 ordenador.setModelo(modelo);
@@ -151,32 +160,32 @@ public class DBManager implements AutoCloseable {
                 ordenador.setMemoriaCapacidad(capacidad_ram);
                 ordenador.setDiscoTipo(disco_tipo);
                 ordenador.setDiscoCapacidad(capacidad_disco);
-    
+
                 ordenadores.add(ordenador);
             }
         } catch (SQLException ex) {
-            System.out.println (" SQLException : " + ex.getMessage());
+            System.out.println(" SQLException : " + ex.getMessage());
             ex.printStackTrace();
-            System.out.println (" VendorError : " + ex.getErrorCode());
-            System.out.println (" SQLState : " + ex.getSQLState());
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
         }
-        
+
         return ordenadores;
     }
-    
-/**
+
+    /**
      * Return a list with all the RAMs in the DB.
      *
      * @return List with all the books.
      * @throws SQLException If something fails with the DB.
      */
-    public List<Ordenador> tiposMemoria(){
+    public List<Ordenador> tiposMemoria() {
         String query = "SELECT * FROM memorias";
 
-        try(Statement stmt = connection.createStatement()){
+        try (Statement stmt = connection.createStatement()) {
             ResultSet resultSet = stmt.executeQuery(query);
             List<Ordenador> ordenadores = new ArrayList<Ordenador>();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 String tipo = resultSet.getString("tipo");
                 String capacidad = resultSet.getString("capacidad");
                 Ordenador ordenador = new Ordenador();
@@ -187,10 +196,10 @@ public class DBManager implements AutoCloseable {
             }
             return ordenadores;
         } catch (SQLException ex) {
-            System.out.println (" SQLException : " + ex.getMessage());
+            System.out.println(" SQLException : " + ex.getMessage());
             ex.printStackTrace();
-            System.out.println (" VendorError : " + ex.getErrorCode());
-            System.out.println (" SQLState : " + ex.getSQLState());
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
 
         }
         return new ArrayList<Ordenador>();
@@ -202,14 +211,14 @@ public class DBManager implements AutoCloseable {
      * @return List with all the books.
      * @throws SQLException If something fails with the DB.
      */
-    public List<Ordenador> tiposProcesador(){
+    public List<Ordenador> tiposProcesador() {
         String query = "SELECT * FROM procesadores";
 
-        try(Statement stmt = connection.createStatement()){
+        try (Statement stmt = connection.createStatement()) {
             ResultSet resultSet = stmt.executeQuery(query);
             List<Ordenador> ordenadores = new ArrayList<Ordenador>();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 String tipo = resultSet.getString("nombre");
                 Ordenador ordenador = new Ordenador();
 
@@ -217,23 +226,23 @@ public class DBManager implements AutoCloseable {
                 ordenadores.add(ordenador);
             }
             return ordenadores;
-        }catch (SQLException ex) {
-            System.out.println (" SQLException : " + ex.getMessage());
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
             ex.printStackTrace();
-            System.out.println (" VendorError : " + ex.getErrorCode());
-            System.out.println (" SQLState : " + ex.getSQLState());
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
         }
         return new ArrayList<Ordenador>();
     }
 
-    public List<Ordenador> tiposDisco(){
+    public List<Ordenador> tiposDisco() {
         String query = "SELECT * FROM discos";
 
-        try(Statement stmt = connection.createStatement()){
+        try (Statement stmt = connection.createStatement()) {
             ResultSet resultSet = stmt.executeQuery(query);
             List<Ordenador> ordenadores = new ArrayList<Ordenador>();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 String tipo = resultSet.getString("tipo");
                 String capacidad = resultSet.getString("capacidad");
                 Ordenador ordenador = new Ordenador();
@@ -243,19 +252,14 @@ public class DBManager implements AutoCloseable {
                 ordenadores.add(ordenador);
             }
             return ordenadores;
-        }catch (SQLException ex) {
-            System.out.println (" SQLException : " + ex.getMessage());
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
             ex.printStackTrace();
-            System.out.println (" VendorError : " + ex.getErrorCode());
-            System.out.println (" SQLState : " + ex.getSQLState());
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
         }
         return new ArrayList<Ordenador>();
     }
-
-
-
-
-    
 
     /****************************************************************************
      * 
@@ -264,11 +268,6 @@ public class DBManager implements AutoCloseable {
      * 
      * 
      *****************************************************************************/
-
-
-
-
-
 
     /**
      * Return a User account checking the name and the password
@@ -279,73 +278,72 @@ public class DBManager implements AutoCloseable {
      */
 
     public Usuario getUsuarioDB(String nombre, String contrasena) throws SQLException {
-        
+
         String query = "SELECT usuarios.id, usuarios.nombre, usuarios.correo, usuarios.contrasena FROM usuarios WHERE nombre = ? AND contrasena=PASSWORD(?)";
-        Usuario usuario=new Usuario();
-        PreparedStatement stmt=null;
-        try
-        {
-        
-            stmt= connection.prepareStatement(query);
+        Usuario usuario = new Usuario();
+        PreparedStatement stmt = null;
+        try {
+
+            stmt = connection.prepareStatement(query);
             stmt.setString(1, nombre);
             stmt.setString(2, contrasena);
-       
+
             ResultSet resultSet = stmt.executeQuery();
 
-            
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String nom = resultSet.getString("nombre");
-                String cor= resultSet.getString("correo");
+                String cor = resultSet.getString("correo");
                 String con = resultSet.getString("contrasena");
-                System.out.println ("nombre : "+ nom+ "contraseña: "+ con);
+                System.out.println("nombre : " + nom + "contraseña: " + con);
                 usuario.setNombre(nom);
                 usuario.setCorreo(cor);
                 usuario.setContrasena(con);
-                usuario.setId(id); 
-                System.out.println ("nombre : "+ usuario.getNombre()+ "contraseña: "+ usuario.getContrasena());
+                usuario.setId(id);
+                System.out.println("nombre : " + usuario.getNombre() + "contraseña: " + usuario.getContrasena());
 
             }
             return usuario;
         } catch (SQLException ex) {
-            System.out.println (" SQLException : " + ex.getMessage());
+            System.out.println(" SQLException : " + ex.getMessage());
             ex.printStackTrace();
-            System.out.println (" VendorError : " + ex.getErrorCode());
-            System.out.println (" SQLState : " + ex.getSQLState());
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
 
         }
         return new Usuario();
-    } 
+    }
 
-    //hacer que devuelva un usuario si todo okey
+    // hacer que devuelva un usuario si todo okey
     public Usuario insertUsuarioDB(String nombre, String contrasena, String email) throws SQLException {
-        Usuario usuario=new Usuario();;
+        Usuario usuario = new Usuario();
+        ;
         String query = "INSERT INTO usuarios (nombre, contrasena, correo) VALUES (?, PASSWORD(?), ?)";
-        
-        PreparedStatement stmt=null;
-        try
-        {
-            stmt= connection.prepareStatement(query);
+
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(query);
             stmt.setString(1, nombre);
             stmt.setString(2, contrasena);
-            stmt.setString(3,  email);
+            stmt.setString(3, email);
             stmt.executeUpdate();
-         
+
         } catch (SQLException ex) {
-            System.out.println (" SQLException : " + ex.getMessage());
+            System.out.println(" SQLException : " + ex.getMessage());
             ex.printStackTrace();
-            System.out.println (" VendorError : " + ex.getErrorCode());
-            System.out.println (" SQLState : " + ex.getSQLState());
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
 
         }
         usuario.setNombre(nombre);
         usuario.setCorreo(email);
         usuario.setContrasena(contrasena);
         usuario.setId(20);
-       //cuando la otra funcion vaya llamamos a la consulta de usuario para que nos devuelva un usuario completo con id correspondiente en vez de hacer nosotros los set
+        // cuando la otra funcion vaya llamamos a la consulta de usuario para que nos
+        // devuelva un usuario completo con id correspondiente en vez de hacer nosotros
+        // los set
         return usuario;
-        
-    } 
 
+    }
 
 }

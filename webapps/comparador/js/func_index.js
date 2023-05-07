@@ -1,8 +1,6 @@
 
 
  function searchOrdenadores() {
-        // Get form data
-        const formData = new FormData(document.getElementById('filtros'));
 
         // Send AJAX request
 		fetch('buscar', {
