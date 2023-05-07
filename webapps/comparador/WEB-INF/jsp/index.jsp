@@ -124,7 +124,7 @@
             <section>
               <form id="filtros" onsubmit="event.preventDefault(); searchOrdenadores();">
                 <div class="filtro">
-                  <p class="centered-text-filtro">Marca:
+                  <p class="centered-text-filtro">Marca:</p>
                     <select class="seleccionador" name="marca">
                       <option value="ASUS">ASUS</option>
                       <option value="LG">LG</option>
@@ -133,7 +133,6 @@
                       <option value="HP">HP</option>
                       <option value="LENOVO">LENOVO</option>
                     </select>
-                  </p>
                 </div>
                 <div class="filtro">
                   <p class="centered-text-filtro">Tipo de Memoria:
