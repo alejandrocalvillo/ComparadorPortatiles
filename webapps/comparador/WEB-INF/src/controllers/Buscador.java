@@ -30,25 +30,24 @@ public class Buscador extends HttpServlet {
             throws ServletException, IOException {
 
         System.out.println("Entro en el Post");
-        HttpSession session = request.getSession();
 
-        System.out.println("Content Type: " + session.getContentType());
+        System.out.println("Content Type: " + request.getContentType());
         String marca = request.getParameter("marca");
         System.out.println("Marca: " + marca);
 
-        String memoriaTipo = session.getParameter("tipoMemoria");
+        String memoriaTipo = request.getParameter("tipoMemoria");
         System.out.println("Memoria Tipo: " + memoriaTipo);
 
-        int memoriaCapacidad = Integer.parseInt(session.getParameter("capacidadMemoria"));
+        int memoriaCapacidad = Integer.parseInt(request.getParameter("capacidadMemoria"));
         System.out.println("Memoria Capacidad: " + memoriaCapacidad);
 
-        String procesador = session.getParameter("procesador");
+        String procesador = request.getParameter("procesador");
         System.out.println("Procesador: " + procesador);
 
-        String discoTipo = session.getParameter("tipoDisco");
+        String discoTipo = request.getParameter("tipoDisco");
         System.out.println("Disco Tipo: " + discoTipo);
 
-        int discoCapacidad = Integer.parseInt(session.getParameter("capacidadDisco"));
+        int discoCapacidad = Integer.parseInt(request.getParameter("capacidadDisco"));
         System.out.println("Disco Capacidad: " + discoCapacidad);
 
         try (DBManager dbManager = new DBManager()) {
