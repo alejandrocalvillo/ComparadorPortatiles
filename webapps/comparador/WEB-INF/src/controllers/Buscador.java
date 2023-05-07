@@ -28,7 +28,8 @@ public class Buscador extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        System.out.println("Entro en el Post");      
+        System.out.println("Entro en el Post"); 
+        System.out.println(request);     
         String marca = request.getParameter("marca");
         System.out.println("Marca: " + marca);
         String procesador = request.getParameter("procesador");
