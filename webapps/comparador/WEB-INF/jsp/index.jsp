@@ -124,7 +124,7 @@
             <section>
               <form id="filtros" onsubmit="event.preventDefault(); searchOrdenadores();">
                 <div class="filtro">
-                  <p class="centered-text-filtro">Marca:</p>
+                  <p class="centered-text-filtro">Marca:
                     <select class="seleccionador" name="marca">
                       <option value="ASUS">ASUS</option>
                       <option value="LG">LG</option>
@@ -133,6 +133,7 @@
                       <option value="HP">HP</option>
                       <option value="LENOVO">LENOVO</option>
                     </select>
+                  </p>
                 </div>
                 <div class="filtro">
                   <p class="centered-text-filtro">Tipo de Memoria:
@@ -188,7 +189,7 @@
                     </select>
                   </p>
                 </div>
-                <div><input id="buscar" type="submit" value="Buscar"></input></div>
+                <input id="buscar" type="submit" value="Buscar"></input>
               </form>
             </section>
 
