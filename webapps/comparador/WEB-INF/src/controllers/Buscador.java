@@ -37,8 +37,12 @@ public class Buscador extends HttpServlet {
        
         String memoriaTipo = request.getParameter("tipoMemoria");
         System.out.println("Memoria Tipo: " + memoriaTipo);
-
-        int memoriaCapacidad = Integer.parseInt(request.getParameter("capacidadMemoria"));
+        
+        try {
+            int memoriaCapacidad = Integer.parseInt(request.getParameter("capacidadMemoria"));
+        } catch (Exception e) {
+            int memoriaCapacidad = 0;
+        }
         System.out.println("Memoria Capacidad: " + memoriaCapacidad);
 
         String procesador = request.getParameter("procesador");
