@@ -30,7 +30,6 @@ public class Buscador extends HttpServlet {
             throws ServletException, IOException {
         
         System.out.println("Entro en el Post"); 
-        request.setContentType(request.getContentType());
         Enumeration<String> parameterNames = request.getParameterNames();
         while (parameterNames.hasMoreElements()) {
             String paramName = parameterNames.nextElement();
