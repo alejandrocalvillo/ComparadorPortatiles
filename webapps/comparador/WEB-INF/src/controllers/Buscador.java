@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.RequestDispatcher;
 
+import java.io.Console;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,12 +27,19 @@ public class Buscador extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        System.out.println("Entro en el Post");      
         String marca = request.getParameter("marca");
+        System.out.println("Marca: " + marca);
         String procesador = request.getParameter("procesador");
+        System.out.println("Procesador: " + procesador);
         String memoriaTipo = request.getParameter("tipoMemoria");
+        System.out.println("Memoria Tipo: " + memoriaTipo);
         int memoriaCapacidad = Integer.parseInt(request.getParameter("capacidadMemoria"));
         String discoTipo = request.getParameter("tipoDisco");
         int discoCapacidad = Integer.parseInt(request.getParameter("capacidadDisco"));
+
+        
         try (DBManager dbManager = new DBManager()) {
             System.out.println("Holita estoy aqui");
             List<Ordenador> ordenadores = dbManager.searchOrdenadores(marca, procesador, memoriaTipo, memoriaCapacidad,

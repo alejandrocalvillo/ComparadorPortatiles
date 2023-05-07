@@ -188,7 +188,7 @@
                         <% } %>
                     </select>
                   </p>
-                  <div>
+                </div>
                     <div><input type="submit" value="Buscar"></input></div>
               </form>
             </section>
