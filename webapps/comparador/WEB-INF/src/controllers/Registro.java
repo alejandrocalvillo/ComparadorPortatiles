@@ -22,7 +22,7 @@ import comparador.*;
 @WebServlet("/registro")
 public class Registro extends HttpServlet {
     Usuario usuario;
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         // Obtiene un unico ordenador.
         HttpSession session = request.getSession(false);
         Usuario usuario= new Usuario();
@@ -36,7 +36,7 @@ public class Registro extends HttpServlet {
 */
         try (DBManager db = new DBManager()) {
             //Empezamos contando marcas en el index
-       // String nextpage="/login";
+  
 		String usuario_str=request.getParameter("usuario");
 
 		String contrasena_str=request.getParameter("contrasena");
@@ -44,9 +44,6 @@ public class Registro extends HttpServlet {
         String email_str=request.getParameter("email");
 
 		System.out.println(usuario_str+" "+contrasena_str+" "+email_str);
-
-        
-
 
          if(usuario_str!=null && contrasena_str!=null && email_str!=null  )
             {
@@ -59,20 +56,15 @@ public class Registro extends HttpServlet {
             session = request.getSession();
             session.setAttribute("usuario", usuario);
             //ssesion y te manda al index
-            RequestDispatcher rd = request.getRequestDispatcher("/index");
-            rd.forward(request, response);
+            response.sendRedirect(request.getContextPath()+"/index");
             
-            }  else{
+            }  
+        else{
 
-       RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/registro.jsp");
-       rd.forward(request, response);
+            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/registro.jsp");
+            rd.forward(request, response);
             } 
 
-          //  
-                
-
-		
-  
 
 	
         } catch (SQLException | NamingException e) {
@@ -80,4 +72,8 @@ public class Registro extends HttpServlet {
             response.sendError(500);
         }
     }
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/registro.jsp");
+       rd.forward(request, response);
+    } 
 }

@@ -15,7 +15,7 @@
   	</head>
 	<body>
 		<div id=texto>
-		<form action="/comparador/login">
+		<form action="${pageContext.request.contextPath}/login" method="POST" onsubmit="return validarFormulario()">
 			<p>
       		<label>
         	Usuario: <input type="text" name="usuario">
@@ -28,13 +28,13 @@
 			</p>
  			<p>
 			<input id="Inicio" type="submit" value="Iniciar sesion">
-			<input id="Registro" type="submit" value="Registrarse" >
+			<input id="Registro" type="button" value="Registrarse" >
 			</p>
       		
     	</form>
+	
 
-
-
+	
 		<%	
 		DBManager db = new DBManager();
 		Usuario usuario= new Usuario();
@@ -58,6 +58,17 @@
 		}
 		
 		%>
+
+		<%
+    		String error = (String) request.getAttribute("error");
+    		if (error != null) {
+			%>
+        		<p id="error-message"><%= error %></p>
+			<%
+    		}
+		%>
+		
 		</div>
+		<div id="error-message"></div>
 	</body>
 </html>

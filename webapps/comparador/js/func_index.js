@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 	$("#IniciarSesion").click(function () {
 		// Código a ejecutar cuando el usuario haga click
-		window.location.href = "/login";
+		window.location.href = "/comparador/login";
 
 	});
 

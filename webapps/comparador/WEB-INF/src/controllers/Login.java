@@ -19,57 +19,57 @@ import comparador.*;
 
 
 
+
 @WebServlet("/login")
 public class Login extends HttpServlet {
     Usuario usuario;
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        // Obtiene un unico ordenador.
+    public void  doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(false);
 
-        /* 
-      	if (session != null && session.getAttribute("usuario") != null) {
-            // El usuario ya inició sesión, redireccionar a la página index.jsp
-            response.sendRedirect("/comparador/index");
-            return;
-        }
-*/
-        try (DBManager db = new DBManager()) {
-            //Empezamos contando marcas en el index
-       // String nextpage="/login";
-		String usuario_str=request.getParameter("usuario");
-
+        String usuario_str=request.getParameter("usuario");
 		String contrasena_str=request.getParameter("contrasena");
-
 		System.out.println(usuario_str+" "+contrasena_str);
+		
 
-        
+        try (DBManager db = new DBManager()) {
 
-         if(usuario_str!=null && contrasena_str!=null  )
-            {
-            usuario =db.getUsuarioDB(usuario_str, contrasena_str);
-            System.out.println(usuario.getNombre()+" "+usuario.getContrasena());
-            if(usuario.getNombre().equals(usuario_str))
+            if(usuario_str!=null && contrasena_str!=null  )
                 {
-                //asociar la sesion al usuario creado
-                // Guardar el objeto usuario en la sesión
-                session = request.getSession();
-                session.setAttribute("usuario", usuario);
-                //ssesion y te manda al index
-                RequestDispatcher rd = request.getRequestDispatcher("/index");
+                usuario =db.getUsuarioDB(usuario_str, contrasena_str);
+                System.out.println(usuario.getNombre()+" "+usuario.getContrasena());
+                if(usuario.getNombre()!=null && usuario.getContrasena()!= null )
+                    {         
+                    // Guardar el objeto usuario en la sesión
+                    session = request.getSession();
+                    session.setAttribute("usuario", usuario);
+                    response.sendRedirect(request.getContextPath()+"/index");
+                    } 
+                else
+                    {
+                    request.setAttribute("error", "Usuario o contraseña incorrectos.");
+                    RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/inicio_sesion.jsp");
+                    rd.forward(request, response);                 
+                    //añadir parametro error y ponerlo enn jsp
+                    }             
+                }  
+            else
+                {
+                RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/inicio_sesion.jsp");
                 rd.forward(request, response);
                 } 
-            
-            
-            }  else{
-
-       RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/inicio_sesion.jsp");
-       rd.forward(request, response);
-            } 
 
 	
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
             response.sendError(500);
         }
+    } 
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+   
+            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/inicio_sesion.jsp");
+            rd.forward(request, response);
+            
     }
 }
+
+

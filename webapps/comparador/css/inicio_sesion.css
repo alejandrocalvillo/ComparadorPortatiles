@@ -67,5 +67,31 @@ input[type="submit"]:hover {
   	background-color: #3e8e41;
 }
 
+input[type="button"] {
+	background-color: #4CAF50;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	padding: 10px 20px;
+	cursor: pointer;
+	margin-right: 10px;
+  font-size: 34px;
+}
 
+input[type="button"]:hover {
+	background-color: #3e8e41;
+}
 
+#error-message {
+	display: none;
+	margin-top: 528px;
+	padding: 10px;
+	border-radius: 5px;
+	background-color: #f44336;
+	color: white;
+	font-size: 16px;
+	text-align: center;
+  }
+  #error-message.show {
+	display: block;
+  }

@@ -151,8 +151,7 @@ public class DBManager implements AutoCloseable {
         }
         return new ArrayList<Ordenador>();
     }
-
-    /**
+/**
      * Return a list with all the RAMs in the DB.
      *
      * @return List with all the books.
@@ -239,7 +238,14 @@ public class DBManager implements AutoCloseable {
         }
         return new ArrayList<Ordenador>();
     }
-    
+
+    /****************************************************************************
+     * 
+     * 
+     * AQUI EMPIEZA LA PARTE DE USUARIOS
+     * 
+     * 
+     *****************************************************************************/
     /**
      * Return a User account checking the name and the password
      *
@@ -261,7 +267,6 @@ public class DBManager implements AutoCloseable {
             stmt.setString(2, contrasena);
        
             ResultSet resultSet = stmt.executeQuery();
-            
 
             
             if(resultSet.next()){

@@ -13,7 +13,7 @@
   	</head>
 	<body>
 		<div id=texto>
-		<form action="/comparador/registro">
+		<form action="${pageContext.request.contextPath}/registro" method="POST">
 			<p>
       		<label>
         	Usuario: <input type="text" name="usuario">
