@@ -29,7 +29,7 @@ public class Buscador extends HttpServlet {
             throws ServletException, IOException {
         
         System.out.println("Entro en el Post"); 
-        System.out.println(request);     
+        System.out.println("Content Type: " + request.getContentType());     
         String marca = request.getParameter("marca");
         System.out.println("Marca: " + marca);
         String procesador = request.getParameter("procesador");
