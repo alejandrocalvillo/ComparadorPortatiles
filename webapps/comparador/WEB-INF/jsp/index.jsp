@@ -122,7 +122,7 @@
             <!--Filtros-->
 
             <section>
-              <form id="filtros" onsubmit="event.preventDefault(); searchOrdenadores();">
+              <form id="filtros" onsubmit="event.preventDefault(); searchOrdenadores();" enctype="application/x-www-form-urlencoded">
                 <div class="filtro">
                   <p class="centered-text-filtro">Marca:
                     <select class="seleccionador" name="marca">

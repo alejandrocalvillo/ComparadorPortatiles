@@ -5,11 +5,14 @@
         const formData = new FormData(document.getElementById('filtros'));
 
         // Send AJAX request
-        fetch('buscar', {
-            method: 'POST',
-            body: formData,
-			charset: 'UTF-8',
-        })
+		fetch('buscar', {
+			method: 'POST',
+			headers: {
+			  'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+			},
+			body: new URLSearchParams(new FormData(document.getElementById("filtros"))).toString(),
+		  })
+		  
         .then(response => response.json())
         .then(ordenadores => {
             // Generate table HTML
