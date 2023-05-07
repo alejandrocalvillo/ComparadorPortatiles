@@ -30,22 +30,23 @@ public class Buscador extends HttpServlet {
             throws ServletException, IOException {
         
         System.out.println("Entro en el Post"); 
-        Enumeration<String> parameterNames = request.getParameterNames();
-        while (parameterNames.hasMoreElements()) {
-            String paramName = parameterNames.nextElement();
-            System.out.println("Parameter Name - " + paramName + ", Value - " + request.getParameter(paramName));
-        }
+
         System.out.println("Content Type: " + request.getContentType());     
         String marca = request.getParameter("marca");
         System.out.println("Marca: " + marca);
-        String procesador = request.getParameter("procesador");
-        System.out.println("Procesador: " + procesador);
+       
         String memoriaTipo = request.getParameter("tipoMemoria");
         System.out.println("Memoria Tipo: " + memoriaTipo);
+
         int memoriaCapacidad = Integer.parseInt(request.getParameter("capacidadMemoria"));
         System.out.println("Memoria Capacidad: " + memoriaCapacidad);
+
+        String procesador = request.getParameter("procesador");
+        System.out.println("Procesador: " + procesador);
+
         String discoTipo = request.getParameter("tipoDisco");
         System.out.println("Disco Tipo: " + discoTipo);
+
         int discoCapacidad = Integer.parseInt(request.getParameter("capacidadDisco"));
         System.out.println("Disco Capacidad: " + discoCapacidad);
         
