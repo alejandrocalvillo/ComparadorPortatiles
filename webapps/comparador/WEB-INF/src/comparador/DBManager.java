@@ -124,33 +124,46 @@ public class DBManager implements AutoCloseable {
      * @throws SQLException If something fails with the DB.
      */
 
-    public List<Ordenador> BuscarOrdenadores(String marca , String memoria , String procesador , String capacidadDisco , String tipoMemoria , String tipoDisco) throws SQLException {
-        String query = "SELECT ordenadores.id AS id, ordenadores.modelo, marcas.nombre AS marca_nombre FROM ordenadores INNER JOIN marcas ON marca_id = marcas.id WHERE marcas.nombre = '"+marca+"'";
-
-        try(Statement stmt = connection.createStatement()){
-            ResultSet resultSet = stmt.executeQuery(query);
-            List<Ordenador> ordenadores = new ArrayList<Ordenador>();
-            while(resultSet.next()){
+     public List<Ordenador> searchOrdenadores(String marca, String procesador, String memoriaTipo, int memoriaCapacidad, String discoTipo, int discoCapacidad) throws SQLException {
+        List<Ordenador> ordenadores = new ArrayList<>();
+        
+        String query = "SELECT ordenadores.id AS id, ordenadores.modelo, marcas.nombre AS marca_nombre, procesadores.nombre AS procesador_nombre, memorias.tipo AS memoria_tipo, memorias.capacidad AS capacidad_ram, discos.tipo AS disco_tipo, discos.capacidad AS capacidad_disco FROM ordenadores INNER JOIN marcas ON marca_id = marcas.id INNER JOIN procesadores ON procesador_id = procesadores.id INNER JOIN discos ON disco_id = discos.id INNER JOIN memorias ON memoria_id = memorias.id WHERE marcas.nombre = ? AND procesadores.nombre = ? AND memorias.tipo = ? AND memorias.capacidad = ? AND discos.tipo = ? AND discos.capacidad = ?";
+        
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+    
+            ResultSet resultSet = stmt.executeQuery();
+            while (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                String modelo1 = resultSet.getString("modelo");
-                String marca1 = resultSet.getString("marca_nombre");
+                String modelo = resultSet.getString("modelo");
+                String marca_nombre = resultSet.getString("marca_nombre");
+                String procesador_nombre = resultSet.getString("procesador_nombre");
+                String memoria_tipo = resultSet.getString("memoria_tipo");
+                int capacidad_ram = resultSet.getInt("capacidad_ram");
+                String disco_tipo = resultSet.getString("disco_tipo");
+                int capacidad_disco = resultSet.getInt("capacidad_disco");
+    
                 Ordenador ordenador = new Ordenador();
-
                 ordenador.setId(id);
-                ordenador.setModelo(modelo1);
-                ordenador.setMarca(marca1);
+                ordenador.setModelo(modelo);
+                ordenador.setMarca(marca_nombre);
+                ordenador.setProcesador(procesador_nombre);
+                ordenador.setMemoriaTipo(memoria_tipo);
+                ordenador.setMemoriaCapacidad(capacidad_ram);
+                ordenador.setDiscoTipo(disco_tipo);
+                ordenador.setDiscoCapacidad(capacidad_disco);
+    
                 ordenadores.add(ordenador);
             }
-            return ordenadores;
         } catch (SQLException ex) {
             System.out.println (" SQLException : " + ex.getMessage());
             ex.printStackTrace();
             System.out.println (" VendorError : " + ex.getErrorCode());
             System.out.println (" SQLState : " + ex.getSQLState());
-
         }
-        return new ArrayList<Ordenador>();
+        
+        return ordenadores;
     }
+    
 /**
      * Return a list with all the RAMs in the DB.
      *
@@ -239,6 +252,11 @@ public class DBManager implements AutoCloseable {
         return new ArrayList<Ordenador>();
     }
 
+
+
+
+    
+
     /****************************************************************************
      * 
      * 
@@ -246,6 +264,12 @@ public class DBManager implements AutoCloseable {
      * 
      * 
      *****************************************************************************/
+
+
+
+
+
+
     /**
      * Return a User account checking the name and the password
      *

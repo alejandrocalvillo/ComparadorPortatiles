@@ -17,36 +17,37 @@ import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import comparador.*;
 
+@WebServlet("/buscar")
+public class SearchServlet extends HttpServlet {
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String marca = request.getParameter("marca");
+        String procesador = request.getParameter("procesador");
+        String memoriaTipo = request.getParameter("memoriaTipo");
+        int memoriaCapacidad = Integer.parseInt(request.getParameter("memoriaCapacidad"));
+        String discoTipo = request.getParameter("discoTipo");
+        int discoCapacidad = Integer.parseInt(request.getParameter("discoCapacidad"));
 
-@WebServlet("/buscador")
-public class Buscador extends HttpServlet {
-    List<Ordenador> ordenadores;
+        try (DBManager dbManager = new DBManager()) {
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {       
+            List<Ordenador> ordenadores = dbManager.searchOrdenadores(marca, procesador, memoriaTipo, memoriaCapacidad,
+                    discoTipo, discoCapacidad);
+            request.setAttribute("ordenadores", ordenadores);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
 
-        try (DBManager db = new DBManager()) {
+            // Convert list to JSON
+            Gson gson = new Gson();
+            String ordenadoresJson = gson.toJson(ordenadores);
+            // Set response content type and charset
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
 
-            String marca = request.getParameter("marca");
-            String memoria = request.getParameter("memoria");
-            String procesador = request.getParameter("procesador");
-            String capacidadDisco = request.getParameter("capacidadDisco");
-            String tipoMemoria = request.getParameter("tipoMemoria");
-            String tipoDisco = request.getParameter("tipoDisco");
-
-            ordenadores = db.BuscarOrdenadores(marca, memoria, procesador, capacidadDisco, tipoMemoria, tipoDisco);
-            // Redirigir al usuario a la página de inicio
-            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
-
-            System.out.println("Paso por aqui");
-            rd.forward(request, response);
-            System.out.println("Por aqui?");
-
-        } catch (SQLException | NamingException e) {
-            e.printStackTrace();
+            // Write JSON to response
+            response.getWriter().write(ordenadoresJson);
+        } catch (SQLException | NamingException ex) {
+            ex.printStackTrace();
             response.sendError(500);
         }
-
     }
-
 }

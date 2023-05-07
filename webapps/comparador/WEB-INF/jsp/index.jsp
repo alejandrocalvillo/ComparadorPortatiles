@@ -122,7 +122,7 @@
             <!--Filtros-->
 
             <section>
-              <div id="filtros">
+              <form id="filtros" onsubmit="event.preventDefault(); searchOrdenadores();">
                 <div class="filtro">
                   <p class="centered-text-filtro">Marca:
                     <select class="seleccionador" name="marca">
@@ -189,13 +189,12 @@
                     </select>
                   </p>
                 </div>
-
-              </div>
-              <div><input id="buscar" type="button" value="Buscar"></input></div>
+                <div><input id="buscar" type="submit" value="Buscar"></input></div>
+              </form>
             </section>
 
             <section id="tabla-container">
-              <div id="tabla"></div>
+              <div id="resultsContainer"></div>
             </section>
 
           </main>
