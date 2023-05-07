@@ -2,7 +2,7 @@
 
  function searchOrdenadores() {
         // Get form data
-        const formData = new FormData(document.getElementById('searchForm'));
+        const formData = new FormData(document.getElementById('filtros'));
 
         // Send AJAX request
         fetch('SearchServlet', {
