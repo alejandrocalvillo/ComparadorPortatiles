@@ -37,8 +37,6 @@ public class Buscador extends HttpServlet {
 
             List<Ordenador> ordenadores = dbManager.searchOrdenadores(marca, procesador, memoriaTipo, memoriaCapacidad,
                     discoTipo, discoCapacidad);
-            request.setAttribute("ordenadores", ordenadores);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
 
             JSONArray ordenadoresJsonArray = new JSONArray();
             for (Ordenador ordenador : ordenadores) {
