@@ -14,6 +14,7 @@
         .then(response => response.json())
         .then(ordenadores => {
             // Generate table HTML
+			//Create the table as u want @Camilo
             let tableHtml = `
                 <table border="1">
                     <tr>
