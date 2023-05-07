@@ -6,8 +6,7 @@
 
         // Send AJAX request
         fetch('buscar', {
-            method: 'POST',
-            body: formData
+            method: 'POST'
         })
         .then(response => response.json())
         .then(ordenadores => {
