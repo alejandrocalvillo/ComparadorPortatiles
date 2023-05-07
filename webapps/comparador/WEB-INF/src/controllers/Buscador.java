@@ -12,6 +12,7 @@ import java.io.Console;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -29,6 +30,12 @@ public class Buscador extends HttpServlet {
             throws ServletException, IOException {
         
         System.out.println("Entro en el Post"); 
+        request.setContentType(request.getContentType());
+        Enumeration<String> parameterNames = request.getParameterNames();
+        while (parameterNames.hasMoreElements()) {
+            String paramName = parameterNames.nextElement();
+            System.out.println("Parameter Name - " + paramName + ", Value - " + request.getParameter(paramName));
+        }
         System.out.println("Content Type: " + request.getContentType());     
         String marca = request.getParameter("marca");
         System.out.println("Marca: " + marca);
