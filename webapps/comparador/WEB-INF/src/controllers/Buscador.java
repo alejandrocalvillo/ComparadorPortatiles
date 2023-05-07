@@ -32,7 +32,7 @@ public class Buscador extends HttpServlet {
         System.out.println("Entro en el Post"); 
 
         System.out.println("Content Type: " + request.getContentType());     
-        String marca = request.getParameter("marca").value();
+        String marca = request.getParameter("marca");
         System.out.println("Marca: " + marca);
        
         String memoriaTipo = request.getParameter("tipoMemoria");
