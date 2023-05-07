@@ -28,10 +28,10 @@ public class Buscador extends HttpServlet {
             throws ServletException, IOException {
         String marca = request.getParameter("marca");
         String procesador = request.getParameter("procesador");
-        String memoriaTipo = request.getParameter("memoriaTipo");
-        int memoriaCapacidad = Integer.parseInt(request.getParameter("memoriaCapacidad"));
-        String discoTipo = request.getParameter("discoTipo");
-        int discoCapacidad = Integer.parseInt(request.getParameter("discoCapacidad"));
+        String memoriaTipo = request.getParameter("tipoMemoria");
+        int memoriaCapacidad = Integer.parseInt(request.getParameter("capacidadMemoria"));
+        String discoTipo = request.getParameter("tipoDisco");
+        int discoCapacidad = Integer.parseInt(request.getParameter("capacidadDisco"));
         try (DBManager dbManager = new DBManager()) {
             System.out.println("Holita estoy aqui");
             List<Ordenador> ordenadores = dbManager.searchOrdenadores(marca, procesador, memoriaTipo, memoriaCapacidad,
