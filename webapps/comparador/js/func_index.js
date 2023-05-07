@@ -5,7 +5,7 @@
         const formData = new FormData(document.getElementById('filtros'));
 
         // Send AJAX request
-        fetch('Buscador', {
+        fetch('buscar', {
             method: 'POST',
             body: formData
         })
