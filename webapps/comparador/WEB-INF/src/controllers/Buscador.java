@@ -43,9 +43,11 @@ public class Buscador extends HttpServlet {
         String memoriaTipo = request.getParameter("tipoMemoria");
         System.out.println("Memoria Tipo: " + memoriaTipo);
         int memoriaCapacidad = Integer.parseInt(request.getParameter("capacidadMemoria"));
+        System.out.println("Memoria Capacidad: " + memoriaCapacidad);
         String discoTipo = request.getParameter("tipoDisco");
+        System.out.println("Disco Tipo: " + discoTipo);
         int discoCapacidad = Integer.parseInt(request.getParameter("capacidadDisco"));
-
+        System.out.println("Disco Capacidad: " + discoCapacidad);
         
         try (DBManager dbManager = new DBManager()) {
             System.out.println("Holita estoy aqui");
