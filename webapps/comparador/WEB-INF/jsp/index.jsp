@@ -189,7 +189,7 @@
                     </select>
                   </p>
                   <div>
-                    <div id="buscar-box"><input type="submit" value="Buscar"></input></div>
+                    <div><input type="submit" value="Buscar"></input></div>
               </form>
             </section>
 
