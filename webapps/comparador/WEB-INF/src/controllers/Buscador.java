@@ -32,13 +32,14 @@ public class Buscador extends HttpServlet {
         int memoriaCapacidad = Integer.parseInt(request.getParameter("memoriaCapacidad"));
         String discoTipo = request.getParameter("discoTipo");
         int discoCapacidad = Integer.parseInt(request.getParameter("discoCapacidad"));
-
         try (DBManager dbManager = new DBManager()) {
-
+            System.out.println("Holita estoy aqui");
             List<Ordenador> ordenadores = dbManager.searchOrdenadores(marca, procesador, memoriaTipo, memoriaCapacidad,
                     discoTipo, discoCapacidad);
 
             JSONArray ordenadoresJsonArray = new JSONArray();
+
+            System.out.println("Cree el JSONArray");
             for (Ordenador ordenador : ordenadores) {
                 JSONObject ordenadorJson = new JSONObject();
                 ordenadorJson.put("id", ordenador.getId());
