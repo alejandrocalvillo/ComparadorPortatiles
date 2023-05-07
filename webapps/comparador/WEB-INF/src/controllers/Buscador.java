@@ -63,7 +63,11 @@ public class Buscador extends HttpServlet {
             response.getWriter().write(ordenadoresJson);
         } catch (SQLException | NamingException ex) {
             ex.printStackTrace();
-            response.sendError(500);
+            String errorMessage = "Error: " + ex.getMessage();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(errorMessage);
         }
     }
 }
