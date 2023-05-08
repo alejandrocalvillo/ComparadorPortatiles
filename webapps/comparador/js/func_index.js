@@ -1,93 +1,46 @@
 
+
 function searchOrdenadores() {
 
 	// Send AJAX request
 	fetch('buscar', {
 		method: 'POST',
 		headers: {
-		  'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+			'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
 		},
 		body: new URLSearchParams(new FormData(document.getElementById("filtros"))).toString(),
-	  })
-	  
-	.then(response => response.json())
-	.then(ordenadores => {
-		// Generate table HTML
-		//Create the table as u want @Camilo En ordenador esta toda la info que necesitas de los ordenadores
-		let tableHtml = `
-			<table id="tabla" border="1">
-				<tr>
-					<th>ID</th>
-					<th>Marca</th>
-					<th>Modelo</th>
-					<th>Procesador</th>
-					<th>Memoria Tipo</th>
-					<th>Memoria Capacidad</th>
-					<th>Disco Tipo</th>
-					<th>Disco Capacidad</th>
-				</tr>`;
+	})
 
-		ordenadores.forEach(ordenador => {
-			tableHtml += `
-				<tr>
-					<td>${ordenador.id}</td>
-					<td>${ordenador.marca}</td>
-					<td>${ordenador.modelo}</td>
-					<td>${ordenador.procesador}</td>
-					<td>${ordenador.memoriaTipo}</td>
-					<td>${ordenador.memoriaCapacidad}</td>
-					<td>${ordenador.discoTipo}</td>
-					<td>${ordenador.discoCapacidad}</td>
-				</tr>`;
-		});
+		.then(response => response.json())
+		.then(ordenadores => {
+			// Generate table HTML
+			//Create the table as u want @Camilo En ordenador esta toda la info que necesitas de los ordenadores
+			let tableHtml = `
+                <table id="tabla" border="1">
+                    <tr>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+						<th></th>
+						th></th>
+                    </tr>`;
 
-		tableHtml += '</table>';
-
-		// Update results container
-		document.getElementById('resultsContainer').innerHTML = tableHtml;
-	});
-}
-// function searchOrdenadores() {
-
-// 	// Send AJAX request
-// 	fetch('buscar', {
-// 		method: 'POST',
-// 		headers: {
-// 			'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-// 		},
-// 		body: new URLSearchParams(new FormData(document.getElementById("filtros"))).toString(),
-// 	})
-
-// 		.then(response => response.json())
-// 		.then(ordenadores => {
-// 			// Generate table HTML
-// 			//Create the table as u want @Camilo En ordenador esta toda la info que necesitas de los ordenadores
-// 			let tableHtml = `
-//                 <table id="tabla" border="1">
-//                     <tr>
-//                         <th>Marca</th>
-//                         <th>Modelo</th>
-// 						<th></th>
-// 						th></th>
-//                     </tr>`;
-
-// 			ordenadores.forEach(ordenador => {
-// 				tableHtml += `
-//                     <tr>
+			ordenadores.forEach(ordenador => {
+				tableHtml += `
+                    <tr>
    
-//                         <td>${ordenador.marca}</td>
-// 						<td>${ordenador.modelo}</td>
-// 						<td><button onclick="detallesOrdenador(${ordenador})">Detalles</button></td>
-// 						<td><button onclick="seleccionarOrdenador(${ordenador})">Seleccionar</button></td> 
-//                     </tr>`;
-// 			});
-// //Cambiar a ordenador.id
-// 			tableHtml += '</table>';
+                        <td>${ordenador.marca}</td>
+						<td>${ordenador.modelo}</td>
+						<td><button onclick="detallesOrdenador(${ordenador})">Detalles</button></td>
+						<td><button onclick="seleccionarOrdenador(${ordenador})">Seleccionar</button></td> 
+                    </tr>`;
+			});
+//Cambiar a ordenador.id
+			tableHtml += '</table>';
 
-// 			// Update results container
-// 			document.getElementById('resultsContainer').innerHTML = tableHtml;
-// 		});
-// }
+			// Update results container
+			document.getElementById('resultsContainer').innerHTML = tableHtml;
+		});
+}
 
 function seleccionarOrdenador(ordenador) {
 	console.log('Modificaste ' + ordenador);
