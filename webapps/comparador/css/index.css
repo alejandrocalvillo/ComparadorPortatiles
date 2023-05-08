@@ -1,0 +1,9 @@
+body {
+    background-color: #ecb4b4;
+}
+
+.rectangle {
+    background-color: #D9D9D9;
+    padding: 1rem;
+    border-radius: .25rem;
+}

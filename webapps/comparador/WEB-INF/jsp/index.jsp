@@ -7,10 +7,12 @@
 <head>
     <title>Comparador de portátiles</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
     <!-- Add Bootstrap 5 CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/func_index.js" type="text/javascript"></script>
+
 </head>
 <body>
     <header class="bg-light mb-4">
