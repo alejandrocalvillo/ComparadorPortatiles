@@ -200,6 +200,9 @@
               <div id="resultsContainer"></div>
             </section>
 
+            <section>
+              <div id="popUpDetalles"></div>
+            </section>
           </main>
 
 

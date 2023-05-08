@@ -79,6 +79,8 @@ function detallesOrdenador(ordenador) {
 			</div>
 		</div>
 		</div>`;
+
+		document.getElementById('detallesContainer').innerHTML = detallesHTML;
 }
 
 	// console.log("ready!");
