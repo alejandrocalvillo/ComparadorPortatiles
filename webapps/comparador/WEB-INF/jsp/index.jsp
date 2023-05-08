@@ -201,7 +201,7 @@
             </section>
 
             <section>
-              <div id="resultsContainer"></div>
+              <div id="popUpDetalles"></div>
             </section>
           </main>
 
