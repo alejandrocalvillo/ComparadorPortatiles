@@ -199,7 +199,7 @@
           <!-- Modal para ver los detalles de un ordenador -->
           <section>
             <div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="detallesModalLabel" aria-hidden="true">
-              <div class="modal-dialog wide-modal">
+              <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="detallesModalLabel">Detalles del ordenador</h5>
