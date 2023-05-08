@@ -24,9 +24,22 @@ body {
 }
 
 /* Ordenadores Seleccionados (lista) */
-.lista-ordenadores {
-    padding-left: 15px;
-    border-left: 2px solid #999999;
+.lista-ordenadores{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 300px;
+    z-index: 999;
+}
+
+.lista-ordenadores:before {
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #999999;
 }
 
 #ordenadoresSeleccionadosText {
