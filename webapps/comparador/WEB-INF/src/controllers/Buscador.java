@@ -77,7 +77,7 @@ public class Buscador extends HttpServlet {
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
 
-            // Write JSON to response
+            // Write JSON string to response
             response.getWriter().write(ordenadoresJson);
         } catch (SQLException | NamingException ex) {
             ex.printStackTrace();

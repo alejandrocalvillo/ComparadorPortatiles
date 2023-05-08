@@ -189,7 +189,7 @@
                     </select>
                   </p>
                 </div>
-                    <div><input type="submit" value="Buscar"></input></div>
+                    <div id="Buscar"><input type="submit" value="Buscar"></input></div>
               </form>
             </section>
 
