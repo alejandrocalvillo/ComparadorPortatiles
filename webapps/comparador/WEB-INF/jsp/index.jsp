@@ -183,7 +183,7 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="resultsModalLabel">Ordenadores disponibles</h5>
-                    <button type="button" class="btn-close boton-rojo-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close close-button" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
                     <div id="modalResultsContainer"></div>
@@ -199,11 +199,11 @@
           <!-- Modal para ver los detalles de un ordenador -->
           <section>
             <div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="detallesModalLabel" aria-hidden="true">
-              <div class="modal-dialog ancho-del-modal">
+              <div class="modal-dialog wide-modal">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="detallesModalLabel">Detalles del ordenador</h5>
-                    <button type="button" class="btn-close boton-rojo-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close close-button" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
                     <div id="popUpDetalles"></div>
