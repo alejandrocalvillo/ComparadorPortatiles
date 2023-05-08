@@ -24,7 +24,7 @@ body {
 }
 
 /* Ordenadores Seleccionados (lista) */
-.lista-ordenadores{
+.lista-ordenadores {
     position: absolute;
     right: 20px;
     top: 20px;
@@ -57,7 +57,8 @@ body {
     overflow-y: auto;
 }
 
-#compareButton, #removeSelectionButton {
+#compareButton,
+#removeSelectionButton {
     display: block;
     width: 100%;
 }
@@ -65,10 +66,9 @@ body {
 /* Modal de busqueda */
 .boton-rojo-close {
     color: red;
-  }
-  
-  .close-button:hover {
+}
+
+.close-button:hover {
     color: darkred;
     cursor: pointer;
-  }
-  
+}
