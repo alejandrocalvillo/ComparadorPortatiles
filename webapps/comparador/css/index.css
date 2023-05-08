@@ -68,7 +68,13 @@ body {
     color: red;
 }
 
-.close-button:hover {
+.boton-rojo-close:hover {
     color: darkred;
     cursor: pointer;
 }
+
+/* Detalles */
+
+.ancho-del-modal {
+    max-width: 800px;
+  }
