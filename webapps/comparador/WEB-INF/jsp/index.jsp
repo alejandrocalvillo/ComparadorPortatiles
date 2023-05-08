@@ -189,7 +189,7 @@
                     <div id="modalResultsContainer"></div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn-close close-button" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                 </div>
               </div>
