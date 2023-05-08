@@ -4,28 +4,29 @@ body {
 }
 
 .rectangle {
-    background-color: #D9D9D9;
+    position: relative;
+    width: 319px;
+    height: 195px;
+    float: left;
+    margin: 20px;
     padding: 1rem;
     border-radius: .25rem;
+    background-color: #D9D9D9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.centered-text {
+    text-align: center;
+    font-weight: bold;
 }
 
 /* Ordenadores Seleccionados (lista) */
-.lista-ordenadores{
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    width: 300px;
-    z-index: 999;
-}
-
-.lista-ordenadores:before {
-    content: "";
-    position: absolute;
-    left: -2px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background-color: #999999;
+.lista-ordenadores {
+    padding-left: 15px;
+    border-left: 2px solid #999999;
 }
 
 #ordenadoresSeleccionadosText {
