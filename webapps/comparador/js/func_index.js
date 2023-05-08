@@ -3,16 +3,16 @@
 function searchOrdenadores() {
 	// Send AJAX request
 	fetch('buscar', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-		},
-		body: new URLSearchParams(new FormData(document.getElementById("filtros"))).toString(),
+	  method: 'POST',
+	  headers: {
+		'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+	  },
+	  body: new URLSearchParams(new FormData(document.getElementById("filtros"))).toString(),
 	})
-		.then(response => response.json())
-		.then(ordenadores => {
-			// Generate table HTML
-			let tableHtml = `
+	  .then(response => response.json())
+	  .then(ordenadores => {
+		// Generate table HTML
+		let tableHtml = `
 	  <table id="tabla" class="table table-striped">
 	  <thead>
 		<tr>
@@ -23,25 +23,28 @@ function searchOrdenadores() {
 		</tr>
 	  </thead>
 	  <tbody>`;
-
-			ordenadores.forEach(ordenador => {
-				tableHtml += `
+  
+		ordenadores.forEach(ordenador => {
+		  tableHtml += `
 		<tr>
 		  <td>${ordenador.marca}</td>
 		  <td>${ordenador.modelo}</td>
 		  <td><button onclick="detallesOrdenador(${ordenador})" class="btn btn-info">Detalles</button></td>
 		  <td><button onclick="seleccionarOrdenador(${ordenador})" class="btn btn-primary">Seleccionar</button></td>
 		</tr>`;
-			});
-
-			tableHtml += '</tbody></table>';
-
-			// Show modal
-			const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
-			resultsModal.show();
 		});
-}
-
+  
+		tableHtml += '</tbody></table>';
+  
+		// Update results container
+		document.getElementById('modalResultsContainer').innerHTML = tableHtml;
+  
+		// Show modal
+		const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
+		resultsModal.show();
+	  });
+  }
+  
 
 function seleccionarOrdenador(ordenador) {
 	console.log('Modificaste ' + ordenador);
@@ -49,7 +52,7 @@ function seleccionarOrdenador(ordenador) {
 
 function detallesOrdenador(ordenador) {
 	console.log('Detalles ' + ordenador);
-
+  
 	detallesHTML = `
 	  <table id="tabla" border="2">
 		<tr>
@@ -71,11 +74,14 @@ function detallesOrdenador(ordenador) {
 		  <td>${ordenador.discoCapacidad}</td>
 		</tr>
 	  </table>`;
-
+  
+	document.getElementById('popUpDetalles').innerHTML = detallesHTML;
+  
+	// Muestra el modal de detalles
 	var detallesModal = new bootstrap.Modal(document.getElementById('detallesModal'), {});
 	detallesModal.show();
-}
-
+  }
+  
 
 	// console.log("ready!");
 

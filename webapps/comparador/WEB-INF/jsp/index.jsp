@@ -175,7 +175,7 @@
           </section>
 
 
-          <section id="tabla-container" class="mb-4">
+          <section class="mb-4">
             <div id="resultsContainer"></div>
             <!-- Modal -->
             <div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="resultsModalLabel" aria-hidden="true">
@@ -196,23 +196,6 @@
             </div>
           </section>
           
-
-          <!--Donde vemos los portatiles-->
-          <section>
-            <div class="lista-ordenadores">
-              <div id="ordenadoresSeleccionadosText">
-                <p class="centered-text">Portátiles Seleccionados</p>
-              </div>
-              <div id="ordenadoresSeleccionadosBox"></div>
-              <div><input id="compareButton" type="button" class="btn btn-primary mb-2" value="Comparar"></input>
-              </div>
-              <div><input id="removeSelectionButton" type="button" class="btn btn-danger"
-                  value="Eliminar Selección"></input></div>
-            </div>
-          </section>
-
-          <!-- Aqui se ven los detalles de los ordenadores -->
-
           <section>
             <div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="detallesModalLabel" aria-hidden="true">
               <div class="modal-dialog">
@@ -228,6 +211,22 @@
               </div>
             </div>
           </section>
+          
+          <!--Donde vemos los portatiles-->
+          <section>
+            <div class="lista-ordenadores">
+              <div id="ordenadoresSeleccionadosText">
+                <p class="centered-text">Portátiles Seleccionados</p>
+              </div>
+              <div id="ordenadoresSeleccionadosBox"></div>
+              <div><input id="compareButton" type="button" class="btn btn-primary mb-2" value="Comparar"></input>
+              </div>
+              <div><input id="removeSelectionButton" type="button" class="btn btn-danger"
+                  value="Eliminar Selección"></input></div>
+            </div>
+          </section>
+
+          <!-- Aqui se ven los detalles de los ordenadores -->
 
           <!-- Add Bootstrap 5 JS CDN -->
           <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
