@@ -100,9 +100,8 @@
             </section>
 
             <!--Donde vemos los portatiles-->
-            <!--Donde vemos los portatiles-->
             <section>
-              <div class="shopping-list">
+              <div class="lista-ordenadores">
                 <div id="ordenadoresSeleccionadosText">
                   <p class="centered-text">Portátiles Seleccionados</p>
                 </div>
