@@ -30,11 +30,11 @@ function searchOrdenadores() {
    
                         <td>${ordenador.marca}</td>
 						<td>${ordenador.modelo}</td>
-						<td><button onclick="detallesOrdenador(${ordenador.id})">Detalles</button></td>
-						<td><button onclick="seleccionarOrdenador(${ordenador.id})">Seleccionar</button></td>
+						<td><button onclick="detallesOrdenador(${ordenador})">Detalles</button></td>
+						<td><button onclick="seleccionarOrdenador(${ordenador})">Seleccionar</button></td> 
                     </tr>`;
 			});
-
+//Cambiar a ordenador.id
 			tableHtml += '</table>';
 
 			// Update results container
