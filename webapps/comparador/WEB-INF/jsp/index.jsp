@@ -175,6 +175,10 @@
           </section>
 
 
+            <section id="tabla-container" class="mb-4">
+              <div id="resultsContainer"></div>
+          </section>
+
           <!--Donde vemos los portatiles-->
           <section>
             <div class="lista-ordenadores">
