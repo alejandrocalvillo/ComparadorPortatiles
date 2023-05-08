@@ -24,13 +24,13 @@ function searchOrdenadores() {
 	  </thead>
 	  <tbody>`;
   
-		ordenadores.forEach(ordenador => {
+		ordenadores.forEach((ordenador, index) => {
 		  tableHtml += `
 		<tr>
 		  <td>${ordenador.marca}</td>
 		  <td>${ordenador.modelo}</td>
-		  <td><button onclick="detallesOrdenador(${ordenador})" class="btn btn-info">Detalles</button></td>
-		  <td><button onclick="seleccionarOrdenador(${ordenador})" class="btn btn-primary">Seleccionar</button></td>
+		  <td><button onclick="detallesOrdenador(${index})" class="btn btn-info">Detalles</button></td>
+		  <td><button onclick="seleccionarOrdenador(${index})" class="btn btn-primary">Seleccionar</button></td>
 		</tr>`;
 		});
   
@@ -39,6 +39,9 @@ function searchOrdenadores() {
 		// Update results container
 		document.getElementById('modalResultsContainer').innerHTML = tableHtml;
   
+		// Save ordenadores array in a global variable
+		window.ordenadoresArray = ordenadores;
+  
 		// Show modal
 		const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
 		resultsModal.show();
@@ -46,12 +49,14 @@ function searchOrdenadores() {
   }
   
 
-function seleccionarOrdenador(ordenador) {
+function seleccionarOrdenador(inde) {
 	console.log('Modificaste ' + ordenador);
 }
 
-function detallesOrdenador(ordenador) {
-	console.log('Detalles ' + ordenador);
+function detallesOrdenador(index) {
+	console.log('Detalles ' + index);
+
+	const ordenador = window.ordenadoresArray[index];
   
 	detallesHTML = `
 	  <table id="tabla" border="2">
@@ -78,9 +83,10 @@ function detallesOrdenador(ordenador) {
 	document.getElementById('popUpDetalles').innerHTML = detallesHTML;
   
 	// Muestra el modal de detalles
-	var detallesModal = new bootstrap.Modal(document.getElementById('detallesModal'), {});
+	var detallesModal = new bootstrap.Modal(document.getElementById('detallesModal'));
 	detallesModal.show();
   }
+  
   
 
 	// console.log("ready!");
