@@ -20,13 +20,62 @@
         </div>
     </header>
     <main class="container">
-        <section class="row row-cols-1 row-cols-md-3 g-4 mb-4">
+      <section class="row row-cols-1 row-cols-md-3 g-4 mb-4">
+          <div class="rectangle">
+              <p class="centered-text">ASUS</p>
+              <% int ASUSCount=(Integer)request.getAttribute("ASUSCount"); %>
+                <% if (ASUSCount !=0) { %>
+                  <p class="centered-text">
+                    <%= ASUSCount %> Portatiles
+                  </p>
+                  <% } else { %>
+                    <p>No hay ordenadores Asus</p>
+                    <% } %>
+            </div>
+
             <div class="rectangle">
-                <p class="centered-text">ASUS</p>
-                <% int ASUSCount=(Integer)request.getAttribute("ASUSCount"); %>
-                  <% if (ASUSCount !=0) { %>
+              <p class="centered-text">LG</p>
+              <% int LGCount=(Integer)request.getAttribute("LGCount"); %>
+                <% if (LGCount !=0) { %>
+                  <p class="centered-text">
+                    <%= LGCount %> Portatiles
+                  </p>
+                  <% } else { %>
+                    <p>No hay ordenadores Asus</p>
+                    <% } %>
+            </div>
+
+            <div class="rectangle">
+              <p class="centered-text">DELL</p>
+              <% int DELLCount=(Integer)request.getAttribute("DELLCount"); %>
+                <% if (DELLCount !=0) { %>
+                  <p class="centered-text">
+                    <%= DELLCount %> Portatiles
+                  </p>
+                  <% } else { %>
+                    <p>No hay ordenadores Asus</p>
+                    <% } %>
+            </div>
+
+            <!--Empieza segunda linea de cajas--->
+
+              <div class="rectangle">
+                <p class="centered-text">TOSHIBA</p>
+                <% int TOSHIBACount=(Integer)request.getAttribute("TOSHIBACount"); %>
+                  <% if (TOSHIBACount !=0) { %>
                     <p class="centered-text">
-                      <%= ASUSCount %> Portatiles
+                      <%= TOSHIBACount %> Portatiles
+                    </p>
+                    <% } else { %>
+                      <p>No hay ordenadores Asus</p>
+                      <% } %>
+              </div>
+              <div class="rectangle">
+                <p class="centered-text">HP</p>
+                <% int HPCount=(Integer)request.getAttribute("HPCount"); %>
+                  <% if (HPCount !=0) { %>
+                    <p class="centered-text">
+                      <%= HPCount %> Portatiles
                     </p>
                     <% } else { %>
                       <p>No hay ordenadores Asus</p>
@@ -34,44 +83,17 @@
               </div>
 
               <div class="rectangle">
-                <p class="centered-text">LG</p>
-                <% int LGCount=(Integer)request.getAttribute("LGCount"); %>
-                  <% if (LGCount !=0) { %>
+                <p class="centered-text">LENOVO</p>
+                <% int LENOVOCount=(Integer)request.getAttribute("LENOVOCount"); %>
+                  <% if (LENOVOCount !=0) { %>
                     <p class="centered-text">
-                      <%= LGCount %> Portatiles
+                      <%= LENOVOCount %> Portatiles
                     </p>
                     <% } else { %>
                       <p>No hay ordenadores Asus</p>
                       <% } %>
               </div>
-
-              <div class="rectangle">
-                <p class="centered-text">DELL</p>
-                <% int DELLCount=(Integer)request.getAttribute("DELLCount"); %>
-                  <% if (DELLCount !=0) { %>
-                    <p class="centered-text">
-                      <%= DELLCount %> Portatiles
-                    </p>
-                    <% } else { %>
-                      <p>No hay ordenadores Asus</p>
-                      <% } %>
-              </div>
-        </section>
-        <section>
-            <!-- Your Portatiles Seleccionados section -->
-        </section>
-        <section>
-            <form id="filtros" onsubmit="event.preventDefault(); searchOrdenadores();" enctype="application/x-www-form-urlencoded">
-                <!-- Your filters markup -->
-            </form>
-        </section>
-        <section id="tabla-container" class="mb-4">
-            <div id="resultsContainer"></div>
-        </section>
-        <section>
-            <div id="popUpDetalles"></div>
-        </section>
-    </main>
+      </section>
     <!-- Add Bootstrap 5 JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
