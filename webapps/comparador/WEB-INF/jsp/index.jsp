@@ -31,7 +31,7 @@
           <main>
             <section>
               <!--Empieza primera linea de cajas--->
-              <div id="contenedor">
+              <div id="contenedor1">
                 <div class="rectangle">
                   <p class="centered-text">ASUS</p>
                   <% int ASUSCount=(Integer)request.getAttribute("ASUSCount"); %>
@@ -44,7 +44,7 @@
                         <% } %>
                 </div>
 
-                <div class="contenedor">
+                <div class="rectangle">
                   <p class="centered-text">LG</p>
                   <% int LGCount=(Integer)request.getAttribute("LGCount"); %>
                     <% if (LGCount !=0) { %>
@@ -201,7 +201,7 @@
             </section>
 
             <section>
-              <div id="popUpDetalles"></div>
+              <div id="resultsContainer"></div>
             </section>
           </main>
 
