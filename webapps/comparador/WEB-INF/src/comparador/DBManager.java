@@ -133,13 +133,23 @@ public class DBManager implements AutoCloseable {
 
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
 
-            //Esto es por no value specified for parameter 1 indica que no has establecido valores para los parámetros de la consulta en tu función searchOrdenadores. Antes de ejecutar la consulta con stmt.executeQuery(), debes establecer los valores para los parámetros utilizando el método set correspondiente de PreparedStatement.
+            // Esto es por no value specified for parameter 1 indica que no has establecido
+            // valores para los parámetros de la consulta en tu función searchOrdenadores.
+            // Antes de ejecutar la consulta con stmt.executeQuery(), debes establecer los
+            // valores para los parámetros utilizando el método set correspondiente de
+            // PreparedStatement.
             stmt.setString(1, marca);
-            stmt.setString(2, procesador);
-            stmt.setString(3, memoriaTipo);
-            stmt.setInt(4, memoriaCapacidad);
-            stmt.setString(5, discoTipo);
-            stmt.setInt(6, discoCapacidad);
+            stmt.setString(2, marca);
+            stmt.setString(3, procesador);
+            stmt.setString(4, procesador);
+            stmt.setString(5, memoriaTipo);
+            stmt.setString(6, memoriaTipo);
+            stmt.setInt(7, memoriaCapacidad);
+            stmt.setInt(8, memoriaCapacidad);
+            stmt.setString(9, discoTipo);
+            stmt.setString(10, discoTipo);
+            stmt.setInt(11, discoCapacidad);
+            stmt.setInt(12, discoCapacidad);
             ResultSet resultSet = stmt.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
