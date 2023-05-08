@@ -31,7 +31,7 @@
           <main>
             <section>
               <!--Empieza primera linea de cajas--->
-              <div id="contenedor1">
+              <div id="contenedor">
                 <div class="rectangle">
                   <p class="centered-text">ASUS</p>
                   <% int ASUSCount=(Integer)request.getAttribute("ASUSCount"); %>
@@ -44,7 +44,7 @@
                         <% } %>
                 </div>
 
-                <div class="rectangle">
+                <div class="contenedor">
                   <p class="centered-text">LG</p>
                   <% int LGCount=(Integer)request.getAttribute("LGCount"); %>
                     <% if (LGCount !=0) { %>
