@@ -13,7 +13,7 @@ function searchOrdenadores() {
 	  .then(ordenadores => {
 		// Generate table HTML
 		let tableHtml = `
-	  <table id="tabla" class="table table-striped">
+	  <table class="table table-striped">
 	  <thead>
 		<tr>
 		  <th>Marca</th>
@@ -59,7 +59,7 @@ function detallesOrdenador(index) {
 	const ordenador = window.ordenadoresArray[index];
   
 	detallesHTML = `
-	  <table id="tabla" border="2">
+	  <table class="table table-striped" border="2">
 		<tr>
 		  <th>Marca</th>
 		  <th>Modelo</th>
