@@ -56,6 +56,43 @@
                       <p>No hay ordenadores Asus</p>
                       <% } %>
               </div>
+
+              <!--Empieza segunda linea de cajas--->
+              <div id="contenedor2">
+                <div class="rectangle">
+                  <p class="centered-text">TOSHIBA</p>
+                  <% int TOSHIBACount=(Integer)request.getAttribute("TOSHIBACount"); %>
+                    <% if (TOSHIBACount !=0) { %>
+                      <p class="centered-text">
+                        <%= TOSHIBACount %> Portatiles
+                      </p>
+                      <% } else { %>
+                        <p>No hay ordenadores Asus</p>
+                        <% } %>
+                </div>
+                <div class="rectangle">
+                  <p class="centered-text">HP</p>
+                  <% int HPCount=(Integer)request.getAttribute("HPCount"); %>
+                    <% if (HPCount !=0) { %>
+                      <p class="centered-text">
+                        <%= HPCount %> Portatiles
+                      </p>
+                      <% } else { %>
+                        <p>No hay ordenadores Asus</p>
+                        <% } %>
+                </div>
+
+                <div class="rectangle">
+                  <p class="centered-text">LENOVO</p>
+                  <% int LENOVOCount=(Integer)request.getAttribute("LENOVOCount"); %>
+                    <% if (LENOVOCount !=0) { %>
+                      <p class="centered-text">
+                        <%= LENOVOCount %> Portatiles
+                      </p>
+                      <% } else { %>
+                        <p>No hay ordenadores Asus</p>
+                        <% } %>
+                </div>
         </section>
         <section>
             <!-- Your Portatiles Seleccionados section -->
