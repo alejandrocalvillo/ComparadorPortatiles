@@ -1,45 +1,50 @@
 
 
 function searchOrdenadores() {
-
 	// Send AJAX request
 	fetch('buscar', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-		},
-		body: new URLSearchParams(new FormData(document.getElementById("filtros"))).toString(),
+	  method: 'POST',
+	  headers: {
+		'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+	  },
+	  body: new URLSearchParams(new FormData(document.getElementById("filtros"))).toString(),
 	})
-
-		.then(response => response.json())
-		.then(ordenadores => {
-			// Generate table HTML
-			//Create the table as u want @Camilo En ordenador esta toda la info que necesitas de los ordenadores
-			let tableHtml = `
-		<table id="tabla" border="1">
+	  .then(response => response.json())
+	  .then(ordenadores => {
+		// Generate table HTML
+		let tableHtml = `
+	  <table id="tabla" class="table table-striped">
+	  <thead>
 		<tr>
-			<th>Marca</th>
-			<th>Modelo</th>
-			<th></th>
-			<th></th>
+		  <th>Marca</th>
+		  <th>Modelo</th>
+		  <th></th>
+		  <th></th>
+		</tr>
+	  </thead>
+	  <tbody>`;
+  
+		ordenadores.forEach(ordenador => {
+		  tableHtml += `
+		<tr>
+		  <td>${ordenador.marca}</td>
+		  <td>${ordenador.modelo}</td>
+		  <td><button onclick="detallesOrdenador(${ordenador})" class="btn btn-info">Detalles</button></td>
+		  <td><button onclick="seleccionarOrdenador(${ordenador})" class="btn btn-primary">Seleccionar</button></td>
 		</tr>`;
-
-			ordenadores.forEach(ordenador => {
-				tableHtml += `
-			<tr>
-				<td>${ordenador.marca}</td>
-				<td>${ordenador.modelo}</td>
-				<td><button onclick="detallesOrdenador(${ordenador})">Detalles</button></td>
-				<td><button onclick="seleccionarOrdenador(${ordenador})">Seleccionar</button></td> 
-			</tr>`;
-			});
-
-			tableHtml += '</table>';
-
-			// Update results container
-			document.getElementById('resultsContainer').innerHTML = tableHtml;
 		});
-}
+  
+		tableHtml += '</tbody></table>';
+  
+		// Update results container
+		document.getElementById('modalResultsContainer').innerHTML = tableHtml;
+  
+		// Show modal
+		const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
+		resultsModal.show();
+	  });
+  }
+  
 
 function seleccionarOrdenador(ordenador) {
 	console.log('Modificaste ' + ordenador);
