@@ -126,7 +126,7 @@
                 <div class="filtro">
                   <p class="centered-text-filtro">Marca:
                     <select class="seleccionador" name="marca">
-                      <option value="cualquiera">cualquiera</option>
+                      <option value="cualquiera">Cualquiera</option>
                       <option value="ASUS">ASUS</option>
                       <option value="LG">LG</option>
                       <option value="DELL" selected>DELL</option>
@@ -147,7 +147,7 @@
                   <p class="centered-text-filtro">Capacidad de Memoria:
                     <select class="seleccionador" name="capacidadMemoria">
                       <% List<Ordenador> memorias = (List<Ordenador>)request.getAttribute("tiposMemoria"); %>
-                        <option value="-1">cualquiera</option>
+                        <option value="-1">Cualquiera</option>
                           <% for (Ordenador ordenador : memorias) { %>
                             <option value="<%= ordenador.getMemoriaCapacidad() %>">
                               <%= ordenador.getMemoriaCapacidad() %>
@@ -160,7 +160,7 @@
                   <p class="centered-text-filtro">Procesador:
                     <select class="seleccionador" name="procesador">
                       <% List<Ordenador> procesadores = (List<Ordenador>)request.getAttribute("tiposProcesador"); %>
-                        <option value="cualquiera">cualquiera</option>
+                        <option value="cualquiera">Cualquiera</option>
                           <% for (Ordenador ordenador : procesadores) { %>
                             <option value="<%= ordenador.getProcesador() %>">
                               <%= ordenador.getProcesador() %>
@@ -173,7 +173,7 @@
                   <p class="centered-text-filtro">Tipo del Disco:
                     <select class="seleccionador" name="tipoDisco">
                       <% List<Ordenador> discos = (List<Ordenador>)request.getAttribute("tiposDisco"); %>
-                        <option value="cualquiera">cualquiera</option>
+                        <option value="cualquiera">Cualquiera</option>
                          <option value="HDD">HDD</option>
                          <option value="SSD">SSD</option>
                             </option>
@@ -183,7 +183,7 @@
                 <div class="filtro">
                   <p class="centered-text-filtro">Capacidad del Disco:
                     <select class="seleccionador" name="capacidadDisco">
-                        <option value="-1">cualquiera</option>
+                        <option value="-1">Cualquiera</option>
                       <% for (Ordenador ordenador : discos) { %>
                         <option value="<%= ordenador.getDiscoCapacidad() %>">
                           <%= ordenador.getDiscoCapacidad() %>

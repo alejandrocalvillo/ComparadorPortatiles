@@ -16,7 +16,7 @@
             // Generate table HTML
 			//Create the table as u want @Camilo En ordenador esta toda la info que necesitas de los ordenadores
             let tableHtml = `
-                <table border="1">
+                <table id="tabla" border="1">
                     <tr>
                         <th>ID</th>
                         <th>Marca</th>
