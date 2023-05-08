@@ -9,13 +9,15 @@ body {
     border-radius: .25rem;
 }
 
-
-/* Ordenadores Seleccionados (lista)*/
-.ordenadores-seleccionados {
+/* Ordenadores Seleccionados (lista) */
+.shopping-list {
     position: fixed;
     right: 20px;
     top: 20px;
     z-index: 999;
+    width: 300px;
+    margin-right: 20px;
+    border-left: 2px solid #999999;
 }
 
 #ordenadoresSeleccionadosText {
