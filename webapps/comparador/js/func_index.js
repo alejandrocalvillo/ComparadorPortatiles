@@ -80,7 +80,7 @@ function detallesOrdenador(ordenador) {
 		</div>
 		</div>`;
 
-		document.getElementById('detallesContainer').innerHTML = detallesHTML;
+		document.getElementById('popUpDetalles').innerHTML = detallesHTML;
 }
 
 	// console.log("ready!");
