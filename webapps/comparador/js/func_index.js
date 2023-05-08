@@ -16,31 +16,25 @@ function searchOrdenadores() {
 			// Generate table HTML
 			//Create the table as u want @Camilo En ordenador esta toda la info que necesitas de los ordenadores
 			let tableHtml = `
-			<div id="popup" class="overlay">
-            <div id="popupBody">
-                <h2>Ordenadores</h2>
-                <a id="cerrar" href="#">&times;</a>
-                <div class="popupContent">
-				<table id="tabla" border="1">
-				<tr>
-					<th>Marca</th>
-					<th>Modelo</th>
-					<th></th>
-					<th></th>
-				</tr>`;
-                
+		<table id="tabla" border="1">
+		<tr>
+			<th>Marca</th>
+			<th>Modelo</th>
+			<th></th>
+			<th></th>
+		</tr>`;
+
 			ordenadores.forEach(ordenador => {
 				tableHtml += `
-                    <tr>
-   
-                        <td>${ordenador.marca}</td>
-						<td>${ordenador.modelo}</td>
-						<td><button onclick="detallesOrdenador(${ordenador})">Detalles</button></td>
-						<td><button onclick="seleccionarOrdenador(${ordenador})">Seleccionar</button></td> 
-                    </tr>`;
+			<tr>
+				<td>${ordenador.marca}</td>
+				<td>${ordenador.modelo}</td>
+				<td><button onclick="detallesOrdenador(${ordenador})">Detalles</button></td>
+				<td><button onclick="seleccionarOrdenador(${ordenador})">Seleccionar</button></td> 
+			</tr>`;
 			});
-//Cambiar a ordenador.id
-			tableHtml += '</table></div></div></div>';
+
+			tableHtml += '</table>';
 
 			// Update results container
 			document.getElementById('resultsContainer').innerHTML = tableHtml;
@@ -85,8 +79,8 @@ function detallesOrdenador(ordenador) {
 		</div>
 		</div>`;
 
-		document.getElementById('popUpDetalles').innerHTML = detallesHTML;
-		document.querySelector('.overlay').style.display = 'block';
+	document.getElementById('popUpDetalles').innerHTML = detallesHTML;
+	document.querySelector('.overlay').style.display = 'block';
 }
 
 	// console.log("ready!");
