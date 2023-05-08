@@ -96,6 +96,16 @@
                       <% } %>
               </div>
       </section>
+
+      <!--Donde vemos los portatiles-->
+      <div class="ordenadores-seleccionados">
+        <div id="ordenadoresSeleccionadosText">
+            <p class="centered-text">Portátiles Seleccionados</p>
+        </div>
+        <div id="ordenadoresSeleccionadosBox"></div>
+        <div><input id="compareButton" type="button" class="btn btn-primary mb-2" value="Comparar"></input></div>
+        <div><input id="removeSelectionButton" type="button" class="btn btn-danger" value="Eliminar Selección"></input></div>
+    </div>
     <!-- Add Bootstrap 5 JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
