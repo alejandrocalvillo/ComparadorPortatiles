@@ -10,7 +10,7 @@ body {
     height: 43px;
     left: 1670px;
     top: 13px;
-    
+
     background: #D9D9D9;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
@@ -21,7 +21,7 @@ body {
     line-height: 30px;
 
     color: #000000;
-    
+
 }
 
 #title {
@@ -30,13 +30,13 @@ body {
     height: 35px;
     left: 35px;
     top: 21px;
-    
+
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 25px;
     line-height: 30px;
-    
+
     color: #000000;
 }
 
@@ -47,11 +47,11 @@ body {
     width: 100%;
     height: 1px;
     background-color: #000;
-    
+
     border: 1px solid #000000;
 }
 
-.lineaVertical{
+.lineaVertical {
     position: absolute;
     left: 1450px;
     top: 78.5px;
@@ -101,13 +101,15 @@ body {
 }
 
 .centered-text {
-    text-align: center; /* centrar el texto horizontalmente */
+    text-align: center;
+    /* centrar el texto horizontalmente */
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 34px;
-    color: #000000; /* ajustar el color del texto */
-  }
+    color: #000000;
+    /* ajustar el color del texto */
+}
 
 #PortatilesSeleccionadosTEXT {
     position: absolute;
@@ -115,7 +117,7 @@ body {
     height: 51px;
     left: 1470px;
     top: 101px;
-        
+
 }
 
 #PortatilesSeleccionadosBOX {
@@ -124,7 +126,7 @@ body {
     height: 651px;
     left: 1480px;
     top: 200px;
-    
+
     border: 1px solid #000000;
 }
 
@@ -137,7 +139,7 @@ body {
     height: 43px;
     left: 1550px;
     top: 880px;
-    
+
     background: #D9D9D9;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
@@ -146,7 +148,7 @@ body {
     font-weight: 400;
     font-size: 25px;
     line-height: 30px;
-    
+
     color: #000000;
 }
 
@@ -158,7 +160,7 @@ body {
     height: 43px;
     left: 1550px;
     top: 943px;
-    
+
     background: #D9D9D9;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
@@ -167,11 +169,11 @@ body {
     font-weight: 400;
     font-size: 25px;
     line-height: 30px;
-    
+
     color: #000000;
 }
 
-#filtros{
+#filtros {
     position: absolute;
     width: 1350px;
     height: 300px;
@@ -193,12 +195,14 @@ body {
 }
 
 .centered-text-filtro {
-    text-align: center; /* centrar el texto horizontalmente */
+    text-align: center;
+    /* centrar el texto horizontalmente */
     font-family: 'Inter';
     font-style: normal;
     font-weight: 200;
     font-size: 20px;
-    color: #000000; /* ajustar el color del texto */
+    color: #000000;
+    /* ajustar el color del texto */
 }
 
 .seleccionador {
@@ -235,34 +239,84 @@ body {
     font-size: 25px !important;
     line-height: 30px !important;
     color: #000000 !important;
-  }
-  
+}
+
 #tabla {
     position: absolute;
     margin: auto;
-    width: 800px; /* 100%;*/
+    width: 800px;
+    /* 100%;*/
     border-collapse: collapse;
-    bottom: 20px; /* 20px;*/
-    left: 60%; /* 60%;*/
+    bottom: 20px;
+    /* 20px;*/
+    left: 60%;
+    /* 60%;*/
     transform: translateX(-50%);
-  }
-  #tabla td, #tabla th {
+}
+
+#tabla td,
+#tabla th {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
-  }
-  
-  #tabla th {
-    background-color: #ddd;
-  }
+}
 
-  #tabla-container {
+#tabla th {
+    background-color: #ddd;
+}
+
+#tabla-container {
     position: absolute;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-  }
+}
 
-  .hidden {
+.hidden {
     display: none;
-  }
+}
+
+/* For the popup of detalles */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+#popupBody {
+    width: 46%;
+    padding: 2%;
+
+    border-radius: 15px;
+    box-shadow: 0 0 5px #CCC;
+    background: #FFF;
+    position: relative;
+    margin: 20% auto;
+
+    transition: all 5s ease-in-out;
+}
+
+#cerrar {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+
+    font-size: 30px;
+    fotn-weight: bold;
+    text-decoration: none;
+    color: #F00;
+
+    transition: all 200ms;
+}

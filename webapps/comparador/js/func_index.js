@@ -1,53 +1,85 @@
 
 
- function searchOrdenadores() {
+function searchOrdenadores() {
 
-        // Send AJAX request
-		fetch('buscar', {
-			method: 'POST',
-			headers: {
-			  'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-			},
-			body: new URLSearchParams(new FormData(document.getElementById("filtros"))).toString(),
-		  })
-		  
-        .then(response => response.json())
-        .then(ordenadores => {
-            // Generate table HTML
+	// Send AJAX request
+	fetch('buscar', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+		},
+		body: new URLSearchParams(new FormData(document.getElementById("filtros"))).toString(),
+	})
+
+		.then(response => response.json())
+		.then(ordenadores => {
+			// Generate table HTML
 			//Create the table as u want @Camilo En ordenador esta toda la info que necesitas de los ordenadores
-            let tableHtml = `
+			let tableHtml = `
                 <table id="tabla" border="1">
                     <tr>
-                        <th>ID</th>
                         <th>Marca</th>
                         <th>Modelo</th>
-                        <th>Procesador</th>
-                        <th>Memoria Tipo</th>
-                        <th>Memoria Capacidad</th>
-                        <th>Disco Tipo</th>
-                        <th>Disco Capacidad</th>
+						<th></th>
+						th></th>
                     </tr>`;
 
-            ordenadores.forEach(ordenador => {
-                tableHtml += `
+			ordenadores.forEach(ordenador => {
+				tableHtml += `
                     <tr>
-                        <td>${ordenador.id}</td>
+   
                         <td>${ordenador.marca}</td>
-                        <td>${ordenador.modelo}</td>
-                        <td>${ordenador.procesador}</td>
-                        <td>${ordenador.memoriaTipo}</td>
-                        <td>${ordenador.memoriaCapacidad}</td>
-                        <td>${ordenador.discoTipo}</td>
-                        <td>${ordenador.discoCapacidad}</td>
+						<td>${ordenador.modelo}</td>
+						<td><button onclick="detallesOrdenador(${ordenador.id})">Detalles</button></td>
+						<td><button onclick="seleccionarOrdenador(${ordenador.id})">Seleccionar</button></td>
                     </tr>`;
-            });
+			});
 
-            tableHtml += '</table>';
+			tableHtml += '</table>';
 
-            // Update results container
-            document.getElementById('resultsContainer').innerHTML = tableHtml;
-        });
-    }
+			// Update results container
+			document.getElementById('resultsContainer').innerHTML = tableHtml;
+		});
+}
+
+function seleccionarOrdenador(ordenador) {
+	console.log('Modificaste ' + ordenador);
+}
+
+function detallesOrdenador(ordenador) {
+	console.log('Detalles ' + ordenador);
+
+	detallesHTML = `
+		<div id="popup" class="overlay">
+		<div id="popupBody">
+			<h2>${ordenador.modelo}</h2>
+			<a id="cerrar" href="#">&times;</a>
+			<div class="popupContent">
+				<table id="tabla" border="2">
+					<tr>
+						<th>Marca</th>
+						<th>Modelo</th>
+						<th>Procesador</th>
+						<th>Memoria Tipo</th>
+						<th>Memoria Capacidad</th>
+						<th>Disco Tipo</th>
+						<th>Disco Capacidad</th>
+					</tr>
+
+					<tr>
+						<td>${ordenador.marca}</td>
+						<td>${ordenador.modelo}</td>
+						<td>${ordenador.procesador}</td>
+						<td>${ordenador.memoriaTipo}</td>
+						<td>${ordenador.memoriaCapacidad}</td>
+						<td>${ordenador.discoTipo}</td>
+						<td>${ordenador.discoCapacidad}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		</div>`;
+}
 
 	// console.log("ready!");
 
@@ -82,7 +114,7 @@
 	// 		capacidadDisco:capacidadDisco,
 	// 		tipoMemoria:tipoMemoria,
 	// 		tipoDisco:tipoDisco
-	// 	}  
+	// 	}
 
 	// 	$.ajax({
 	// 		type: "POST",
@@ -146,12 +178,6 @@
 	// }
 
 
-	// function seleccionarOrdenador(ordenador) {
-	// 	console.log('Modificaste ' + ordenador);
-	// }
 
-	// function detallesOrdenador(ordenador) {
-	// 	console.log('Detalles ' + ordenador);
-	// }
 
 
