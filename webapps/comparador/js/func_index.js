@@ -16,14 +16,19 @@ function searchOrdenadores() {
 			// Generate table HTML
 			//Create the table as u want @Camilo En ordenador esta toda la info que necesitas de los ordenadores
 			let tableHtml = `
-                <table id="tabla" border="1">
-                    <tr>
-                        <th>Marca</th>
-                        <th>Modelo</th>
-						<th></th>
-						<th></th>
-                    </tr>`;
-
+			<div id="popup" class="overlay">
+            <div id="popupBody">
+                <h2>Ordenadores</h2>
+                <a id="cerrar" href="#">&times;</a>
+                <div class="popupContent">
+				<table id="tabla" border="1">
+				<tr>
+					<th>Marca</th>
+					<th>Modelo</th>
+					<th></th>
+					<th></th>
+				</tr>`;
+                
 			ordenadores.forEach(ordenador => {
 				tableHtml += `
                     <tr>
@@ -35,7 +40,7 @@ function searchOrdenadores() {
                     </tr>`;
 			});
 //Cambiar a ordenador.id
-			tableHtml += '</table>';
+			tableHtml += '</table></div></div></div>';
 
 			// Update results container
 			document.getElementById('resultsContainer').innerHTML = tableHtml;
