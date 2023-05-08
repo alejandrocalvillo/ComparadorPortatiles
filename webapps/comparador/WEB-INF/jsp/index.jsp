@@ -177,7 +177,6 @@
                          <option value="HDD">HDD</option>
                          <option value="SSD">SSD</option>
                             </option>
-                            <% } %>
                     </select>
                   </p>
                 </div>
