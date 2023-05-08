@@ -211,6 +211,23 @@
             </div>
           </section>
 
+          <!-- Aqui se ven los detalles de los ordenadores -->
+
+          <section>
+            <div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="detallesModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="detallesModalLabel">Detalles del ordenador</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div id="popUpDetalles"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
 
           <!-- Add Bootstrap 5 JS CDN -->
           <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

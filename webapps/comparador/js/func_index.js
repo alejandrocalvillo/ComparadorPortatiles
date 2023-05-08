@@ -3,16 +3,16 @@
 function searchOrdenadores() {
 	// Send AJAX request
 	fetch('buscar', {
-	  method: 'POST',
-	  headers: {
-		'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-	  },
-	  body: new URLSearchParams(new FormData(document.getElementById("filtros"))).toString(),
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+		},
+		body: new URLSearchParams(new FormData(document.getElementById("filtros"))).toString(),
 	})
-	  .then(response => response.json())
-	  .then(ordenadores => {
-		// Generate table HTML
-		let tableHtml = `
+		.then(response => response.json())
+		.then(ordenadores => {
+			// Generate table HTML
+			let tableHtml = `
 	  <table id="tabla" class="table table-striped">
 	  <thead>
 		<tr>
@@ -23,28 +23,25 @@ function searchOrdenadores() {
 		</tr>
 	  </thead>
 	  <tbody>`;
-  
-		ordenadores.forEach(ordenador => {
-		  tableHtml += `
+
+			ordenadores.forEach(ordenador => {
+				tableHtml += `
 		<tr>
 		  <td>${ordenador.marca}</td>
 		  <td>${ordenador.modelo}</td>
 		  <td><button onclick="detallesOrdenador(${ordenador})" class="btn btn-info">Detalles</button></td>
 		  <td><button onclick="seleccionarOrdenador(${ordenador})" class="btn btn-primary">Seleccionar</button></td>
 		</tr>`;
+			});
+
+			tableHtml += '</tbody></table>';
+
+			// Show modal
+			const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
+			resultsModal.show();
 		});
-  
-		tableHtml += '</tbody></table>';
-  
-		// Update results container
-		document.getElementById('modalResultsContainer').innerHTML = tableHtml;
-  
-		// Show modal
-		const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
-		resultsModal.show();
-	  });
-  }
-  
+}
+
 
 function seleccionarOrdenador(ordenador) {
 	console.log('Modificaste ' + ordenador);
@@ -54,39 +51,31 @@ function detallesOrdenador(ordenador) {
 	console.log('Detalles ' + ordenador);
 
 	detallesHTML = `
-		<div id="popup" class="overlay">
-		<div id="popupBody">
-			<h2>${ordenador.modelo}</h2>
-			<a id="cerrar" href="#">&times;</a>
-			<div class="popupContent">
-				<table id="tabla" border="2">
-					<tr>
-						<th>Marca</th>
-						<th>Modelo</th>
-						<th>Procesador</th>
-						<th>Memoria Tipo</th>
-						<th>Memoria Capacidad</th>
-						<th>Disco Tipo</th>
-						<th>Disco Capacidad</th>
-					</tr>
+	  <table id="tabla" border="2">
+		<tr>
+		  <th>Marca</th>
+		  <th>Modelo</th>
+		  <th>Procesador</th>
+		  <th>Memoria Tipo</th>
+		  <th>Memoria Capacidad</th>
+		  <th>Disco Tipo</th>
+		  <th>Disco Capacidad</th>
+		</tr>
+		<tr>
+		  <td>${ordenador.marca}</td>
+		  <td>${ordenador.modelo}</td>
+		  <td>${ordenador.procesador}</td>
+		  <td>${ordenador.memoriaTipo}</td>
+		  <td>${ordenador.memoriaCapacidad}</td>
+		  <td>${ordenador.discoTipo}</td>
+		  <td>${ordenador.discoCapacidad}</td>
+		</tr>
+	  </table>`;
 
-					<tr>
-						<td>${ordenador.marca}</td>
-						<td>${ordenador.modelo}</td>
-						<td>${ordenador.procesador}</td>
-						<td>${ordenador.memoriaTipo}</td>
-						<td>${ordenador.memoriaCapacidad}</td>
-						<td>${ordenador.discoTipo}</td>
-						<td>${ordenador.discoCapacidad}</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-		</div>`;
-
-	document.getElementById('popUpDetalles').innerHTML = detallesHTML;
-	document.querySelector('.overlay').style.display = 'block';
+	var detallesModal = new bootstrap.Modal(document.getElementById('detallesModal'), {});
+	detallesModal.show();
 }
+
 
 	// console.log("ready!");
 
