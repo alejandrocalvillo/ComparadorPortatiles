@@ -21,7 +21,7 @@ function searchOrdenadores() {
                         <th>Marca</th>
                         <th>Modelo</th>
 						<th></th>
-						th></th>
+						<th></th>
                     </tr>`;
 
 			ordenadores.forEach(ordenador => {
