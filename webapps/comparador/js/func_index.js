@@ -86,6 +86,7 @@ function detallesOrdenador(ordenador) {
 		</div>`;
 
 		document.getElementById('popUpDetalles').innerHTML = detallesHTML;
+		document.querySelector('.overlay').style.display = 'block';
 }
 
 	// console.log("ready!");
