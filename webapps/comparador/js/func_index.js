@@ -63,7 +63,7 @@ function seleccionarOrdenador(index) {
 
 		const ordenadorSeleccionado = document.createElement('div');
 		ordenadorSeleccionado.innerHTML = `Marca: ${ordenador.marca}, Modelo: ${ordenador.modelo}`;
-		ordenadorSeleccionado.setAttribute('id', `caja`);
+		ordenadorSeleccionado.setAttribute('class', `md-4 mb-3`);
 		const btnEliminar = document.createElement('input');
 		btnEliminar.id = 'eliminarOrdenador';
 		btnEliminar.value= 'X';
