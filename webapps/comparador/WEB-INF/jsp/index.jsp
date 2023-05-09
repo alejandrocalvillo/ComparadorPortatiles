@@ -16,7 +16,7 @@
           <script src="js/func_index.js" type="text/javascript"></script>
 
         </head>
-        <% Usuario usuario = (Usuario)request.getAttribute(usuario) %>
+        <% Usuario usuario = (Usuario)request.getAttribute("usuario") %>
         <body>
           <header class="bg-light mb-4">
             <div class="container d-flex justify-content-between py-3">
