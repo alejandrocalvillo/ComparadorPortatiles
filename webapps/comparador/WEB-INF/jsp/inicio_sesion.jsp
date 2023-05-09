@@ -22,7 +22,7 @@
 		<div class="text-center fs-1 fw-bold">Iniciar Sesion</div>
 		<div class="input-group mt-4">
 			<div class="input-group-text bg-info">
-				<img src="img/login/icons/usuario.png" alt="usuario icono" style="height: 1rem;"></div>
+				<img src="img/login/icons/usuario.svg" alt="usuario icono" style="height: 1rem;"></div>
 		</div>
 	</div>
 </body>
