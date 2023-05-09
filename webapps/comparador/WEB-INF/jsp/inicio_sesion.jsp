@@ -40,8 +40,6 @@
 			<div class="input-group mt-2">
 				<input type="submit" class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm"
 					value="Iniciar sesion">
-			</div>
-			<div class="input-group mt-1">
 				<input id="Registro" type="button" class="btn btn-warning text-white w-100 mt-4 fw-semibold shadow-sm"
 				value="Registrarse">
 			</div>
