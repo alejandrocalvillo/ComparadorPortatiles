@@ -20,10 +20,16 @@
 			<img src="img/login/Imagen_de_login.png" alt="login image" style="height: 7rem" />
 		</div>
 		<div class="text-center fs-1 fw-bold">Iniciar Sesion</div>
-		<div class="input-group mt-4">
-			<div class="input-group-text bg-info">
-				<img src="img/login/icons/usuario.svg" alt="usuario icono" style="height: 1rem;"></div>
-		</div>
+		<form action="${pageContext.request.contextPath}/login" method="POST" onsubmit="return validarFormulario()">
+			<div class="input-group mt-4">
+				<div class="input-group-text bg-info">
+					<img src="img/login/icons/usuario.svg" alt="usuario icono" style="height: 1rem;">
+				</div>
+				<div class="input-group-text bg-info">
+					<input type="form-control bg-light" placeholder="Usuario" name="usuario" id="usuario" type="text">
+				</div>
+			</div>
+		</form>
 	</div>
 </body>
 <!-- Add Bootstrap 5 JS CDN -->
