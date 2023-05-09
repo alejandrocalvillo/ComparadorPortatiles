@@ -9,7 +9,7 @@
           <title>Comparador de portátiles</title>
           <meta charset="UTF-8">
           <link rel="stylesheet" href="css/index.css" type="text/css">
-          <!-- Add Bootstrap 5 CSS CDN -->
+          <!--Bootstrap 5 CSS CDN-->
           <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
           <script src="js/func_index.js" type="text/javascript"></script>
@@ -23,6 +23,8 @@
               <a href="/comparador/login" class="btn btn-primary">Iniciar Sesion</a>
             </div>
           </header>
+
+          <!--Empieza primeralinea de cajas--->
           <section class="row row-cols-1 row-cols-md-3 g-4 mb-4">
             <div class="rectangle">
               <p class="centered-text">ASUS</p>
