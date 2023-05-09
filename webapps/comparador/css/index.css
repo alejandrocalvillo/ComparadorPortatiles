@@ -25,7 +25,7 @@ body {
 
 /* Ordenadores Seleccionados (lista) */
 .lista-ordenadores {
-    position: absolute;
+    position: relative;
     right: 20px;
     top: 20px;
     width: 300px;
