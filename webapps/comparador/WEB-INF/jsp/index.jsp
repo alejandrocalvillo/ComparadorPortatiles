@@ -213,7 +213,7 @@
             </div>
           </section>
 
-          <!--Donde vemos los portatiles-->
+          <!--Lista de los portatiles seleccionados-->
           <section>
             <div class="lista-ordenadores">
               <div id="ordenadoresSeleccionadosText">
