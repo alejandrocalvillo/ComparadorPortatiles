@@ -57,13 +57,21 @@
 					usuarioForm=request.getParameter("usuario"); String
 					contrasenaForm=request.getParameter("contrasena"); if (usuarioForm !=null && contrasenaForm !=null)
 					{ Usuario usuarioBD=db.getUsuarioDB(usuarioForm, contrasenaForm); if (usuarioBD.getNombre() !=null)
-					{ session.setAttribute("usuario", usuarioBD); %>
+					{ session.setAttribute("usuario", usuarioBD); response.sendRedirect("index.jsp"); } else { %>
+					<div class="alert alert-danger text-center mt-3" role="alert">
+						Error: Usuario o contraseña incorrectos.
+					</div>
+					<% } } else { out.println("<p>No hay usuario</p>");
+						}
+						%>
 
-					<% String error=(String) request.getAttribute("error"); if (error !=null) { %>
-						<div class="alert alert-danger text-center mt-3" role="alert">
-							<%= error %>
-						</div>
-						<% } %>
+						<% String error=(String) request.getAttribute("error"); if (error !=null) { %>
+							<div class="alert alert-danger text-center mt-3" role="alert">
+								<%= error %>
+							</div>
+							<% } %>
+
+
 			</body>
 
 			</html>
