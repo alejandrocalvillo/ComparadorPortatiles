@@ -23,7 +23,7 @@
 		<form action="${pageContext.request.contextPath}/login" method="POST" onsubmit="return validarFormulario()">
 			<div class="input-group mt-4">
 				<div class="input-group-text bg-info">
-					<img src="img/login/icons/usuario.svg" alt="usuario icono" style="height: 1rem;">
+					<img src="img/login/icons/usuario.svg" alt="usuario icono" style="height: 20px; width: 20px;">
 				</div>
 				<div class="input-group-text bg-light">
 					<input type="form-control bg-light" placeholder="Usuario" type="text" name="usuario" id="usuario">
@@ -31,16 +31,14 @@
 			</div>
 			<div class="input-group mt-1">
 				<div class="input-group-text bg-info">
-					<img src="img/login/icons/password.svg" alt="contraseña icono" style="height: 1rem;">
+					<img src="img/login/icons/password.svg" alt="contraseña icono" style="height: 20px; width: 20px;">
 				</div>
 				<div class="input-group-text bg-light">
 					<input type="password" placeholder="Password" name="contrasena" id="contrasena">
 				</div>
 			</div>
 
-			<div class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm">
-				Iniciar Sesion
-			  </div>
+			<input type="submit" class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm" value="Iniciar sesión">
 		</form>
 	</div>
 </body>
