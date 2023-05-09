@@ -18,15 +18,11 @@
 
 		<div class="d-flex justify-content-center">
 			<img src="img/login/Imagen_de_login.png" alt="login image" style="height: 7rem" />
-
-			<div class="text-center fs-1 fw-bold">Iniciar Sesion</div>
-			<div class="input-group mt-4">
-				<div class="input-group-text bg-info">
-					<img src="img/login/usuario.png" alt="usuario icono">
-				</div>
-
-
-			</div>
+		</div>
+		<div class="text-center fs-1 fw-bold">Iniciar Sesion</div>
+		<div class="input-group mt-4">
+			<div class="input-group-text bg-info">
+				<img src="img/login/icons/usuario.png" alt="usuario icono" style="height: 1rem;"></div>
 		</div>
 	</div>
 </body>
