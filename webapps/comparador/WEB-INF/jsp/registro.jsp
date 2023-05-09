@@ -34,7 +34,10 @@
 			</p>
       		
     	</form>
-		
+		<div id="cajaEsquina">
+			
+			<a href="/comparador/index" class="btn btn-primary">Pagina Principal</a>
+		</div>
 
 
 		<%	

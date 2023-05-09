@@ -69,3 +69,8 @@ input[type="submit"]:hover {
 }
 
 
+#cajaEsquina{
+	position: fixed;
+	top: 10px;
+	right: 120px;
+  }	

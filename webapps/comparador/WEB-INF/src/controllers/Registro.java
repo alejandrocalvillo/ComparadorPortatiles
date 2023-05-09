@@ -27,13 +27,8 @@ public class Registro extends HttpServlet {
         HttpSession session = request.getSession(false);
         Usuario usuario= new Usuario();
 
-/* 
-      	if (session != null && session.getAttribute("usuario") != null) {
-            // El usuario ya inició sesión, redireccionar a la página index.jsp
-            response.sendRedirect("/comparador/index");
-            return;
-        }
-*/
+
+
         try (DBManager db = new DBManager()) {
             //Empezamos contando marcas en el index
   

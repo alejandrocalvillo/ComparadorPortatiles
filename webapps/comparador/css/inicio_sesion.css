@@ -95,3 +95,8 @@ input[type="button"]:hover {
   #error-message.show {
 	display: block;
   }
+  #cajaEsquina{
+	position: fixed;
+	top: 10px;
+	right: 120px;
+  }	

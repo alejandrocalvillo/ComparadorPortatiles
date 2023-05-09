@@ -36,13 +36,25 @@ public class Login extends HttpServlet {
             if(usuario_str!=null && contrasena_str!=null  )
                 {
                 usuario =db.getUsuarioDB(usuario_str, contrasena_str);
-                System.out.println(usuario.getNombre()+" "+usuario.getContrasena());
+                System.out.println("antes de comprobar: "+usuario.getNombre()+" "+usuario.getContrasena());
                 if(usuario.getNombre()!=null && usuario.getContrasena()!= null )
-                    {         
-                    // Guardar el objeto usuario en la sesión
-                    session = request.getSession();
-                    session.setAttribute("usuario", usuario);
-                    response.sendRedirect(request.getContextPath()+"/index");
+                    { 
+                    if(usuario.getNombre().equals("admin") && usuario.getContrasena().equals("*00A51F3F48415C7D4E8908980D443C29C69B60C9"))
+                        {
+                        // Guardar el objeto usuario en la sesión
+                        session = request.getSession();
+                        session.setAttribute("usuario", usuario);
+                        response.sendRedirect(request.getContextPath()+"/admin");
+                         
+                        }
+                    else
+                        {
+                        // Guardar el objeto usuario en la sesión
+                        session = request.getSession();
+                        session.setAttribute("usuario", usuario);
+                        response.sendRedirect(request.getContextPath()+"/index");
+                        }    
+                          
                     } 
                 else
                     {

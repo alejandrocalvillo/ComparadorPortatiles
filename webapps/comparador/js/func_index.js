@@ -1,3 +1,5 @@
+var indicesSeleccionados = [];
+
 
 
 function searchOrdenadores() {
@@ -13,7 +15,7 @@ function searchOrdenadores() {
 	  .then(ordenadores => {
 		// Generate table HTML
 		let tableHtml = `
-	  <table class="table table-striped">
+	  <table id="tabla" class="table table-striped">
 	  <thead>
 		<tr>
 		  <th>Marca</th>
@@ -49,8 +51,58 @@ function searchOrdenadores() {
   }
   
 
-function seleccionarOrdenador(inde) {
-	console.log('Modificaste ' + ordenador);
+function seleccionarOrdenador(index) {
+
+	console.log('Seleccionaste ' + index);
+
+	const ordenador = window.ordenadoresArray[index];
+	
+	if(indicesSeleccionados.indexOf(index) === -1) {
+
+		indicesSeleccionados.push(index);
+
+		const ordenadorSeleccionado = document.createElement('div');
+		ordenadorSeleccionado.innerHTML = `Marca: ${ordenador.marca}, Modelo: ${ordenador.modelo}`;
+		ordenadorSeleccionado.setAttribute('id', `caja`);
+		const btnEliminar = document.createElement('button');
+		btnEliminar.id = 'eliminarOrdenador';
+		btnEliminar.innerText = 'X';
+		btnEliminar.addEventListener('click', () => {
+  			const indice = indicesSeleccionados.indexOf(index);
+  			if (indice > -1) {
+    			indicesSeleccionados.splice(indice, 1);
+    			ordenadorSeleccionado.remove();
+  			}
+		});
+
+		ordenadorSeleccionado.appendChild(btnEliminar);
+	
+		// Agregar el elemento div al div principal
+		const ordenadoresSeleccionadosBox = document.getElementById('ordenadoresSeleccionadosBox');
+		ordenadoresSeleccionadosBox.appendChild(ordenadorSeleccionado);
+	
+		var seleccion = new bootstrap.Modal(document.getElementById('ordenadoresSeleccionadosBox'));
+		//seleccion.show();
+
+
+	}else{
+		console.log('Ya ha sido seleccionado');
+	}
+
+
+
+	document.getElementById('removeSelectionButton').addEventListener('click', function() {
+		const ordenadoresSeleccionadosBox = document.getElementById('ordenadoresSeleccionadosBox');
+	
+		// Eliminar todos los hijos del div principal
+		while (ordenadoresSeleccionadosBox.firstChild) {
+			ordenadoresSeleccionadosBox.removeChild(ordenadoresSeleccionadosBox.firstChild);
+		}
+	
+		// Vaciar el array de índices seleccionados
+		indicesSeleccionados = [];
+	});
+
 }
 
 function detallesOrdenador(index) {
@@ -59,7 +111,7 @@ function detallesOrdenador(index) {
 	const ordenador = window.ordenadoresArray[index];
   
 	detallesHTML = `
-	  <table class="table table-striped" border="2">
+	  <table id="tabla" border="2">
 		<tr>
 		  <th>Marca</th>
 		  <th>Modelo</th>

@@ -64,7 +64,7 @@ body {
 }
 
 /* Modal de busqueda */
-.close-button {
+.boton-rojo-close {
     color: red;
 }
 
@@ -72,9 +72,15 @@ body {
     color: darkred;
     cursor: pointer;
 }
+#caja{
+    border: 1px solid black;
+    margin-bottom: 10px;
 
-/* Detalles */
-
-.wide-modal {
-    max-width: 800px; /* Ajusta este valor según la anchura que desees */
+}
+#CerrarSesion {
+    display: none;
   }
+  #IniciarSesion {
+    display: inline-block;
+
+  } 
