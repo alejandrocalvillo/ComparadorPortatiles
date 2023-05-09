@@ -26,7 +26,7 @@
 					<img src="img/login/icons/usuario.svg" alt="usuario icono" style="height: 1rem;">
 				</div>
 				<div class="input-group-text bg-light">
-					<input type="form-control bg-light" placeholder="Usuario" name="usuario" id="usuario" type="text">
+					<input type="form-control bg-light" placeholder="Usuario" type="text" name="usuario" id="usuario">
 				</div>
 			</div>
 			<div class="input-group mt-1">
@@ -34,7 +34,7 @@
 					<img src="img/login/icons/password.svg" alt="contraseña icono" style="height: 1rem;">
 				</div>
 				<div class="input-group-text bg-light">
-					<input type="form-control bg-light" placeholder="contraseña" name="contrasena" id="contrasena" type="password">
+					<input type="form-control bg-light" type="password" placeholder="Password" name="contrasena" id="contrasena">
 				</div>
 
 			</div>
