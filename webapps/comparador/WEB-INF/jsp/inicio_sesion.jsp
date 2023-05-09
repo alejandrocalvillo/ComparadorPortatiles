@@ -37,7 +37,7 @@
 					<input type="password" placeholder="Password" name="contrasena" id="contrasena">
 				</div>
 			</div>
-			<div class="input-group mt-3">
+			<div class="input-group mt-2">
 				<input type="submit" class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm"
 					value="Iniciar sesion">
 			</div>
