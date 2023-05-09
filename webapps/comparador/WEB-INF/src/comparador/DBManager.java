@@ -129,7 +129,7 @@ public class DBManager implements AutoCloseable {
             String discoTipo, int discoCapacidad) throws SQLException {
         List<Ordenador> ordenadores = new ArrayList<>();
 
-        String query = "SELECT ordenadores.id AS id, ordenadores.modelo, marcas.nombre AS marca_nombre, procesadores.nombre AS procesador_nombre, memorias.tipo AS memoria_tipo, memorias.capacidad AS capacidad_ram, discos.tipo AS disco_tipo, discos.capacidad AS capacidad_disco FROM ordenadores INNER JOIN marcas ON marca_id = marcas.id INNER JOIN procesadores ON procesador_id = procesadores.id INNER JOIN discos ON disco_id = discos.id INNER JOIN memorias ON memoria_id = memorias.id WHERE (? = 'cualquiera' OR marcas.nombre = ?) AND (? = 'cualquiera' OR procesadores.nombre = ?) AND (? = 'cualquiera' OR memorias.tipo = ?) AND (? = -1 OR memorias.capacidad = ?) AND (? = 'cualquiera' OR discos.tipo = ?) AND (? = -1 OR discos.capacidad = ?)";
+        String query = "SELECT ordenadores.id AS id, ordenadores.modelo, marcas.nombre AS marca_nombre, procesadores.nombre AS procesador_nombre, memorias.tipo AS memoria_tipo, memorias.capacidad AS capacidad_ram, discos.tipo AS disco_tipo, discos.capacidad AS capacidad_disco, puntos_de_venta.tienda, puntos_de_venta.precio FROM ordenadores INNER JOIN marcas ON marca_id = marcas.id INNER JOIN procesadores ON procesador_id = procesadores.id INNER JOIN discos ON disco_id = discos.id INNER JOIN memorias ON memoria_id = memorias.id INNER JOIN puntos_de_venta ON ordenadores.id = puntos_de_venta.ordenador_id WHERE (? = 'cualquiera' OR marcas.nombre = ?) AND (? = 'cualquiera' OR procesadores.nombre = ?) AND (? = 'cualquiera' OR memorias.tipo = ?) AND (? = -1 OR memorias.capacidad = ?) AND (? = 'cualquiera' OR discos.tipo = ?) AND (? = -1 OR discos.capacidad = ?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
 
@@ -160,6 +160,8 @@ public class DBManager implements AutoCloseable {
                 int capacidad_ram = resultSet.getInt("capacidad_ram");
                 String disco_tipo = resultSet.getString("disco_tipo");
                 int capacidad_disco = resultSet.getInt("capacidad_disco");
+                String tienda = resultSet.getString("tienda");
+                double precio = resultSet.getDouble("precio");
 
                 Ordenador ordenador = new Ordenador();
                 ordenador.setId(id);
@@ -170,6 +172,8 @@ public class DBManager implements AutoCloseable {
                 ordenador.setMemoriaCapacidad(capacidad_ram);
                 ordenador.setDiscoTipo(disco_tipo);
                 ordenador.setDiscoCapacidad(capacidad_disco);
+                ordenador.setTienda(tienda);
+                ordenador.setPrecio(precio);
 
                 ordenadores.add(ordenador);
             }

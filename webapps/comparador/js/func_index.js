@@ -174,7 +174,7 @@ function searchOrdenadoresLoged() {
 		<tr>
 		  <td>${ordenador.marca}</td>
 		  <td>${ordenador.modelo}</td>
-		  <td><button onclick="detallesOrdenador(${index})" class="btn btn-info">Detalles</button></td>
+		  <td><button onclick="detallesOrdenadorLoged(${index})" class="btn btn-info">Detalles</button></td>
 		  <td><button onclick="seleccionarOrdenador(${index})" class="btn btn-primary">Seleccionar</button></td>
 		</tr>`;
 		});
@@ -192,4 +192,44 @@ function searchOrdenadoresLoged() {
 		resultsModal.show();
 	  });
   }
+
+  function detallesOrdenadorLoged(index) {
+	console.log('Detalles ' + index);
+
+	const ordenador = window.ordenadoresArray[index];
+  
+	detallesHTML = `
+	  <table id="tabla" border="2">
+		<tr>
+		  <th>Marca</th>
+		  <th>Modelo</th>
+		  <th>Procesador</th>
+		  <th>Memoria Tipo</th>
+		  <th>Memoria Capacidad</th>
+		  <th>Disco Tipo</th>
+		  <th>Disco Capacidad</th>
+		  <th>Tienda</th>
+		  <th>Precio</th>
+
+		</tr>
+		<tr>
+		  <td>${ordenador.marca}</td>
+		  <td>${ordenador.modelo}</td>
+		  <td>${ordenador.procesador}</td>
+		  <td>${ordenador.memoriaTipo}</td>
+		  <td>${ordenador.memoriaCapacidad}</td>
+		  <td>${ordenador.discoTipo}</td>
+		  <td>${ordenador.discoCapacidad}</td>
+		  <td>${ordenador.tienda}</td>
+		  <td>${ordenador.precio}</td>
+		</tr>
+	  </table>`;
+  
+	document.getElementById('popUpDetalles').innerHTML = detallesHTML;
+  
+	// Muestra el modal de detalles
+	var detallesModal = new bootstrap.Modal(document.getElementById('detallesModal'));
+	detallesModal.show();
+  }
+
   

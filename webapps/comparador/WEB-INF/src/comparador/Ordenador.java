@@ -9,6 +9,8 @@ public class Ordenador {
     private int memoriaCapacidad;
     private String discoTipo;
     private int discoCapacidad;
+    private String tienda;
+    private double precio;
 
     public int getId() {
         return id;
@@ -74,8 +76,27 @@ public class Ordenador {
         this.discoCapacidad = discoCapacidad;
     }
 
+    public String getTienda() {
+        return tienda;
+    }
+
+    public void setTienda(String tienda) {
+        this.tienda = tienda;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+        if (this.precio < 0) {
+            this.precio = 0;
+        }
+    }
+
     public String toString() {
-        return modelo + " " + marca + " " + procesador + " "+ memoriaTipo + " " + memoriaCapacidad + " " + discoTipo + " " + discoCapacidad;
+        return modelo + " " + marca + " " + procesador + " "+ memoriaTipo + " " + memoriaCapacidad + " " + discoTipo + " " + discoCapacidad + " " + tienda + " " + precio;
     }
 
 }
