@@ -22,7 +22,11 @@
             <div class="container d-flex justify-content-between py-3">
               <h1>Comparador de portátiles</h1>
               <% if (usuario != null){ %>
-                <p class="centered-text">Bienvenido <%= usuario.getNombre() %></p>
+                <div>
+                  <p class="centered-text">Bienvenido <%= usuario.getNombre() %></p>
+                  <a href="${pageContext.request.contextPath}/cerrar" class="btn btn-danger">Cerrar Sesion</a>
+                </div>
+ 
                 <% } else { %>
                   <a href="${pageContext.request.contextPath}/login" class="btn btn-primary">Iniciar Sesion</a>
                   <% } %>
