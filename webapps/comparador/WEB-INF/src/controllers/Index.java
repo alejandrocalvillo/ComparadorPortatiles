@@ -28,6 +28,8 @@ public class Index extends HttpServlet {
 
         try (DBManager db = new DBManager()) {
             //Empezamos contando marcas en el index
+            Usuario usuario = (Usuario)session.getAttribute("usuario");
+            request.setAttribute("usuario", usuario);
 
             ordenadores = new ArrayList<Ordenador>();
             ordenadores = db.listOrdenadoresPorMarca("ASUS");

@@ -1,5 +1,6 @@
 <%@ page language='java' contentType='text/html;charset=utf-8' %>
   <%@ page import='comparador.Ordenador' %>
+  <%@page import='comparador.Usuario' %>
     <%@ page import='java.util.ArrayList' %>
       <%@ page import='java.util.List' %>
         <!DOCTYPE html>
@@ -15,12 +16,16 @@
           <script src="js/func_index.js" type="text/javascript"></script>
 
         </head>
-
+        <% Usuario usuario = (Usuario)request.getAttribute(usuario) %>
         <body>
           <header class="bg-light mb-4">
             <div class="container d-flex justify-content-between py-3">
               <h1>Comparador de portátiles</h1>
-              <a href="/comparador/login" class="btn btn-primary">Iniciar Sesion</a>
+              <% if (usuario != null){ %>
+                <p class="centered-text">Bienvenido <%= usuario.getNombre() %></p>
+                <% } else { %>
+                  <a href="/comparador/login" class="btn btn-primary">Iniciar Sesion</a>
+                  <% } %>
             </div>
           </header>
 
