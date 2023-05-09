@@ -24,7 +24,7 @@
               <% if (usuario != null){ %>
                 <p class="centered-text">Bienvenido <%= usuario.getNombre() %></p>
                 <% } else { %>
-                  <a href="/comparador/login" class="btn btn-primary">Iniciar Sesion</a>
+                  <a href="${pageContext.request.contextPath}login" class="btn btn-primary">Iniciar Sesion</a>
                   <% } %>
             </div>
           </header>
