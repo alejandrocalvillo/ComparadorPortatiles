@@ -68,6 +68,8 @@ public class Buscador extends HttpServlet {
                 ordenadorJson.put("memoriaCapacidad", ordenador.getMemoriaCapacidad());
                 ordenadorJson.put("discoTipo", ordenador.getDiscoTipo());
                 ordenadorJson.put("discoCapacidad", ordenador.getDiscoCapacidad());
+                ordenadorJson.put("tienda", ordenador.getTienda());
+                ordenadorJson.put("precio", ordenador.getPrecio());
                 ordenadoresJsonArray.put(ordenadorJson);
             }
 
