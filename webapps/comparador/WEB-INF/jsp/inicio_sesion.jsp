@@ -37,12 +37,13 @@
 					<input type="password" placeholder="Password" name="contrasena" id="contrasena">
 				</div>
 			</div>
-
-			<input type="submit" class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm" value="Iniciar sesion">
+			<div class="input-group mt-3">
+				<input type="submit" class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm"
+					value="Iniciar sesion">
+				<input id="Registro" type="button" class="btn btn-warning text-white w-100 mt-4 fw-semibold shadow-sm"
+					value="Registrarse">
+			</div>
 		</form>
-		<div class="mt-1">
-			<input id="Registro" type="button" class="btn btn-warning text-white w-100 mt-4 fw-semibold shadow-sm" value="Registrarse">
-		</div>
 	</div>
 </body>
 <!-- Add Bootstrap 5 JS CDN -->
