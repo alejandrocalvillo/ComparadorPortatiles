@@ -107,7 +107,13 @@
 
           <!-- Filtros de Busqueda -->
           <section class="mt-5">
-            <form id="filtros" onsubmit="event.preventDefault(); searchOrdenadores();"
+            <form id="filtros" onsubmit="event.preventDefault(); 
+            <% if (usuario != null) { %>
+              searchOrdenadoresLoged();"
+            <% } else { %>
+              searchOrdenadores();"
+              <% } %>
+
               enctype="application/x-www-form-urlencoded">
               <div class="row">
                 <div class="col-md-4 mb-3">
