@@ -66,7 +66,7 @@ function seleccionarOrdenador(index) {
 		ordenadorSeleccionado.setAttribute('class', `md-4 mb-3`);
 		const btnEliminar = document.createElement('input');
 		btnEliminar.id = 'eliminarOrdenador';
-		btnEliminar.value= 'X';
+		btnEliminar.value= 'Eliminar';
 		btnEliminar.type = 'button';
 		btnEliminar.className = 'btn btn-danger';
 
