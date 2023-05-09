@@ -38,8 +38,9 @@
 				</div>
 			</div>
 
-			<input type="submit" class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm" value="Iniciar sesión">
+			<input type="submit" class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm" value="Iniciar sesion">
 		</form>
+			<input type="button" class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm" value="Registrarse">
 	</div>
 </body>
 <!-- Add Bootstrap 5 JS CDN -->
