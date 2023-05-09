@@ -64,9 +64,12 @@ function seleccionarOrdenador(index) {
 		const ordenadorSeleccionado = document.createElement('div');
 		ordenadorSeleccionado.innerHTML = `Marca: ${ordenador.marca}, Modelo: ${ordenador.modelo}`;
 		ordenadorSeleccionado.setAttribute('id', `caja`);
-		const btnEliminar = document.createElement('button');
+		const btnEliminar = document.createElement('input');
 		btnEliminar.id = 'eliminarOrdenador';
-		btnEliminar.innerText = 'X';
+		btnEliminar.value= 'X';
+		btnEliminar.type = 'button';
+		btnEliminar.className = 'btn btn-danger';
+
 		btnEliminar.addEventListener('click', () => {
   			const indice = indicesSeleccionados.indexOf(index);
   			if (indice > -1) {
