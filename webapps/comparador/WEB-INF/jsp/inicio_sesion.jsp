@@ -40,8 +40,8 @@
 
 			<input type="submit" class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm" value="Iniciar sesion">
 		</form>
-		<div class="mt-2">
-			<input id="Registro" type="button" class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm" value="Registrarse">
+		<div class="mt-1">
+			<input id="Registro" type="button" class="btn btn-warning text-white w-100 mt-4 fw-semibold shadow-sm" value="Registrarse">
 		</div>
 	</div>
 </body>
