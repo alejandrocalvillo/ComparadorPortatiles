@@ -34,10 +34,13 @@
 					<img src="img/login/icons/password.svg" alt="contraseña icono" style="height: 1rem;">
 				</div>
 				<div class="input-group-text bg-light">
-					<input type="form-control bg-light" type="password" placeholder="Password" name="contrasena" id="contrasena">
+					<input type="password" placeholder="Password" name="contrasena" id="contrasena">
 				</div>
-
 			</div>
+
+			<div class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm">
+				Iniciar Sesion
+			  </div>
 		</form>
 	</div>
 </body>
