@@ -418,10 +418,13 @@ function seleccionarParaAdmin(index, accion) {
         // Actualizar la tabla de usuarios con el nuevo usuario
         searchAdministradores('buscar');
         // Cerrar el modal
-        const modal = document.querySelector('#adminModal');
+        const modal = document.querySelector('#adminAddModal');
         const modalBootstrap = bootstrap.Modal.getInstance(modal);
         modalBootstrap.hide();
   
+        const modal1 = document.querySelector('#adminModal');
+        const modalBootstrap1 = bootstrap.Modal.getInstance(modal1);
+        modalBootstrap1.hide();
   
       })
       .catch(error => {
