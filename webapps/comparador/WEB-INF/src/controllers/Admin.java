@@ -44,40 +44,4 @@ public class Admin extends HttpServlet {
         }
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        System.out.println("Entro en el Post");
-        try (DBManager dbManager = new DBManager()) {
-            System.out.println("Holita estoy aqui");
-            List<Usuario> usuarios = dbManager.getUsuariosDB();
-
-            JSONArray usuariosJsonArray = new JSONArray();
-
-            System.out.println("Cree el JSONArray");
-            for (Usuario usuario : usuarios) {
-                JSONObject usuarioJson = new JSONObject();
-                usuarioJson.put("id", usuario.getId());
-                usuarioJson.put("nombre", usuario.getNombre());
-                usuarioJson.put("correo", usuario.getCorreo());
-                usuariosJsonArray.put(usuarioJson);
-            }
-
-            String usuariosJson = usuariosJsonArray.toString();
-
-            // Set response content type and charset
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-
-            // Write JSON string to response
-            response.getWriter().write(usuariosJson);
-        } catch (SQLException | NamingException ex) {
-            ex.printStackTrace();
-            String errorMessage = "Error: " + ex.getMessage();
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            response.setContentType("text/plain");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(errorMessage);
-        }
-    }
 }

@@ -396,4 +396,25 @@ public class DBManager implements AutoCloseable {
         return new ArrayList<Usuario>();
     }
 
+    
+    public void deleteUsuarioDB(String id) throws SQLException {
+
+        String query = "DELETE FROM usuarios WHERE id = ? ";
+      
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+
+        }
+       
+    }
+
 }

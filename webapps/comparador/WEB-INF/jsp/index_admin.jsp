@@ -37,7 +37,7 @@
 				<div class="box">
 					<h2>USUARIOS</h2>
 					<div class="buttons">
-						<button id="botonUsuarios" onclick="searchUsuarios()">Mostrar</button>
+						<button id="botonUsuarios" onclick="searchUsuarios('buscar')">Mostrar</button>
 					</div>
 				</div>
 				<div class="box">
@@ -48,8 +48,8 @@
 				</div>
 			</div>
 			<div id="cajaEsquina">
-				<button class="btn btn-danger">Cerrar Sesión</button>
-				<a href="/comparador/index" class="btn btn-primary">Pagina Principal</a>
+				<button href="<%= request.getContextPath() %>/cerrar" class="btn btn-danger">Cerrar Sesión</button>
+				<a href="<%= request.getContextPath() %>/index" class="btn btn-primary">Pagina Principal</a>
 			</div>
 
 			<!-- Los resultados de la busqueda USUARIOS -->
@@ -62,7 +62,8 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<h5 class="modal-title" id="resultsModalLabel">Usuarios </h5>
-								<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Añadir</button>
+								<button type="button"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Añadir</button>
+								
 								<button type="button" class="btn-close close-button" data-bs-dismiss="modal"
 									aria-label="Close"></button>
 							</div>
@@ -85,7 +86,7 @@
 					<div class="modal-dialog modal-lg">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title" id="detallesModalLabel">Detalles del ordenador</h5>
+								<h5 class="modal-title" id="detallesModalLabel">Detalles del usuario</h5>
 								<button type="button" class="btn-close close-button" data-bs-dismiss="modal"
 									aria-label="Close"></button>
 							</div>
@@ -108,6 +109,37 @@
 					</div>
 				</div>
 			</section>
+			<!-- Modal para añadir usuarios -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <h5 class="modal-title" id="exampleModalLabel">Agregar usuario</h5>
+					  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+					  <form>
+						<div class="mb-3">
+						  <label for="nombre" class="form-label">Nombre</label>
+						  <input type="text" class="form-control" id="nombre" name="nombre">
+						</div>
+						<div class="mb-3">
+						  <label for="correo" class="form-label">Correo</label>
+						  <input type="email" class="form-control" id="correo" name="correo">
+						</div>
+						<div class="mb-3">
+						  <label for="contrasena" class="form-label">Contraseña</label>
+						  <input type="password" class="form-control" id="contrasena" name="contrasena">
+						</div>
+					  </form>
+					</div>
+					<div class="modal-footer">
+					  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+					  <button type="button" class="btn btn-primary" onclick="anadirUsuario('anadir')">Agregar</button>
+					</div>
+				  </div>
+				</div>
+			  </div>
 			<!-- Add Bootstrap 5 JS CDN -->
 			<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
