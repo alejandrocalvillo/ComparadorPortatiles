@@ -37,15 +37,13 @@
 				<div class="box">
 					<h2>USUARIOS</h2>
 					<div class="buttons">
-						<button class="btn btn-primary" id="botonUsuarios" onclick="searchUsuarios('buscar')"
-							value="Mostrar"></button>
+						<button class="btn btn-primary" id="botonUsuarios" onclick="searchUsuarios('buscar')">Mostrar</button>
 					</div>
 				</div>
 				<div class="box">
 					<h2>USUARIOS ADMINISTRADORES</h2>
 					<div class="buttons">
-						<button class="btn btn-primary" id="botonUsuarios" onclick="searchAdministradores('buscar')"
-							value="Mostrar"></button>
+						<button class="btn btn-primary" id="botonUsuarios" onclick="searchAdministradores('buscar')"Mostrar></button>
 					</div>
 				</div>
 			</div>
