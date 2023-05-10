@@ -125,11 +125,12 @@ function seleccionarUsuario(index, accion) {
     .then(data => {
       console.log('Usuario agregado:', data);
       // Actualizar la tabla de usuarios con el nuevo usuario
-      searchUsuarios('buscar');
+
       // Cerrar el modal
       const modal = document.querySelector('#exampleModal');
       const modalBootstrap = bootstrap.Modal.getInstance(modal);
       modalBootstrap.hide();
+      searchUsuarios('buscar');
       
     })
     .catch(error => {
