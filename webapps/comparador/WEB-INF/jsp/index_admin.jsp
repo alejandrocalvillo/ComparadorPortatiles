@@ -155,7 +155,7 @@
 							<div class="modal-header">
 								<h5 class="modal-title" id="adminModalLabel">Administradores </h5>
 								<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-									data-bs-target="#adminAddModal">Añadir</button>
+									data-bs-target="#adminAddModal" onclick="mostrarUsuariosParaAdmin('buscar')">Añadir</button>
 								<button type="button" class="btn-close close-button" data-bs-dismiss="modal"
 									aria-label="Close"></button>
 							</div>

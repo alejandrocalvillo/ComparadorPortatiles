@@ -340,7 +340,7 @@ function searchAdministradores(accion) {
     });
 }
 
-function mostrarUsuariosParaAdmin() {
+function mostrarUsuariosParaAdmin(accion) {
   // Send AJAX request
   fetch('usuarios', {
     method: 'POST',
@@ -348,7 +348,7 @@ function mostrarUsuariosParaAdmin() {
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
     },
     body: new URLSearchParams({
-      accion: 'buscar' // Agregar el parámetro de acción
+      accion: accion // Agregar el parámetro de acción
     }).toString(),
 
   })
