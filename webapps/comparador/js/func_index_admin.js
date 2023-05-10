@@ -395,74 +395,77 @@ function mostrarUsuariosParaAdmin(accion) {
 
 function seleccionarParaAdmin(index, accion) {
 
-    // Obtener los datos del formulario
-    const usuario = window.usuariosArray[index];
-    const formData = new FormData();
-    formData.append('accion', accion);
-    formData.append('id', usuario.id);
-  
-    // Send AJAX request
+  const modal1 = document.querySelector('#adminModal');
+  const modalBootstrap = bootstrap.Modal.getInstance(modal1);
+  modalBootstrap.hide();
+  // Obtener los datos del formulario
+  const usuario = window.usuariosArray[index];
+  const formData = new FormData();
+  formData.append('accion', accion);
+  formData.append('id', usuario.id);
+
+  // Send AJAX request
+  fetch('admin', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+    },
+    body: new URLSearchParams(formData).toString(),
+  })
+    .then(data => {
+      console.log('Usuario agregado:', data);
+
+      // Actualizar la tabla de usuarios con el nuevo usuario
+
+      searchAdministradores('buscar');
+      // Cerrar el modal
+      const modal = document.querySelector('#adminAddModal');
+      const modalBootstrap = bootstrap.Modal.getInstance(modal);
+      modalBootstrap.hide();
+
+    })
+    .catch(error => {
+      console.error('Error al agregar usuario:', error);
+      alert('Error al agregar usuario');
+    });
+}
+
+function eliminarAdmin(index, accion) {
+
+  // Obtener el usuario a eliminar
+  const usuario = window.usuariosArray[index];
+
+  // Mostrar confirmación de eliminación
+  if (confirm(`¿Estás seguro de que deseas eliminar de Administrador a "${usuario.nombre}"?`)) {
+    // Enviar solicitud AJAX para eliminar el usuario
     fetch('admin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       },
-      body: new URLSearchParams(formData).toString(),
+      body: new URLSearchParams({
+        id: usuario.id, // Enviar el ID del usuario a eliminar
+        accion: accion
+      }).toString(),
     })
+      //.then(response => response.json())
       .then(data => {
-        console.log('Usuario agregado:', data);
-
-        // Actualizar la tabla de usuarios con el nuevo usuario
+        // Actualizar la tabla de usuarios
 
         searchAdministradores('buscar');
         // Cerrar el modal
-        const modal = document.querySelector('#adminAddModal');
+        const modal = document.querySelector('#adminModal');
         const modalBootstrap = bootstrap.Modal.getInstance(modal);
         modalBootstrap.hide();
-  
+
       })
       .catch(error => {
-        console.error('Error al agregar usuario:', error);
-        alert('Error al agregar usuario');
+        // Mostrar mensaje de error
+        console.error('Error al eliminar usuario:', error);
+        alert('Error al eliminar usuario. Por favor, inténtelo de nuevo más tarde.');
+        searchUsuarios('buscar');
       });
-}
-
-function eliminarAdmin(index, accion){
-
-    // Obtener el usuario a eliminar
-    const usuario = window.usuariosArray[index];
-
-    // Mostrar confirmación de eliminación
-    if (confirm(`¿Estás seguro de que deseas eliminar de Administrador a "${usuario.nombre}"?`)) {
-      // Enviar solicitud AJAX para eliminar el usuario
-      fetch('admin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-        },
-        body: new URLSearchParams({
-          id: usuario.id, // Enviar el ID del usuario a eliminar
-          accion: accion
-        }).toString(),
-      })
-        //.then(response => response.json())
-        .then(data => {
-          // Actualizar la tabla de usuarios
-  
-          searchAdministradores('buscar');
-          // Cerrar el modal
-          const modal = document.querySelector('#adminModal');
-          const modalBootstrap = bootstrap.Modal.getInstance(modal);
-          modalBootstrap.hide();
-  
-        })
-        .catch(error => {
-          // Mostrar mensaje de error
-          console.error('Error al eliminar usuario:', error);
-          alert('Error al eliminar usuario. Por favor, inténtelo de nuevo más tarde.');
-          searchUsuarios('buscar');
-        });
-    }
+  }
 
 }
 
