@@ -115,7 +115,7 @@ function seleccionarUsuario(index, accion) {
     formData.append('accion', accion);
 
     // Send AJAX request
-    fetch('buscar', {
+    fetch('usuarios', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
