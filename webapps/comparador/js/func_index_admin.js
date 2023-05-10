@@ -379,7 +379,7 @@ function mostrarUsuariosParaAdmin() {
       tableUsuariosHtml += '</tbody></table>';
 
       // Update results container
-      document.getElementById('modalResultsContainer').innerHTML = tableUsuariosHtml;
+      document.getElementById('modalAdminAddContainer').innerHTML = tableUsuariosHtml;
 
 
       // Save usuarios array in a global variable
@@ -387,7 +387,7 @@ function mostrarUsuariosParaAdmin() {
 
       console.log(`he rellenado los usuarios ` + window.usuariosArray[1]);
       // Show modal
-      const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
+      const resultsModal = new bootstrap.Modal(document.getElementById('adminAddModal'));
       resultsModal.show();
     });
 }
