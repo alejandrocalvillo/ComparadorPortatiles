@@ -37,13 +37,15 @@
 				<div class="box">
 					<h2>USUARIOS</h2>
 					<div class="buttons">
-						<button class="btn btn-primary" id="botonUsuarios" onclick="searchUsuarios('buscar')">Mostrar</button>
+						<button class="btn btn-primary" id="botonUsuarios"
+							onclick="searchUsuarios('buscar')">Mostrar</button>
 					</div>
 				</div>
 				<div class="box">
 					<h2>USUARIOS ADMINISTRADORES</h2>
 					<div class="buttons">
-						<button class="btn btn-primary" id="botonUsuarios" onclick="searchAdministradores('buscar')">Mostrar</button>
+						<button class="btn btn-primary" id="botonUsuarios"
+							onclick="searchAdministradores('buscar')">Mostrar</button>
 					</div>
 				</div>
 			</div>
@@ -154,7 +156,6 @@
 								<h5 class="modal-title" id="adminModalLabel">Administradores </h5>
 								<button type="button" class="btn btn-primary" data-bs-toggle="modal"
 									data-bs-target="#adminAddModal">Añadir</button>
-
 								<button type="button" class="btn-close close-button" data-bs-dismiss="modal"
 									aria-label="Close"></button>
 							</div>
@@ -169,7 +170,7 @@
 				</div>
 			</section>
 
-
+			<!-- Modal para agregar administradores -->
 			<section>
 				<div class="modal fade" id="adminAddModal" tabindex="-1" aria-labelledby="adminAddModalLabel"
 					aria-hidden="true">
@@ -194,6 +195,7 @@
 					</div>
 				</div>
 			</section>
+
 			<!-- Add Bootstrap 5 JS CDN -->
 			<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
