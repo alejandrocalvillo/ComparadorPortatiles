@@ -68,7 +68,7 @@ public class Ordenadores extends HttpServlet {
                         ordenadorJson.put("tienda", ordenador.getTienda());
                         ordenadorJson.put("precio", ordenador.getPrecio());
                         ordenadoresJsonArray.put(ordenadorJson);
-                
+                    }
     
                 String ordenadoresJson = ordenadoresJsonArray.toString();
     
