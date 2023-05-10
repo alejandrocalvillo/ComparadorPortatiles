@@ -21,15 +21,17 @@
 				<div class="box">
 					<h2>PORTÁTILES</h2>
 					<div class="buttons">
-						<button>Añadir</button>
-						<button>Modificar</button>
-						<button>Eliminar</button>
+						<div class="buttons">
+							<input type="button" class="btn btn-primary" onclick="searchOrdenadores('buscar');" value="Mostrar todos los ordenadores">
+						</div>
 					</div>
 				</div>
 				<div class="box">
-					<h2>PUNTOS DE VENTA</h2>
+					<h2>PORTATILES Y DONDE ENCONTRARLOS</h2>
 					<div class="buttons">
-						<input type="button" class="btn btn-primary" onclick="searchOrdenadores('buscar');">
+						<div class="buttons">
+							<input type="button" class="btn btn-primary" onclick="searchOrdenadoresVentas('buscar');" value="Mostrar todos los ordenadores">
+						</div>
 					</div>
 				</div>
 				<div class="box">

@@ -160,13 +160,13 @@ function searchOrdenadores(accion) {
         <table id="tabla" class="table table-striped">
         <thead>
           <tr>
-            <th>Nombre</th>
             <th>Marca</th>
             <th>Modelo</th>
             <th>Procesador</th>
-            <th>RAM</th>
-            <th>Disco Duro</th>
-            <th>Tarjeta Gráfica</th>
+            <th>Memoria Tipo</th>
+            <th>Memoria Capacidad</th>
+            <th>Disco Tipo</th>
+            <th>Disco Capacidad</th>
             <th></th>
             <th></th>
           </tr>
@@ -200,6 +200,71 @@ function searchOrdenadores(accion) {
       const resultsModal = new bootstrap.Modal(document.getElementById('ordenadoresModal'));
       resultsModal.show();
     });
-
-
 }
+
+
+function searchOrdenadoresVentas(accion) {
+  // Send AJAX request
+  fetch('ordenadores', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+    },
+    body: new URLSearchParams({
+      accion: accion // Agregar el parámetro de acción
+    }).toString(),
+
+  })
+    .then(response => response.json())
+    .then(ordenadores => {
+      // Generate table HTML
+      let tableOrdenadoresHtml = `
+        <table id="tabla" class="table table-striped">
+        <thead>
+          <tr>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Procesador</th>
+            <th>Memoria Tipo</th>
+            <th>Memoria Capacidad</th>
+            <th>Disco Tipo</th>
+            <th>Disco Capacidad</th>
+            <th>Tienda</th>
+            <th>Precio</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>`;
+
+      ordenadores.forEach((ordenador, index) => {
+        tableOrdenadoresHtml += `
+          <tr>
+            <td>${ordenador.marca}</td>
+            <td>${ordenador.modelo}</td>
+            <td>${ordenador.procesador}</td>
+            <td>${ordenador.memoriaTipo}</td>
+            <td>${ordenador.memoriaCapacidad}</td>
+            <td>${ordenador.discoTipo}</td>
+            <td>${ordenador.discoCapacidad}</td>
+            <td>${ordenador.tienda}</td>
+            <td>${ordenador.precio}</td>
+            <td><button onclick="seleccionarOrdenador(${index}, 'seleccionar')" class="btn btn-primary">Seleccionar</button></td>
+            <td><button onclick="eliminarOrdenador(${index}, 'eliminar')" class="btn btn-danger">Eliminar</button></td>
+          </tr>`;
+      });
+
+      tableOrdenadoresHtml += '</tbody></table>';
+
+      // Update results container
+      document.getElementById('modalOrdenadoresContainer').innerHTML = tableOrdenadoresHtml;
+
+      // Save ordenadores array in a global variable
+      window.ordenadoresArray = ordenadores;
+
+      // Show modal
+      const resultsModal = new bootstrap.Modal(document.getElementById('ordenadoresModal'));
+      resultsModal.show();
+    });
+}
+
