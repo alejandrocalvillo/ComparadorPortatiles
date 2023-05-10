@@ -112,7 +112,7 @@ function seleccionarUsuario(index, accion) {
 
     // Obtener los datos del formulario
     const formData = new FormData(document.getElementById("anadirUsuario"));
-    formData.append('action', action);
+    formData.append('accion', accion);
 
     // Send AJAX request
     fetch('buscar', {
