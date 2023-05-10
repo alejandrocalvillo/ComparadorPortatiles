@@ -44,7 +44,7 @@
 				<div class="box">
 					<h2>USUARIOS ADMINISTRADORES</h2>
 					<div class="buttons">
-						<button class="btn btn-primary" id="botonUsuarios"
+						<button class="btn btn-primary" id="botonAdministradores"
 							onclick="searchAdministradores('buscar')">Mostrar</button>
 					</div>
 				</div>
