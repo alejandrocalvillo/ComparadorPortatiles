@@ -360,4 +360,40 @@ public class DBManager implements AutoCloseable {
 
     }
 
+    public List<Usuario> getUsuariosDB() throws SQLException {
+
+        String query = "SELECT usuarios.id, usuarios.nombre, usuarios.correo, usuarios.contrasena FROM usuarios";
+
+        List<Usuario> usuarios = new ArrayList<Usuario>();
+        PreparedStatement stmt = null;
+        try {
+
+            stmt = connection.prepareStatement(query);
+            ResultSet resultSet = stmt.executeQuery();
+
+            while (resultSet.next()) {
+                Usuario usuario = new Usuario();
+                int id = resultSet.getInt("id");
+                String nom = resultSet.getString("nombre");
+                String con = resultSet.getString("contrasena");
+                String cor = resultSet.getString("correo");
+                usuario.setNombre(nom);
+                usuario.setCorreo(cor);
+                usuario.setContrasena(con);
+                usuario.setId(id);
+                usuarios.add(usuario);
+                System.out.println("nombre : " + usuario.getNombre() + "contraseña: " + usuario.getContrasena());
+
+            }
+            return usuarios;
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+
+        }
+        return new ArrayList<Usuario>();
+    }
+
 }
