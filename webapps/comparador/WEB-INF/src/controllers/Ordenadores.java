@@ -53,7 +53,8 @@ public class Ordenadores extends HttpServlet {
                 JSONArray ordenadoresJsonArray = new JSONArray();
     
                 System.out.println("Cree el JSONArray");
-                for (Usuario usuario : usuarios) {
+
+                    List<Ordenador> ordenadores = dbManager.getAllOrdenadores();
                     for (Ordenador ordenador : ordenadores) {
                         JSONObject ordenadorJson = new JSONObject();
                         ordenadorJson.put("id", ordenador.getId());
@@ -67,16 +68,16 @@ public class Ordenadores extends HttpServlet {
                         ordenadorJson.put("tienda", ordenador.getTienda());
                         ordenadorJson.put("precio", ordenador.getPrecio());
                         ordenadoresJsonArray.put(ordenadorJson);
-                }
+                
     
-                String usuariosJson = usuariosJsonArray.toString();
+                String ordenadoresJson = ordenadoresJsonArray.toString();
     
                 // Set response content type and charset
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
     
                 // Write JSON string to response
-                response.getWriter().write(usuariosJson);
+                response.getWriter().write(ordenadoresJson);
             } catch (SQLException | NamingException ex) {
                 ex.printStackTrace();
                 String errorMessage = "Error: " + ex.getMessage();
