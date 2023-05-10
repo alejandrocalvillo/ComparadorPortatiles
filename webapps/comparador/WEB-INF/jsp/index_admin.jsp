@@ -172,22 +172,22 @@
 
 			<!-- Modal para agregar administradores -->
 			<section>
+				<div id="adminAddContainer"></div>
+				<!-- Modal -->
 				<div class="modal fade" id="adminAddModal" tabindex="-1" aria-labelledby="adminAddModalLabel"
 					aria-hidden="true">
-					<div class="modal-dialog">
+					<div class="modal-dialog modal-lg">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title" id="adminAddModalLabel">Agregar Admin</h5>
-								<button type="button" class="btn-close" data-bs-dismiss="modal"
+								<h5 class="modal-title" id="adminAddModalLabel">Añadir Administradores</h5>
+								<button type="button" class="btn-close close-button" data-bs-dismiss="modal"
 									aria-label="Close"></button>
 							</div>
 							<div class="modal-body">
-								<div id = "modalAdminAddContainer">
-								</div>
+								<div id="modalAdminAddContainer"></div>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									data-bs-dismiss="modal">Cancelar</button>
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
 							</div>
 						</div>
 					</div>
