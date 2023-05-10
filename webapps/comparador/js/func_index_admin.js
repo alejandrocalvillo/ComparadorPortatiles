@@ -348,7 +348,7 @@ function mostrarUsuariosParaAdmin() {
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
     },
     body: new URLSearchParams({
-      accion: accion // Agregar el parámetro de acción
+      accion: 'buscar' // Agregar el parámetro de acción
     }).toString(),
 
   })
