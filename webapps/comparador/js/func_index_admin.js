@@ -269,19 +269,19 @@ function searchOrdenadoresVentas(accion) {
 }
 
 function eliminarOrdenador(index, accion) {
-  // Obtener el usuario a eliminar
-  const usuario = window.usuariosArray[index];
+  // Obtener el ordenador a eliminar
+  const ordenador = window.ordenadoresArray[index];
 
   // Mostrar confirmación de eliminación
-  if (confirm(`¿Estás seguro de que deseas eliminar al usuario "${usuario.nombre}"?`)) {
-    // Enviar solicitud AJAX para eliminar el usuario
+  if (confirm(`¿Estás seguro de que deseas eliminar el ordenador "${ordenador.model}"?`)) {
+    // Enviar solicitud AJAX para eliminar el ordenador
     fetch('ordenadores', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       },
       body: new URLSearchParams({
-        id: usuario.id, // Enviar el ID del usuario a eliminar
+        id: ordenador.id, // Enviar el ID del usuario a eliminar
         accion: accion
       }).toString(),
     })
