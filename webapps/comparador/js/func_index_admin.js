@@ -96,6 +96,7 @@ function seleccionarUsuario(index, accion) {
         //.then(response => response.json())
         .then(data => {
           // Actualizar la tabla de usuarios
+          modalBootstrap.hide();
           searchUsuarios('buscar');
           
         })
