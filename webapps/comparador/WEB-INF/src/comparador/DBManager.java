@@ -248,7 +248,7 @@ public class DBManager implements AutoCloseable {
  *  @throws SQLException If something fails with the DB.
  * 
  */
-public void deleteOrdenadoroDB(String id) throws SQLException {
+public void deleteOrdenadorDB(String id) throws SQLException {
 
     String query = "DELETE FROM ordenadores WHERE id = ? ";
   
