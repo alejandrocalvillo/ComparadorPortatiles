@@ -90,7 +90,7 @@ public class Ordenadores extends HttpServlet {
 
         } else if (accion.equals("eliminar")) {
             try (DBManager dbManager = new DBManager()) {
-                int id = request.getParameter("id");
+                String id = request.getParameter("id");
                 dbManager.deleteOrdenadorDB(id);
     
                 // Set response content type and charset

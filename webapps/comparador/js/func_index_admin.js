@@ -273,7 +273,7 @@ function eliminarOrdenador(index, accion) {
   const ordenador = window.ordenadoresArray[index];
 
   // Mostrar confirmación de eliminación
-  if (confirm(`¿Estás seguro de que deseas eliminar el ordenador "${ordenador.model}"?`)) {
+  if (confirm(`¿Estás seguro de que deseas eliminar el ordenador "${ordenador.modelo}"?`)) {
     // Enviar solicitud AJAX para eliminar el ordenador
     fetch('ordenadores', {
       method: 'POST',
