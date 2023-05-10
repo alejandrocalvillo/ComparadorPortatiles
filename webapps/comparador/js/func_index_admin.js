@@ -295,7 +295,7 @@ function seleccionarUsuario(index, accion) {
         tableUsuariosHtml += '</tbody></table>';
     
         // Update results container
-        document.getElementById('modalResultsContainer').innerHTML = tableUsuariosHtml;
+        document.getElementById('modalAdminContainer').innerHTML = tableUsuariosHtml;
     
         
         // Save usuarios array in a global variable

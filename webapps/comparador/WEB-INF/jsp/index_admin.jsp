@@ -160,7 +160,7 @@
 									aria-label="Close"></button>
 							</div>
 							<div class="modal-body">
-								<div id="modaladminContainer"></div>
+								<div id="modalAdminContainer"></div>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
