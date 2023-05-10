@@ -241,6 +241,33 @@ public class DBManager implements AutoCloseable {
 
  return ordenadores;
 }
+/**
+ * Delete a Ordenador from his id
+ * 
+ *  @param id of the computer
+ *  @throws SQLException If something fails with the DB.
+ * 
+ */
+public void deleteOrdenadorDB(String id) throws SQLException {
+
+    String query = "DELETE FROM usuarios WHERE id = ? ";
+  
+    PreparedStatement stmt = null;
+    try {
+        stmt = connection.prepareStatement(query);
+        stmt.setString(1, id);
+        stmt.executeUpdate();
+
+    } catch (SQLException ex) {
+        System.out.println(" SQLException : " + ex.getMessage());
+        ex.printStackTrace();
+        System.out.println(" VendorError : " + ex.getErrorCode());
+        System.out.println(" SQLState : " + ex.getSQLState());
+
+    }
+   
+}
+
     /**
      * Return a list with all the RAMs in the DB.
      *
@@ -329,6 +356,10 @@ public class DBManager implements AutoCloseable {
         return new ArrayList<Ordenador>();
     }
 
+
+
+
+
     /****************************************************************************
      * 
      * 
@@ -336,6 +367,11 @@ public class DBManager implements AutoCloseable {
      * 
      * 
      *****************************************************************************/
+
+
+
+
+
 
     /**
      * Return a User account checking the name and the password

@@ -268,3 +268,34 @@ function searchOrdenadoresVentas(accion) {
     });
 }
 
+function eliminarOrdenador(index, accion) {
+  // Obtener el usuario a eliminar
+  const usuario = window.usuariosArray[index];
+
+  // Mostrar confirmación de eliminación
+  if (confirm(`¿Estás seguro de que deseas eliminar al usuario "${usuario.nombre}"?`)) {
+    // Enviar solicitud AJAX para eliminar el usuario
+    fetch('ordenadores', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      body: new URLSearchParams({
+        id: usuario.id, // Enviar el ID del usuario a eliminar
+        accion: accion
+      }).toString(),
+    })
+      //.then(response => response.json())
+      .then(data => {
+        // Actualizar la tabla de Ordenadores
+        searchOrdenadores('buscar');
+
+      })
+      .catch(error => {
+        // Mostrar mensaje de error
+        console.error('Error al eliminar usuario:', error);
+        alert('Error al eliminar usuario. Por favor, inténtelo de nuevo más tarde.');
+        searchOrdenadores('buscar');
+      });
+  }
+}

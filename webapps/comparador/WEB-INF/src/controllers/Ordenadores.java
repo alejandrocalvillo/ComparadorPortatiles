@@ -91,7 +91,7 @@ public class Ordenadores extends HttpServlet {
         } else if (accion.equals("eliminar")) {
             try (DBManager dbManager = new DBManager()) {
                 String id = request.getParameter("id");
-                dbManager.deleteUsuarioDB(id);
+                dbManager.deleteOrdenadorDB(id);
     
                 // Set response content type and charset
                 response.setContentType("application/json");
