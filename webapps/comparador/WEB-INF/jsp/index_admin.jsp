@@ -43,7 +43,7 @@
 				<div class="box">
 					<h2>USUARIOS ADMINISTRADORES</h2>
 					<div class="buttons">
-						<button class="btn btn-primary" id="botonUsuarios" onclick="searchAdministradores('buscar')"Mostrar></button>
+						<button class="btn btn-primary" id="botonUsuarios" onclick="searchAdministradores('buscar')">Mostrar</button>
 					</div>
 				</div>
 			</div>
@@ -153,7 +153,7 @@
 							<div class="modal-header">
 								<h5 class="modal-title" id="adminModalLabel">Administradores </h5>
 								<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-									data-bs-target="#adminModal">Añadir</button>
+									data-bs-target="#adminAddModal">Añadir</button>
 
 								<button type="button" class="btn-close close-button" data-bs-dismiss="modal"
 									aria-label="Close"></button>
@@ -163,6 +163,32 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+
+			<section>
+				<div class="modal fade" id="adminAddModal" tabindex="-1" aria-labelledby="adminAddModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="adminAddModalLabel">Agregar Admin</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<form id="anadirUsuario">
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-bs-dismiss="modal">Cancelar</button>
+								<button type="button" class="btn btn-primary"
+									onclick="anadirUsuario('anadir')">Agregar</button>
 							</div>
 						</div>
 					</div>

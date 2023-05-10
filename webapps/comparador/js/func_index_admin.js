@@ -307,4 +307,35 @@ function seleccionarUsuario(index, accion) {
         resultsModal.show();
       });
   }
+
+  function anadirUsuario(accion) {
+
+    // Obtener los datos del formulario
+    const formData = new FormData(document.getElementById("anadirUsuario"));
+    formData.append('accion', accion);
+
+    // Send AJAX request
+    fetch('usuarios', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        },
+        body: new URLSearchParams(formData).toString(),
+    })
+    .then(data => {
+      console.log('Usuario agregado:', data);
+      // Actualizar la tabla de usuarios con el nuevo usuario
+      searchUsuarios('buscar');
+      // Cerrar el modal
+      const modal = document.querySelector('#exampleModal');
+      const modalBootstrap = bootstrap.Modal.getInstance(modal);
+      modalBootstrap.hide();
+ 
+      
+    })
+    .catch(error => {
+      console.error('Error al agregar usuario:', error);
+      alert('Error al agregar usuario');
+    });
+  }
   
