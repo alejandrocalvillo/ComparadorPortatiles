@@ -96,8 +96,12 @@ function seleccionarUsuario(index, accion) {
         //.then(response => response.json())
         .then(data => {
           // Actualizar la tabla de usuarios
-          modalBootstrap.hide();
+
           searchUsuarios('buscar');
+          // Cerrar el modal
+          const modal = document.querySelector('#resultsModal');
+          const modalBootstrap = bootstrap.Modal.getInstance(modal);
+          modalBootstrap.hide();
           
         })
         .catch(error => {
@@ -126,12 +130,12 @@ function seleccionarUsuario(index, accion) {
     .then(data => {
       console.log('Usuario agregado:', data);
       // Actualizar la tabla de usuarios con el nuevo usuario
-
+      searchUsuarios('buscar');
       // Cerrar el modal
       const modal = document.querySelector('#exampleModal');
       const modalBootstrap = bootstrap.Modal.getInstance(modal);
       modalBootstrap.hide();
-      searchUsuarios('buscar');
+ 
       
     })
     .catch(error => {
