@@ -250,7 +250,7 @@ public class DBManager implements AutoCloseable {
  */
 public void deleteOrdenadorDB(String id) throws SQLException {
 
-    String query = "DELETE FROM usuarios WHERE id = ? ";
+    String query = "DELETE FROM ordenadores WHERE id = ? ";
   
     PreparedStatement stmt = null;
     try {
