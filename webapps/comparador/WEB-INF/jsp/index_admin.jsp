@@ -148,7 +148,7 @@
 			<section class="mb-4">
 				<div id="adminContainer"></div>
 				<!-- Modal -->
-				<div class="modal fade" id="adminsModal" tabindex="-1" aria-labelledby="adminModalLabel"
+				<div class="modal fade" id="adminModal" tabindex="-1" aria-labelledby="adminModalLabel"
 					aria-hidden="true">
 					<div class="modal-dialog modal-lg">
 						<div class="modal-content">

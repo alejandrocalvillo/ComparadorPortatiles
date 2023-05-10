@@ -303,7 +303,7 @@ function seleccionarUsuario(index, accion) {
 
         console.log(`he rellenado los usuarios `+window.usuariosArray[1] );
         // Show modal
-        const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
+        const resultsModal = new bootstrap.Modal(document.getElementById('adminModal'));
         resultsModal.show();
       });
   }
