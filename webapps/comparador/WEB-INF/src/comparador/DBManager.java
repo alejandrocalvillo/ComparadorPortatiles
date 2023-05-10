@@ -248,16 +248,19 @@ public class DBManager implements AutoCloseable {
  *  @throws SQLException If something fails with the DB.
  * 
  */
-public void deleteOrdenadorDB(String id) throws SQLException {
+public void deleteOrdenadorDB(int id) throws SQLException {
 
-    String query = "DELETE FROM ordenadores WHERE id = ? ";
-  
-    PreparedStatement stmt = null;
-    try {
-        stmt = connection.prepareStatement(query);
-        stmt.setString(1, id);
-        stmt.executeUpdate();
+    String query = "DELETE FROM ordenadores WHERE id = ?";
 
+    try (PreparedStatement stmt = connection.prepareStatement(query)) {
+        stmt.setInt(1, id);
+        int rowsAffected = stmt.executeUpdate();
+
+        if (rowsAffected > 0) {
+            System.out.println("Ordenador con ID " + id + " eliminado correctamente.");
+        } else {
+            System.out.println("No se encontró ningún ordenador con el ID " + id + ".");
+        }
     } catch (SQLException ex) {
         System.out.println(" SQLException : " + ex.getMessage());
         ex.printStackTrace();

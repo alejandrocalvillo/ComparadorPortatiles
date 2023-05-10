@@ -293,7 +293,7 @@ function eliminarOrdenador(index, accion) {
       })
       .catch(error => {
         // Mostrar mensaje de error
-        console.error('Error al eliminar usuario:', error);
+        console.error('Error al eliminar el ordenador:', error);
         alert('Error al eliminar usuario. Por favor, inténtelo de nuevo más tarde.');
         searchOrdenadores('buscar');
       });
