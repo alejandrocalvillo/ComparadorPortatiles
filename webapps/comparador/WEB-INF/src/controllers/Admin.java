@@ -44,4 +44,84 @@ public class Admin extends HttpServlet {
         }
     }
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        System.out.println("Entro en el Post");
+
+        String accion = request.getParameter("accion");
+
+        if (accion.equals("buscar")) {
+
+            try (DBManager dbManager = new DBManager()) {
+                System.out.println("Holita estoy aqui");
+                List<Usuario> administradores = dbManager.getAdministradores();
+
+                JSONArray administradoresJsonArray = new JSONArray();
+
+                System.out.println("Cree el JSONArray");
+                for (Usuario usuario : administradores) {
+                    JSONObject usuarioJson = new JSONObject();
+                    usuarioJson.put("id", usuario.getId());
+                    usuarioJson.put("nombre", usuario.getNombre());
+                    usuarioJson.put("correo", usuario.getCorreo());
+                    administradoresJsonArray.put(usuarioJson);
+                }
+
+                String administradoresJson = administradoresJsonArray.toString();
+
+                // Set response content type and charset
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+
+                // Write JSON string to response
+                response.getWriter().write(administradoresJson);
+            } catch (SQLException | NamingException ex) {
+                ex.printStackTrace();
+                String errorMessage = "Error: " + ex.getMessage();
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                response.setContentType("text/plain");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(errorMessage);
+            }
+
+        } else if (accion.equals("eliminar")) {
+            try (DBManager dbManager = new DBManager()) {
+                String id = request.getParameter("id");
+                dbManager.deleteAdmin(id);
+
+                // Set response content type and charset
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+
+            } catch (SQLException | NamingException ex) {
+                ex.printStackTrace();
+                String errorMessage = "Error: " + ex.getMessage();
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                response.setContentType("text/plain");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(errorMessage);
+            }
+        } else if (accion.equals("anadir")) {
+
+            try (DBManager db = new DBManager()) {
+                // Empezamos contando marcas en el index
+
+                String id = request.getParameter("id");
+
+                if (id != null ) {
+                    db.declararAdmin(id);
+
+                }
+
+            } catch (SQLException | NamingException e) {
+                e.printStackTrace();
+                response.sendError(500);
+            }
+
+        } else {
+            // Acción desconocida
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Acción desconocida");
+        }
+    }
 }

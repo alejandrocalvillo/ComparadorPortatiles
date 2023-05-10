@@ -123,7 +123,41 @@ public class Usuarios extends HttpServlet {
                 response.sendError(500);
             }
 
-        }  else {
+        }  else if (accion.equals("actualizarNombre")) {
+
+            try (DBManager db = new DBManager()) {
+                String id=request.getParameter("id");
+                String usuario_str=request.getParameter("nombre");
+
+
+                if(id !=null && usuario_str !=null  )
+                    {
+                    db.changeNameUserDB(id, usuario_str);
+                    }  
+            
+            } catch (SQLException | NamingException e) {
+                    e.printStackTrace();
+                    response.sendError(500);
+            }
+    
+         }else if (accion.equals("actualizarContrasena")) {
+
+            try (DBManager db = new DBManager()) {
+                String id=request.getParameter("id");
+                String contrasena_str =request.getParameter("contrasena");
+
+
+                if(id !=null && contrasena_str !=null  )
+                    {
+                    db.changePasswordUserDB(id, contrasena_str);
+                    }  
+            
+            } catch (SQLException | NamingException e) {
+                    e.printStackTrace();
+                    response.sendError(500);
+            }
+    
+         } else {
           // Acción desconocida
           response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Acción desconocida");
         }
