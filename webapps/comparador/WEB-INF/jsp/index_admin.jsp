@@ -48,8 +48,8 @@
 				</div>
 			</div>
 			<div id="cajaEsquina">
-				<button href="<%= request.getContextPath() %>/cerrar" class="btn btn-danger">Cerrar Sesión</button>
-				<a href="<%= request.getContextPath() %>/index" class="btn btn-primary">Pagina Principal</a>
+				<button href="${pageContext.request.contextPath}/cerrar" class="btn btn-danger">Cerrar Sesión</button>
+				<a href="<${pageContext.request.contextPath}/index" class="btn btn-primary">Pagina Principal</a>
 			</div>
 
 			<!-- Los resultados de la busqueda USUARIOS -->
