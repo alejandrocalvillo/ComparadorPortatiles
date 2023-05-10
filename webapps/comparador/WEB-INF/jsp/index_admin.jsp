@@ -29,9 +29,7 @@
 				<div class="box">
 					<h2>PUNTOS DE VENTA</h2>
 					<div class="buttons">
-						<button>Añadir</button>
-						<button>Modificar</button>
-						<button>Eliminar</button>
+						<input type="button" class="btn btn-primary" onclick="searchOrdenadores('buscar');">
 					</div>
 				</div>
 				<div class="box">
@@ -76,6 +74,32 @@
 						</div>
 					</div>
 				</div>
+			</section>
+
+			<!-- Los resultados de la busqueda ORDENADORES -->
+			<section class="mb-4">
+				<!-- Modal -->
+				<div class="modal fade" id="ordenadoresModal" tabindex="-1" aria-labelledby="ordenadoresModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="ordenaoresModalLabel">Ordenadores</h5>
+								<button type="button"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Añadir</button>
+								
+								<button type="button" class="btn-close close-button" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<div id="modalOrdenadoresContainer"></div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
 			</section>
 
 
