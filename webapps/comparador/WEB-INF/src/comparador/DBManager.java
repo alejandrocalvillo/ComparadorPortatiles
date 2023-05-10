@@ -187,86 +187,6 @@ public class DBManager implements AutoCloseable {
         return ordenadores;
     }
 
-     /**
-     * Return a list with all the computers that the user is searching.
-     *
-     * @return List with all the books.
-     * @throws SQLException If something fails with the DB.
-     */
-
-     public List<Ordenador> getAllOrdenadores() throws SQLException {
- List<Ordenador> ordenadores = new ArrayList<>();
-
- String query = "SELECT ordenadores.id AS id, ordenadores.modelo, marcas.nombre AS marca_nombre, procesadores.nombre AS procesador_nombre, memorias.tipo AS memoria_tipo, memorias.capacidad AS capacidad_ram, discos.tipo AS disco_tipo, discos.capacidad AS capacidad_disco, puntos_de_venta.tienda, puntos_de_venta.precio FROM ordenadores INNER JOIN marcas ON marca_id = marcas.id INNER JOIN procesadores ON procesador_id = procesadores.id INNER JOIN discos ON disco_id = discos.id INNER JOIN memorias ON memoria_id = memorias.id INNER JOIN puntos_de_venta ON ordenadores.id = puntos_de_venta.ordenador_id ";
- try (PreparedStatement stmt = connection.prepareStatement(query)) {
-
-     // Esto es por no value specified for parameter 1 indica que no has establecido
-     // valores para los parámetros de la consulta en tu función searchOrdenadores.
-     // Antes de ejecutar la consulta con stmt.executeQuery(), debes establecer los
-     // valores para los parámetros utilizando el método set correspondiente de
-     // PreparedStatement.
-     ResultSet resultSet = stmt.executeQuery();
-     while (resultSet.next()) {
-         int id = resultSet.getInt("id");
-         String modelo = resultSet.getString("modelo");
-         String marca_nombre = resultSet.getString("marca_nombre");
-         String procesador_nombre = resultSet.getString("procesador_nombre");
-         String memoria_tipo = resultSet.getString("memoria_tipo");
-         int capacidad_ram = resultSet.getInt("capacidad_ram");
-         String disco_tipo = resultSet.getString("disco_tipo");
-         int capacidad_disco = resultSet.getInt("capacidad_disco");
-         String tienda = resultSet.getString("tienda");
-         double precio = resultSet.getDouble("precio");
-
-         Ordenador ordenador = new Ordenador();
-         ordenador.setId(id);
-         ordenador.setModelo(modelo);
-         ordenador.setMarca(marca_nombre);
-         ordenador.setProcesador(procesador_nombre);
-         ordenador.setMemoriaTipo(memoria_tipo);
-         ordenador.setMemoriaCapacidad(capacidad_ram);
-         ordenador.setDiscoTipo(disco_tipo);
-         ordenador.setDiscoCapacidad(capacidad_disco);
-         ordenador.setTienda(tienda);
-         ordenador.setPrecio(precio);
-
-         ordenadores.add(ordenador);
-     }
- } catch (SQLException ex) {
-     System.out.println(" SQLException : " + ex.getMessage());
-     ex.printStackTrace();
-     System.out.println(" VendorError : " + ex.getErrorCode());
-     System.out.println(" SQLState : " + ex.getSQLState());
- }
-
- return ordenadores;
-}
-/**
- * Delete a Ordenador from his id
- * 
- *  @param id of the computer
- *  @throws SQLException If something fails with the DB.
- * 
- */
-public void deleteOrdenadorDB(String id) throws SQLException {
-
-    String query = "DELETE FROM ordenadores WHERE id = ? ";
-  
-    PreparedStatement stmt = null;
-    try {
-        stmt = connection.prepareStatement(query);
-        stmt.setString(1, id);
-        stmt.executeUpdate();
-
-    } catch (SQLException ex) {
-        System.out.println(" SQLException : " + ex.getMessage());
-        ex.printStackTrace();
-        System.out.println(" VendorError : " + ex.getErrorCode());
-        System.out.println(" SQLState : " + ex.getSQLState());
-
-    }
-   
-}
     /**
      * Return a list with all the RAMs in the DB.
      *
@@ -355,10 +275,6 @@ public void deleteOrdenadorDB(String id) throws SQLException {
         return new ArrayList<Ordenador>();
     }
 
-
-
-
-
     /****************************************************************************
      * 
      * 
@@ -366,11 +282,6 @@ public void deleteOrdenadorDB(String id) throws SQLException {
      * 
      * 
      *****************************************************************************/
-
-
-
-
-
 
     /**
      * Return a User account checking the name and the password
