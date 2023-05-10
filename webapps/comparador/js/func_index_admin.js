@@ -119,9 +119,15 @@ function seleccionarUsuario(index, accion) {
     fetch('usuarios', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       },
-      body: formData
+      body: new URLSearchParams({
+        accion: accion, // Agregar el parámetro de acción
+        nombre: nombre,
+        correo: correo,
+        contrasena: contrasena
+      }).toString(),
+
     })
     .then(data => {
       console.log('Usuario agregado:', data);
