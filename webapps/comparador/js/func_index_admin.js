@@ -390,6 +390,10 @@ function mostrarUsuariosParaAdmin(accion) {
       const resultsModal = new bootstrap.Modal(document.getElementById('adminAddModal'));
       resultsModal.show();
 
+      const modal1 = document.querySelector('#adminModal');
+      const modalBootstrap1 = bootstrap.Modal.getInstance(modal1);
+      modalBootstrap1.hide();
+
     });
 }
 
