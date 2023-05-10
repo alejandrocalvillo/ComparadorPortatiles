@@ -48,7 +48,7 @@
 				</div>
 			</div>
 			<div id="cajaEsquina">
-				<button href="${pageContext.request.contextPath}/cerrar" class="btn btn-danger">Cerrar Sesión</button>
+				<a href="${pageContext.request.contextPath}/cerrar" class="btn btn-danger">Cerrar Sesión</a>
 				<a href="${pageContext.request.contextPath}//index" class="btn btn-primary">Pagina Principal</a>
 			</div>
 
@@ -118,7 +118,7 @@
 					  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-					  <form>
+					  <form id="anadirUsuario">
 						<div class="mb-3">
 						  <label for="nombre" class="form-label">Nombre</label>
 						  <input type="text" class="form-control" id="nombre" name="nombre">

@@ -110,24 +110,17 @@ function seleccionarUsuario(index, accion) {
 
   function anadirUsuario(accion) {
 
-    const formData = new FormData();
-    formData.append('accion', accion);
-    formData.append('nombre', nombre);
-    formData.append('correo', correo);
-    formData.append('contrasena', contrasena);
-  
-    fetch('usuarios', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-      },
-      body: new URLSearchParams({
-        accion: accion, // Agregar el parámetro de acción
-        nombre: nombre,
-        correo: correo,
-        contrasena: contrasena
-      }).toString(),
+    // Obtener los datos del formulario
+    const formData = new FormData(document.getElementById("anadirUsuario"));
+    formData.append('action', action);
 
+    // Send AJAX request
+    fetch('buscar', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        },
+        body: new URLSearchParams(formData).toString(),
     })
     .then(data => {
       console.log('Usuario agregado:', data);
