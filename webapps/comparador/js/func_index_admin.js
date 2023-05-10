@@ -379,7 +379,7 @@ function mostrarUsuariosParaAdmin() {
       tableUsuariosHtml += '</tbody></table>';
 
       // Update results container
-      document.getElementById('modalAdminAddContainer').innerHTML = tableUsuariosHtml;
+      document.getElementById('adminAddModal').innerHTML = tableUsuariosHtml;
 
 
       // Save usuarios array in a global variable
