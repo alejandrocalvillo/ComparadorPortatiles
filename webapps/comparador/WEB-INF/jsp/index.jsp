@@ -35,6 +35,7 @@
                                 </div>
                             <% } } else { %>
                                 <a href="${pageContext.request.contextPath}/login" class="btn btn-primary mb-2">Iniciar Sesion</a>
+                                <% } %>
                                 <div class="lista-ordenadores">
                                     <div id="ordenadoresSeleccionadosText">
                                         <p class="centered-text">Portátiles Seleccionados</p>
@@ -51,7 +52,7 @@
                                     <div><input id="removeSelectionButton" type="button" class="btn btn-danger"
                                         value="Eliminar Selección"></input></div>
                                 </div>
-                            <% } %>
+
                     </div>
                 </div>
             </header>
