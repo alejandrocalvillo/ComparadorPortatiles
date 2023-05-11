@@ -555,5 +555,6 @@ public class DBManager implements AutoCloseable {
         }
         return false;
     }
+}
 
 
