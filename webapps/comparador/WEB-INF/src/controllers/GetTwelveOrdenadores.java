@@ -22,7 +22,7 @@ import org.json.JSONObject;
 import comparador.*;
 
 @WebServlet("/getUsuarios")
-public class GetTwelveUsuarios extends HttpServlet {
+public class GetTwelveOrdenadores extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
