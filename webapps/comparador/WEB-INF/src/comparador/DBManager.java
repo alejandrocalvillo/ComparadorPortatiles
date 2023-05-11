@@ -536,20 +536,17 @@ public class DBManager implements AutoCloseable {
 
     public boolean isAdmin(String id){
         String query = "SELECT * FROM administradores WHERE usuario_id = ?";
-
-        PreparedStatement stmt = null;
-
-        try {
-            stmt = connection.prepareStatement(query);
+    
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, id);
-            ResultSet resultSet = stmt.executeQuery();
-   
-            if (resultSet != null) {
-                return true;
-            } else {
-                return false;
+            try (ResultSet resultSet = stmt.executeQuery()) {
+                if (resultSet.next()) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
-
+    
         } catch (SQLException ex) {
             System.out.println(" SQLException : " + ex.getMessage());
             ex.printStackTrace();
@@ -558,6 +555,5 @@ public class DBManager implements AutoCloseable {
         }
         return false;
     }
-}
 
 
