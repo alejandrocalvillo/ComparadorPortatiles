@@ -198,6 +198,11 @@ function comparar() {
 
 // Usuarios Logueados
 
+let ordenadores = []; // This array will store all fetched computers
+let visibleOrdenadoresIndices = []; // This array will store indices of currently displayed computers
+let currentPage = 0; // This will keep track of the current page
+let itemsPerPage = 12; // This will set the number of items to display per page
+
 function searchOrdenadoresLoged() {
 	// Send AJAX request
 	fetch('buscar', {
@@ -208,9 +213,21 @@ function searchOrdenadoresLoged() {
 		body: new URLSearchParams(new FormData(document.getElementById("filtros"))).toString(),
 	})
 		.then(response => response.json())
-		.then(ordenadores => {
-			// Generate table HTML
-			let tableHtml = `
+		.then(data => {
+			ordenadores = data;
+			window.ordenadoresArray = ordenadores;
+			updateVisibleOrdenadoresIndices();
+			displayOrdenadores();
+		});
+}
+
+function updateVisibleOrdenadoresIndices() {
+	visibleOrdenadoresIndices = ordenadores.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((_, index) => index + currentPage * itemsPerPage);
+}
+
+function displayOrdenadores() {
+	// Generate table HTML
+	let tableHtml = `
 	  <table id="tabla" class="table table-striped">
 	  <thead>
 		<tr>
@@ -222,29 +239,40 @@ function searchOrdenadoresLoged() {
 	  </thead>
 	  <tbody>`;
 
-			ordenadores.forEach((ordenador, index) => {
-				tableHtml += `
+	visibleOrdenadoresIndices.forEach(index => {
+		const ordenador = ordenadores[index];
+		tableHtml += `
 		<tr>
 		  <td>${ordenador.marca}</td>
 		  <td>${ordenador.modelo}</td>
 		  <td><button onclick="detallesOrdenadorLoged(${index})" class="btn btn-info">Detalles</button></td>
 		  <td><button onclick="seleccionarOrdenador(${index})" class="btn btn-primary">Seleccionar</button></td>
 		</tr>`;
-			});
+	});
 
-			tableHtml += '</tbody></table>';
+	tableHtml += `
+	  </tbody>
+	  </table>`;
 
-			// Update results container
-			document.getElementById('modalResultsContainer').innerHTML = tableHtml;
+	if (visibleOrdenadoresIndices.length < itemsPerPage) {
+		tableHtml += `<button id="loadMoreButton" class="btn btn-secondary" style="display: none;">Mostrar más</button>`;
+	} else {
+		tableHtml += `<button id="loadMoreButton" class="btn btn-secondary" onclick="loadMoreOrdenadores()">Mostrar más</button>`;
+	}
 
-			// Save ordenadores array in a global variable
-			window.ordenadoresArray = ordenadores;
+	// Show the table in the modal
+	document.getElementById('modalResultsContainer').innerHTML = tableHtml;
 
-			// Show modal
-			const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
-			resultsModal.show();
-		});
+	const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
+	resultsModal.show();
 }
+
+function loadMoreOrdenadores() {
+	currentPage++;
+	updateVisibleOrdenadoresIndices();
+	displayOrdenadores();
+}
+
 
 function detallesOrdenadorLoged(index) {
 	console.log('Detalles ' + index);
