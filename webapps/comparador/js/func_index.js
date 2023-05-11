@@ -230,6 +230,8 @@ function showOrdenadoresGroup() {
     if (currentGroup < ordenadoresGroups.length) {
         let ordenadores = ordenadoresGroups[currentGroup];
 
+		const resultsModalAbierto = new bootstrap.Modal(document.getElementById('resultsModal'));
+		resultsModalAbierto.hide();
         // Generate table HTML
         let tableHtml = `
         <table id="tabla" class="table table-striped">
@@ -272,9 +274,9 @@ function showOrdenadoresGroup() {
 
 function showMore() {
     // Show the next group
-	const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
-	resultsModal.hide();
+
     showOrdenadoresGroup();
+
 
 }
 function detallesOrdenadorLoged(index) {
