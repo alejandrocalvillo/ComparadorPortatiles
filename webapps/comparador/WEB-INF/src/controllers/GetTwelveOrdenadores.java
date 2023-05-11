@@ -27,6 +27,15 @@ public class GetTwelveOrdenadores extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("Entro en el Post");
 
+        String paginaParameter = request.getParameter("pagina");
+        int pagina;
+        if (paginaParameter == null || paginaParameter.equals("0")) {
+            pagina = 0;
+        } else {
+            pagina = Integer.parseInt(paginaParameter);
+        }
+
+        System.out.println("Pagina: " + pagina);
         System.out.println("Content Type: " + request.getContentType());
         String marca = request.getParameter("marca");
         System.out.println("Marca: " + marca);
