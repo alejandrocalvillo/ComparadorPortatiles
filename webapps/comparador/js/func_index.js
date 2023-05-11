@@ -198,87 +198,54 @@ function comparar() {
 
 // Usuarios Logueados
 
-let ordenadoresGroups = [];
-let currentGroup = 0;
-
 function searchOrdenadoresLoged() {
-    // Send AJAX request
-    fetch('buscar', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-        },
-        body: new URLSearchParams(new FormData(document.getElementById("filtros"))).toString(),
-    })
-        .then(response => response.json())
-        .then(ordenadores => {
-            // Dividir el arreglo de ordenadores en grupos de 12
-            ordenadoresGroups = [];
-            for (let i = 0; i < ordenadores.length; i += 12) {
-                ordenadoresGroups.push(ordenadores.slice(i, i + 12));
-            }
+	// Send AJAX request
+	fetch('buscar', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+		},
+		body: new URLSearchParams(new FormData(document.getElementById("filtros"))).toString(),
+	})
+		.then(response => response.json())
+		.then(ordenadores => {
+			// Generate table HTML
+			let tableHtml = `
+	  <table id="tabla" class="table table-striped">
+	  <thead>
+		<tr>
+		  <th>Marca</th>
+		  <th>Modelo</th>
+		  <th></th>
+		  <th></th>
+		</tr>
+	  </thead>
+	  <tbody>`;
 
-            // Reset currentGroup index
-            currentGroup = 0;
+			ordenadores.forEach((ordenador, index) => {
+				tableHtml += `
+		<tr>
+		  <td>${ordenador.marca}</td>
+		  <td>${ordenador.modelo}</td>
+		  <td><button onclick="detallesOrdenadorLoged(${index})" class="btn btn-info">Detalles</button></td>
+		  <td><button onclick="seleccionarOrdenador(${index})" class="btn btn-primary">Seleccionar</button></td>
+		</tr>`;
+			});
 
-            // Show the first group
-            showOrdenadoresGroup();
-        });
+			tableHtml += '</tbody></table>';
+
+			// Update results container
+			document.getElementById('modalResultsContainer').innerHTML = tableHtml;
+
+			// Save ordenadores array in a global variable
+			window.ordenadoresArray = ordenadores;
+
+			// Show modal
+			const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
+			resultsModal.show();
+		});
 }
 
-function showOrdenadoresGroup() {
-    if (currentGroup < ordenadoresGroups.length) {
-        let ordenadores = ordenadoresGroups[currentGroup];
-
-		const resultsModalAbierto = new bootstrap.Modal(document.getElementById('resultsModal'));
-		resultsModalAbierto.hide();
-        // Generate table HTML
-        let tableHtml = `
-        <table id="tabla" class="table table-striped">
-        <thead>
-            <tr>
-                <th>Marca</th>
-                <th>Modelo</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>`;
-
-        ordenadores.forEach((ordenador, index) => {
-            tableHtml += `
-            <tr>
-                <td>${ordenador.marca}</td>
-                <td>${ordenador.modelo}</td>
-                <td><button onclick="detallesOrdenadorLoged(${index})" class="btn btn-info">Detalles</button></td>
-                <td><button onclick="seleccionarOrdenador(${index})" class="btn btn-primary">Seleccionar</button></td>
-            </tr>`;
-        });
-
-        tableHtml += `</tbody></table>`;
-
-        // If there are more groups, add a "Show More" button
-        if (currentGroup < ordenadoresGroups.length - 1) {
-            tableHtml += `<button onclick="showMore()" class="btn btn-primary">Mostrar más</button>`;
-        }
-
-        // Show the table in the modal
-        document.getElementById('modalResultsContainer').innerHTML = tableHtml;
-
-		const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
-		resultsModal.show();
-        // Increment currentGroup index
-        currentGroup++;
-    }
-}
-
-function showMore() {
-    // Show the next group
-
-    showOrdenadoresGroup();
-
-
-}
 function detallesOrdenadorLoged(index) {
 	console.log('Detalles ' + index);
 
