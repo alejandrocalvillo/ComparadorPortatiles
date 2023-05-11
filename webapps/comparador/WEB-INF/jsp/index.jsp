@@ -95,6 +95,10 @@
                       <% } else { %>
                         <p>No hay ordenadores Asus</p>
                         <% } %>
+
+                  <div id="doceOrdenadores">
+                    <button id="loadMoreButton" class="btn btn-primary"></button>
+                  </div>
                 </div>
 
                 <!--Empieza segunda linea de cajas--->

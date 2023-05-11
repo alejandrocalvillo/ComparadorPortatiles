@@ -1,5 +1,44 @@
 var indicesSeleccionados = [];
 
+let pagina = 0;
+
+function loadOrdenadores() {
+    fetch('/getOrdenadores', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        },
+        body: new URLSearchParams({pagina: pagina}).toString(),
+    })
+    .then(response => response.json())
+    .then(ordenadores => {
+        let tableHtml = `
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Modelo</th>
+				<th></th>
+				<th></th>
+            </tr>
+        </thead>
+        <tbody>`;
+        ordenadores.forEach((ordenador, index) => {
+            tableHtml += `
+            <tr>
+                <td>${ordenador.modelo}</td>
+				<td><button onclick="detallesOrdenador(${index})" class="btn btn-info">Detalles</button></td>
+				<td><button onclick="seleccionarOrdenador(${index})" class="btn btn-primary">Seleccionar</button></td>
+            </tr>`;
+        });
+        tableHtml += `</tbody></table>`;
+        document.getElementById('doceOrdenadores').innerHTML = tableHtml;
+    });
+}
+
+document.getElementById('loadMoreButton').addEventListener('click', function() {
+    page++;
+    loadOrdenadores();
+});
 
 
 function searchOrdenadores() {
