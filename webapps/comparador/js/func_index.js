@@ -200,7 +200,6 @@ function comparar() {
 
 function searchOrdenadoresLoged() {
 	// Send AJAX request
-	List
 	fetch('buscar', {
 		method: 'POST',
 		headers: {
