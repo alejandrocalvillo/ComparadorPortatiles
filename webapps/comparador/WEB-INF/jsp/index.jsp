@@ -134,9 +134,7 @@
                         <% } %>
                 </div>
               </section>
-              <div id="doceOrdenadores">
-                <button id="loadMoreButton" class="btn btn-primary">Cargar mas</button>
-              </div>
+
               <!-- Filtros de Busqueda -->
               <section class="mt-5">
                 <form id="filtros" onsubmit="event.preventDefault(); 
@@ -281,6 +279,11 @@
                 </div>
               </section>
 
+              <section>
+                <div id="doceOrdenadores">
+                  <button id="loadMoreButton" class="btn btn-primary">Cargar mas</button>
+                </div>
+              </section>
 
               <!-- Add Bootstrap 5 JS CDN -->
               <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
