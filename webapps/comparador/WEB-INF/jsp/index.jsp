@@ -22,40 +22,42 @@
             <body>
               <header class="bg-light mb-4">
                 <div class="container d-flex justify-content-between py-3 align-items-start flex-column flex-md-row">
-                    <h1>Comparador de portátiles</h1>
-                    <div class="mt-2 mt-md-0 d-flex flex-column align-items-end">
-                        <% if (usuario !=null){ %>
-                            <div>
-                                <p class="centered-text">Bienvenido <%= usuario.getNombre() %></p>
-                                <% if (usuario.getAdmin()){ %>
-                                    <a href="${pageContext.request.contextPath}/admin" class="btn btn-primary"> Pantalla Admin</a>
-                                    <a href="${pageContext.request.contextPath}/cerrar" class="btn btn-danger">Cerrar Sesion</a>
-                                <% } else {%>
-                                    <a href="${pageContext.request.contextPath}/cerrar" class="btn btn-danger">Cerrar Sesion</a>
-                                </div>
-                            <% } } else { %>
-                                <a href="${pageContext.request.contextPath}/login" class="btn btn-primary mb-2">Iniciar Sesion</a>
-                                <% } %>
-                                <div class="lista-ordenadores">
-                                    <div id="ordenadoresSeleccionadosText">
-                                        <p class="centered-text">Portátiles Seleccionados</p>
-                                    </div>
-                                    <div id="ordenadoresSeleccionadosBox"></div>
-                                    <div><input id="compareButton" type="button" onclick="
-                                        <% if (usuario != null) { %>
-                                            compararLoged();"
-                                            <% } else { %>
-                                                comparar();"
-                                                <% } %> 
-                                            class="btn btn-primary mb-2" value="Comparar"></input>
-                                    </div>
-                                    <div><input id="removeSelectionButton" type="button" class="btn btn-danger"
-                                        value="Eliminar Selección"></input></div>
-                                </div>
+                  <h1>Comparador de portátiles</h1>
+                  <div class="mt-2 mt-md-0 d-flex flex-column align-items-end">
+                    <% if (usuario !=null){ %>
+                      <div>
+                        <p class="centered-text">Bienvenido <%= usuario.getNombre() %>
+                        </p>
+                        <% if (usuario.getAdmin()){ %>
+                          <a href="${pageContext.request.contextPath}/admin" class="btn btn-primary"> Pantalla Admin</a>
+                          <a href="${pageContext.request.contextPath}/cerrar" class="btn btn-danger">Cerrar Sesion</a>
+                          <% } else {%>
+                            <a href="${pageContext.request.contextPath}/cerrar" class="btn btn-danger">Cerrar Sesion</a>
+                      </div>
+                      <% } } else { %>
+                        <a href="${pageContext.request.contextPath}/login" class="btn btn-primary mb-2">Iniciar
+                          Sesion</a>
+                        <% } %>
 
+                  </div>
+                  <div class="lista-ordenadores">
+                    <div id="ordenadoresSeleccionadosText">
+                      <p class="centered-text">Portátiles Seleccionados</p>
                     </div>
+                    <div id="ordenadoresSeleccionadosBox"></div>
+                    <div><input id="compareButton" type="button" onclick="
+                                        <% if (usuario != null) { %>
+                                            compararLoged();" <% } else { %>
+                      comparar();"
+                      <% } %>
+                        class="btn btn-primary mb-2" value="Comparar"></input>
+                    </div>
+                    <div><input id="removeSelectionButton" type="button" class="btn btn-danger"
+                        value="Eliminar Selección"></input></div>
+                  </div>
+
                 </div>
-            </header>
+              </header>
 
               <!--Empieza primeralinea de cajas--->
               <section class="row row-cols-1 row-cols-md-3 g-4 mb-4">
