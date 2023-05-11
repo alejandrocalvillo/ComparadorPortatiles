@@ -3,7 +3,7 @@ var indicesSeleccionados = [];
 let pagina = 0;
 
 function loadOrdenadores() {
-    fetch('/getOrdenadores', {
+    fetch('getOrdenadores', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
