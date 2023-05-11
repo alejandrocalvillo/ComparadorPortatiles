@@ -32,7 +32,6 @@
 						<button id="botonUsuarios" onclick="searchPuntos('buscar')">Mostrar</button>
 					</div>
 				</div>
-				</div>
 				<div class="box">
 					<h2>USUARIOS</h2>
 					<div class="buttons">
