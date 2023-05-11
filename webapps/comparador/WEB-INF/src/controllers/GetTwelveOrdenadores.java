@@ -25,9 +25,28 @@ import comparador.*;
 public class GetTwelveOrdenadores extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("Entro en el Post");
 
+        System.out.println("Content Type: " + request.getContentType());
+        String marca = request.getParameter("marca");
+        System.out.println("Marca: " + marca);
+
+        String memoriaTipo = request.getParameter("tipoMemoria");
+        System.out.println("Memoria Tipo: " + memoriaTipo);
+
+        int memoriaCapacidad = Integer.parseInt(request.getParameter("capacidadMemoria"));
+        System.out.println("Memoria Capacidad: " + memoriaCapacidad);
+
+        String procesador = request.getParameter("procesador");
+        System.out.println("Procesador: " + procesador);
+
+        String discoTipo = request.getParameter("tipoDisco");
+        System.out.println("Disco Tipo: " + discoTipo);
+
+        int discoCapacidad = Integer.parseInt(request.getParameter("capacidadDisco"));
+        System.out.println("Disco Capacidad: " + discoCapacidad);
+        
         int pagina = Integer.parseInt(request.getParameter("pagina"));
-
 
         try (DBManager dbManager = new DBManager()) {
             List<Ordenador> ordenadores = dbManager.getOrdenadores(pagina * 12, 12);
