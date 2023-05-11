@@ -23,6 +23,7 @@ function loadOrdenadores() {
         </thead>
         <tbody>`;
         ordenadores.forEach((ordenador, index) => {
+			console.log(ordenador.modelo);
             tableHtml += `
             <tr>
                 <td>${ordenador.modelo}</td>
