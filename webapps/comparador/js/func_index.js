@@ -194,7 +194,6 @@ function comparar() {
 	compararHTML = '';
 
 }
-window.ordenadoresArray = ordenadores;
 
 let ordenadores = []; // This array will store all fetched computers
 let visibleOrdenadoresIndices = []; // This array will store indices of currently displayed computers
