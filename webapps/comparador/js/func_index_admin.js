@@ -350,7 +350,6 @@ function mostrarUsuariosParaAdmin(accion) {
     body: new URLSearchParams({
       accion: accion // Agregar el parámetro de acción
     }).toString(),
-
   })
     .then(response => response.json())
     .then(usuarios => {
@@ -362,7 +361,6 @@ function mostrarUsuariosParaAdmin(accion) {
                 <th>Nombre</th>
                 <th>Correo</th>
                 <th></th>
-    
               </tr>
             </thead>
             <tbody>`;
@@ -381,19 +379,27 @@ function mostrarUsuariosParaAdmin(accion) {
       // Update results container
       document.getElementById('modalAdminAddContainer').innerHTML = tableUsuariosHtml;
 
-
       // Save usuarios array in a global variable
       window.usuariosArray = usuarios;
 
       console.log(`he rellenado los usuarios ` + window.usuariosArray[1]);
-      // Show modal
-      const modal = document.querySelector('#adminModal');
-      const modalBootstrap = bootstrap.Modal.getInstance(modal);
-      modalBootstrap.hide();
 
-      const resultsModal = new bootstrap.Modal(document.getElementById('adminAddModal'));
-      resultsModal.show();
+      // Get modal instances
+      const adminModal = document.querySelector('#adminModal');
+      const adminModalBootstrap = bootstrap.Modal.getInstance(adminModal);
+      const adminAddModal = document.querySelector('#adminAddModal');
+      const adminAddModalBootstrap = bootstrap.Modal.getInstance(adminAddModal);
 
+      // When adminModal has been hidden...
+      adminModal.addEventListener('hidden.bs.modal', function() {
+        // Show adminAddModal
+        adminAddModalBootstrap.show();
+        // Remove the event listener to prevent it from triggering next time adminModal is hidden
+        adminModal.removeEventListener('hidden.bs.modal', arguments.callee);
+      });
+
+      // Hide adminModal
+      adminModalBootstrap.hide();
     });
 }
 
