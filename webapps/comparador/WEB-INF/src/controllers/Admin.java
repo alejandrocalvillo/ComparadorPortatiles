@@ -36,7 +36,7 @@ public class Admin extends HttpServlet {
         // }
 
         try (DBManager db = new DBManager()) {
-            if(db.isAdmin(String.valueOf(usuario.getId()))) {
+            if(usuario!=null && db.isAdmin(String.valueOf(usuario.getId()))) {
                 RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/index_admin.jsp");
                 rd.forward(request, response);
             } else {
