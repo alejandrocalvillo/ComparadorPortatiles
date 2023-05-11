@@ -29,7 +29,10 @@ public class Index extends HttpServlet {
         try (DBManager db = new DBManager()) {
             //Empezamos contando marcas en el index
             Usuario usuario = (Usuario)session.getAttribute("usuario");
-            usuario.setAdmin(db.isAdmin(String.valueOf(usuario.getId())));
+            if(db.isAdmin(String.valueOf(usuario.getId()))){
+                usuario.setAdmin(true);
+            }
+            
             request.setAttribute("usuario", usuario);
 
             ordenadores = new ArrayList<Ordenador>();
