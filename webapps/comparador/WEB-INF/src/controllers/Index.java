@@ -27,16 +27,19 @@ public class Index extends HttpServlet {
         HttpSession session = request.getSession();
 
         try (DBManager db = new DBManager()) {
-            //Empezamos contando marcas en el index
+            //Verificacion de usuarios
             Usuario usuario = (Usuario)session.getAttribute("usuario");
 
-            if (db.isAdmin(String.valueOf(usuario.getId()))) {
-                usuario.setAdmin(true);
-            } else {
-                usuario.setAdmin(false);
+            if(usuario != null && db != null){
+                if (db.isAdmin(String.valueOf(usuario.getId()))) {
+                    usuario.setAdmin(true);
+                } else {
+                    usuario.setAdmin(false);
+                }
             }
             request.setAttribute("usuario", usuario);
 
+                        //Empezamos contando marcas en el index
             ordenadores = new ArrayList<Ordenador>();
             ordenadores = db.listOrdenadoresPorMarca("ASUS");
             request.setAttribute("ASUSCount", ordenadores.size());
