@@ -30,6 +30,7 @@
                       <% if (usuario.getAdmin()){ %>
                         <a href="${pageContext.request.contextPath}/index_admin}" class="btn btn-primary"> Pantalla
                           Admin</a>
+                        <a href="${pageContext.request.contextPath}/cerrar" class="btn btn-danger">Cerrar Sesion</a>
                         <% } else {%>
 
                       <a href="${pageContext.request.contextPath}/cerrar" class="btn btn-danger">Cerrar Sesion</a>
