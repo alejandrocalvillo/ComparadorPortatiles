@@ -6,7 +6,7 @@ public class Usuario{
     private String nombre;
     private String contrasena;
     private String correo;
-    private boolean admin= false;
+    private boolean admin;
 
     public int getId() {
         return id;
