@@ -272,7 +272,10 @@ function showOrdenadoresGroup() {
 
 function showMore() {
     // Show the next group
+	const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
+	resultsModal.hide();
     showOrdenadoresGroup();
+
 }
 function detallesOrdenadorLoged(index) {
 	console.log('Detalles ' + index);
