@@ -27,10 +27,15 @@
                     <div>
                       <p class="centered-text">Bienvenido <%= usuario.getNombre() %>
                       </p>
+                      <% if (usuario.getAdmin()){ %>
+                        <a href="${pageContext.request.contextPath}/index_admin}" class="btn btn-primary"> Pantalla
+                          Admin</a>
+                        <% } else {%>
+
                       <a href="${pageContext.request.contextPath}/cerrar" class="btn btn-danger">Cerrar Sesion</a>
                     </div>
 
-                    <% } else { %>
+                    <% } } else { %>
                       <a href="${pageContext.request.contextPath}/login" class="btn btn-primary">Iniciar Sesion</a>
                       <% } %>
                 </div>

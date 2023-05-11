@@ -6,6 +6,7 @@ public class Usuario{
     private String nombre;
     private String contrasena;
     private String correo;
+    private boolean admin;
 
     public int getId() {
         return id;
@@ -37,6 +38,14 @@ public class Usuario{
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public boolean getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
 } 
