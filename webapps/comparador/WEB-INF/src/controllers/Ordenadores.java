@@ -39,7 +39,7 @@ public class Ordenadores extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+/* 
         System.out.println("Entro en el Post");
         
         String accion = request.getParameter("accion");
@@ -177,6 +177,6 @@ public class Ordenadores extends HttpServlet {
         }  else {
           // Acción desconocida
           response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Acción desconocida");
-        }
+        }*/
     }
 }

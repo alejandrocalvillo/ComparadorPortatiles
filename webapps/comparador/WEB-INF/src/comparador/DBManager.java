@@ -555,6 +555,161 @@ public class DBManager implements AutoCloseable {
         }
         return false;
     }
+
+
+
+
+      
+    /****************************************************************************
+     * 
+     * 
+     * AQUI EMPIEZA LA PARTE DE PUNTOS DE VENTA
+     * 
+     * 
+     *****************************************************************************/
+
+    /**
+     * Return a User account checking the name and the password
+     *
+     * @param contraseña and name of the user.
+     * @return The user from the database.
+     * @throws SQLException If something fails with the DB.
+     */
+
+     
+    public List<PuntosVenta> getPuntosVentaDB() throws SQLException {
+
+        String query = "SELECT id, tienda, direccion FROM puntos_de_venta_sin_ordenador";
+
+        List<PuntosVenta> puntos = new ArrayList<PuntosVenta>();
+        PreparedStatement stmt = null;
+        try {
+
+            stmt = connection.prepareStatement(query);
+            ResultSet resultSet = stmt.executeQuery();
+
+            while (resultSet.next()) {
+                PuntosVenta punto = new PuntosVenta();
+                int id = resultSet.getInt("id");
+                String tienda = resultSet.getString("tienda");
+                String direccion = resultSet.getString("direccion");
+                punto.setTienda(tienda);
+                punto.setDireccion(direccion);
+                punto.setId(id);
+                puntos.add(punto);
+                
+
+            }
+            return puntos;
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+
+        }
+        return new ArrayList<PuntosVenta>();
+    }
+
+
+    
+    public void deletePuntoDB(String id) throws SQLException {
+
+        String query = "DELETE FROM puntos_de_venta_sin_ordenador WHERE id = ? ";
+      
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+
+        }
+       
+    }
+
+    
+
+    // hacer que devuelva un usuario si todo okey
+    public PuntosVenta insertPuntoDB(String tienda, String direccion) throws SQLException {
+        PuntosVenta punto = new PuntosVenta();
+        
+        String query = "INSERT INTO puntos_de_venta_sin_ordenador (tienda, direccion) VALUES (?, ?)";
+
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, tienda);
+            stmt.setString(2, direccion);
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+
+        }
+        punto.setTienda(tienda);
+        punto.setDireccion(direccion);
+        punto.setId(20);
+        // cuando la otra funcion vaya llamamos a la consulta de usuario para que nos
+        // devuelva un usuario completo con id correspondiente en vez de hacer nosotros
+        // los set
+        return punto;
+
+    }
+
+    
+    public void changeNameShopDB(String id, String nombre) throws SQLException {
+
+        String query = "UPDATE puntos_de_venta_sin_ordenador SET tienda = ? WHERE id = ? ";
+      
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, nombre);
+            stmt.setString(2, id);
+            stmt.executeUpdate();
+            System.out.println(" nombre tienda db" + nombre );
+
+
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+
+        }
+       
+    }
+
+    
+    public void changeAddressShopDB(String id, String direccion) throws SQLException {
+
+        String query = "UPDATE puntos_de_venta_sin_ordenador SET direccion = ? WHERE id = ? ";
+      
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, direccion);
+            stmt.setString(2, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+
+        }
+       
+    }
 }
 
 

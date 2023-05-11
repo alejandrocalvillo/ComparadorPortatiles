@@ -1,102 +1,86 @@
+/* General */
 body {
-    background-color: #ecb4b4;
-	display: flex;
-  	justify-content: center;
-  	align-items: center;
-   	min-height: 100vh;
+    background-color: #f19898;
 }
 
-html {
-  	height: 100%; 
+.rectangle {
+    position: relative;
+    width: 319px;
+    height: 195px;
+    float: left;
+    margin: 20px;
+    padding: 1rem;
+    border-radius: .25rem;
+    background-color: #D9D9D9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-input[type="text"],
-input[type="password"] {
-  	padding: 20px;
- 	border-radius: 5px;
-  	border: none;
-  	margin-bottom: 20px;
-  	font-size: 20px;
-  	width: 100%;
-  	box-sizing: border-box; 
+.centered-text {
+    text-align: center;
+    font-weight: bold;
 }
 
-form {
-	position: absolute;
-  	top: 50%;
-  	left: 50%;
-  	transform: translate(-50%, -50%);
- 	padding: 100px;
-	font-size: 24px; 
-  	width: 80%; 
-	max-width: 500px; 
+/* Ordenadores Seleccionados (lista) */
+.lista-ordenadores {
+    position: absolute;
+    right: 20px;
+    top: 100px;
+    width: 300px;
+    z-index: 999;
 }
 
-#texto {
-	position: fixed;
- 	top: 0;
-  	left: 0;
-  	right: 0;
-  	bottom: 0;
-  	margin: auto;
-  	text-align: center;
-
-
+.lista-ordenadores:before {
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #999999;
 }
 
-
-label {
-  	display: block;
-  	margin-bottom: 10px;
-	font-size: 50px;
+#ordenadoresSeleccionadosText {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
-
-input[type="submit"] {
-  	background-color: #4CAF50;
-  	color: #fff;
-  	border: none;
-  	border-radius: 5px;
-  	padding: 10px 20px;
-  	cursor: pointer;
-  	margin-right: 10px;
-	font-size: 34px;
+#ordenadoresSeleccionadosBox {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    max-height: 650px;
+    overflow-y: auto;
 }
 
-input[type="submit"]:hover {
-  	background-color: #3e8e41;
+#compareButton,
+#removeSelectionButton {
+    display: block;
+    width: 100%;
 }
 
-input[type="button"] {
-	background-color: #4CAF50;
-	color: #fff;
-	border: none;
-	border-radius: 5px;
-	padding: 10px 20px;
-	cursor: pointer;
-	margin-right: 10px;
-  font-size: 34px;
+/* Modal de busqueda */
+.boton-rojo-close {
+    color: red;
 }
 
-input[type="button"]:hover {
-	background-color: #3e8e41;
+.close-button:hover {
+    color: darkred;
+    cursor: pointer;
 }
+#caja{
+    border: 1px solid black;
+    margin-bottom: 10px;
 
-#error-message {
-	display: none;
-	margin-top: 528px;
-	padding: 10px;
-	border-radius: 5px;
-	background-color: #f44336;
-	color: white;
-	font-size: 16px;
-	text-align: center;
+}
+#CerrarSesion {
+    display: none;
   }
-  #error-message.show {
-	display: block;
-  }
-  #cajaEsquina{
-	position: fixed;
-	top: 10px;
-	right: 120px;
-  }	
+  #IniciarSesion {
+    display: inline-block;
+
+  } 
