@@ -249,7 +249,7 @@
                   <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="compararModalLabel">Detalles del ordenador</h5>
+                        <h5 class="modal-title" id="compararModalLabel">Comparativa de Ordenadores</h5>
                         <button type="button" class="btn-close close-button" data-bs-dismiss="modal"
                           aria-label="Close"></button>
                       </div>
@@ -267,13 +267,23 @@
                     <p class="centered-text">Portátiles Seleccionados</p>
                   </div>
                   <div id="ordenadoresSeleccionadosBox"></div>
-                  <div><input id="compareButton" type="button" onclick="comparar()" class="btn btn-primary mb-2"
-                      value="Comparar"></input>
+                  <div><input id="compareButton" type="button" onclick="
+                  <% if (usuario != null) { %>
+                    compararLoged();"
+                    <% } else { %>
+                      comparar();"
+                      <% } %> 
+                      class="btn btn-primary mb-2" value="Comparar"></input>
                   </div>
                   <div><input id="removeSelectionButton" type="button" class="btn btn-danger"
                       value="Eliminar Selección"></input></div>
                 </div>
               </section>
+
+              <% if (usuario != null) { %>
+                searchOrdenadoresLoged();" <% } else { %>
+                    searchOrdenadores();"
+                    <% } %>
 
               <!-- Add Bootstrap 5 JS CDN -->
               <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

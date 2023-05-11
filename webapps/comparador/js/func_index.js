@@ -285,6 +285,62 @@ function detallesOrdenadorLoged(index) {
 	detallesModal.show();
 }
 
+function compararLoged() {
+
+	console.log(indicesSeleccionados.length);
+
+	compararHTML = `
+		  <table id="tabla" border="2" class="table table-striped">
+			<tr>
+			  <th>Marca</th>
+			  <th>Modelo</th>
+			  <th>Procesador</th>
+			  <th>Memoria Tipo</th>
+			  <th>Memoria Capacidad</th>
+			  <th>Disco Tipo</th>
+			  <th>Disco Capacidad</th>
+			  <th>Tienda</th>
+			  <th>Precio</th>
+			</tr>`;
+
+	var ordenadoresComparados = "";
+
+	for (var i = 0; i < indicesSeleccionados.length; i++) {
+
+		const ordenador = window.ordenadoresArray[indicesSeleccionados[i]];
+
+		console.log(ordenador.modelo);
+
+		var ordenadorAComparar = `
+					<tr>
+					  <td>${ordenador.marca}</td>
+					  <td>${ordenador.modelo}</td>
+					  <td>${ordenador.procesador}</td>
+					  <td>${ordenador.memoriaTipo}</td>
+					  <td>${ordenador.memoriaCapacidad}</td>
+					  <td>${ordenador.discoTipo}</td>
+					  <td>${ordenador.discoCapacidad}</td>
+					  <td>${ordenador.tienda}</td>
+					  <td>${ordenador.precio}</td>
+					</tr>`;
+
+		ordenadoresComparados += ordenadorAComparar;
+	}
+
+	compararHTML += ordenadoresComparados;
+
+	compararHTML += `</table>`;
+
+	console.log(compararHTML);
+
+	document.getElementById('popUpComparar').innerHTML = compararHTML;
+
+	var detallesModal = new bootstrap.Modal(document.getElementById('compararModal'));
+	detallesModal.show();
+
+	compararHTML = '';
+
+}
 
 
 
