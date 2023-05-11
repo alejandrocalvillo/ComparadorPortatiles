@@ -39,7 +39,7 @@ public class Login extends HttpServlet {
                 System.out.println("antes de comprobar: "+usuario.getNombre()+" "+usuario.getContrasena());
                 if(usuario.getNombre()!=null && usuario.getContrasena()!= null )
                     { 
-                    if(usuario.getNombre().equals("admin") && usuario.getContrasena().equals("*00A51F3F48415C7D4E8908980D443C29C69B60C9"))
+                    if(db.isAdmin(String.valueOf(usuario.getId())))
                         {
                         // Guardar el objeto usuario en la sesión
                         session = request.getSession();
