@@ -1,86 +1,50 @@
 /* General */
+
 body {
-    background-color: #f19898;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
-.rectangle {
-    position: relative;
-    width: 319px;
-    height: 195px;
-    float: left;
-    margin: 20px;
-    padding: 1rem;
-    border-radius: .25rem;
-    background-color: #D9D9D9;
+.container {
+    max-width: 800px;
+    margin: 0 auto;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
 }
-
-.centered-text {
+.box {
+    flex-basis: 100%;
+    margin: 10px;
+    padding: 20px;
     text-align: center;
-    font-weight: bold;
+    border: 1px solid black;
 }
-
-/* Ordenadores Seleccionados (lista) */
-.lista-ordenadores {
-    position: absolute;
-    right: 20px;
-    top: 100px;
-    width: 300px;
-    z-index: 999;
+.box h2 {
+    margin-top: 0;
 }
-
-.lista-ordenadores:before {
-    content: "";
-    position: absolute;
-    left: -2px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background-color: #999999;
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
 }
-
-#ordenadoresSeleccionadosText {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-#ordenadoresSeleccionadosBox {
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    max-height: 650px;
-    overflow-y: auto;
-}
-
-#compareButton,
-#removeSelectionButton {
-    display: block;
-    width: 100%;
-}
-
-/* Modal de busqueda */
-.boton-rojo-close {
-    color: red;
-}
-
-.close-button:hover {
-    color: darkred;
+.buttons button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #008CBA;
+    color: white;
+    font-size: 16px;
     cursor: pointer;
 }
-#caja{
-    border: 1px solid black;
-    margin-bottom: 10px;
-
+.buttons button:hover {
+    background-color: #006F8F;
 }
-#CerrarSesion {
-    display: none;
-  }
-  #IniciarSesion {
-    display: inline-block;
-
-  } 
+#cajaEsquina{
+position: fixed;
+top: 10px;
+right: 120px;
+}	
