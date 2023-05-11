@@ -5,7 +5,16 @@ $(document).ready(function() {
 	$("#Registro").click(function() {
  	 // Código a ejecutar cuando el usuario haga click
 	 event.preventDefault();
-		window.location.href="/comparador/registro";
+	 var appPath = window.location.pathname;
+
+	 // Extraer el nombre de la carpeta principal
+	 var folderName = appPath.split('/')[1];
+	 
+	 // Construir la URL completa de la página de registro
+	 var url = '/' + folderName + '/registro';
+	 
+	 // Redirigir a la página de registro
+	 window.location.href = url;
   		
 	});
 	function validarFormulario() {
@@ -17,8 +26,6 @@ $(document).ready(function() {
 		}
 		return true;
 	  }
-	var errorMessage = document.getElementById("error-message");
-	errorMessage.innerHTML = "Credenciales incorrectas";
-	errorMessage.classList.add("show");
+	
 });
 

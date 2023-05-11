@@ -27,13 +27,22 @@ public class Puntos_de_venta extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-        if (usuario != null && usuario.getNombre().equals("admin")
-                && usuario.getContrasena().equals("*00A51F3F48415C7D4E8908980D443C29C69B60C9")) {
-            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/index_admin.jsp");
-            rd.forward(request, response);
-        } else {
-            response.sendRedirect(request.getContextPath() + "/index");
-        }
+        try (DBManager db = new DBManager()) {
+
+            if(usuario!=null && db.isAdmin(String.valueOf(usuario.getId()))) {
+                    RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/index_admin.jsp");
+                    rd.forward(request, response);
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/index");
+                }
+            }catch (SQLException | NamingException ex) {
+                ex.printStackTrace();
+                String errorMessage = "Error: " + ex.getMessage();
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                response.setContentType("text/plain");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(errorMessage);
+            }
 
     }
 

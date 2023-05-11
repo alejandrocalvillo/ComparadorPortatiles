@@ -196,8 +196,8 @@ function comparar() {
 }
 
 
+// Usuarios Logueados
 
-//Usuarios Logueados
 function searchOrdenadoresLoged() {
 	// Send AJAX request
 	fetch('buscar', {
@@ -245,7 +245,6 @@ function searchOrdenadoresLoged() {
 			resultsModal.show();
 		});
 }
-
 
 function detallesOrdenadorLoged(index) {
 	console.log('Detalles ' + index);

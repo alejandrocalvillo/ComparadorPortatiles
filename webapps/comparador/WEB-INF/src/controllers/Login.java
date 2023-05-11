@@ -77,9 +77,18 @@ public class Login extends HttpServlet {
         }
     } 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-   
+            HttpSession session = request.getSession();
+            Usuario usuario = (Usuario) session.getAttribute("usuario");
+            if(usuario!=null)
+           {
+            response.sendRedirect(request.getContextPath()+"/index");
+            
+           } else{
+             
             RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/inicio_sesion.jsp");
             rd.forward(request, response);
+           } 
+           
             
     }
 }

@@ -68,7 +68,18 @@ public class Registro extends HttpServlet {
         }
     }
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/registro.jsp");
-       rd.forward(request, response);
+            HttpSession session = request.getSession();
+            Usuario usuario = (Usuario) session.getAttribute("usuario");
+
+         if(usuario!=null)
+           {
+            response.sendRedirect(request.getContextPath()+"/index");
+            
+           } else{
+             
+            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/registro.jsp");
+            rd.forward(request, response);
+           } 
+        
     } 
 }

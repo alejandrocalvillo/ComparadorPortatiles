@@ -97,6 +97,7 @@
 							</div>
 							<div class="modal-footer">
 								<div id="cambioDetalles"></div>
+
 							</div>
 						</div>
 					</div>
