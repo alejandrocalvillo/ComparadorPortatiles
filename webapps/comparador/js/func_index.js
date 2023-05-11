@@ -219,7 +219,7 @@ function searchOrdenadoresLoged() {
 
             // Reset currentGroup index
             currentGroup = 0;
-
+			window.ordenadoresArray = ordenadores; // Save ordenadores array in a global variable
             // Show the first group
             showOrdenadoresGroup();
         });
@@ -261,7 +261,7 @@ function showOrdenadoresGroup() {
 
         // Show the table in the modal
         document.getElementById('modalResultsContainer').innerHTML = tableHtml;
-		window.ordenadoresArray = ordenadores; // Save ordenadores array in a global variable
+
 		const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
 		resultsModal.show();
         // Increment currentGroup index
