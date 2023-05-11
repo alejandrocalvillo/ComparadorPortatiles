@@ -194,9 +194,7 @@ function comparar() {
 	compararHTML = '';
 
 }
-
-
-// Usuarios Logueados
+window.ordenadoresArray = ordenadores;
 
 let ordenadores = []; // This array will store all fetched computers
 let visibleOrdenadoresIndices = []; // This array will store indices of currently displayed computers
@@ -214,8 +212,8 @@ function searchOrdenadoresLoged() {
 	})
 		.then(response => response.json())
 		.then(data => {
-			ordenadores = data;
 			window.ordenadoresArray = ordenadores;
+			ordenadores = data;
 			updateVisibleOrdenadoresIndices();
 			displayOrdenadores();
 		});
@@ -265,37 +263,14 @@ function displayOrdenadores() {
 
 	const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
 	resultsModal.show();
-
-	if (resultsModal) {
-        resultsModal.dispose();
-    }
-
-    // Creamos una nueva instancia del modal
-    resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
-
-    // Mostramos el modal
-    resultsModal.show()
 }
 
 function loadMoreOrdenadores() {
-    // Cerramos el modal actual
-    resultsModal.hide();
-    
-    // Añadimos un listener para el evento 'hidden.bs.modal'
-    $('#resultsModal').on('hidden.bs.modal', function () {
-        // Incrementamos la página actual
-        currentPage++;
-        
-        // Actualizamos los índices de ordenadores visibles
-        updateVisibleOrdenadoresIndices();
-        
-        // Mostramos los ordenadores
-        displayOrdenadores();
-        
-        // Nos aseguramos de quitar el evento una vez se haya disparado para no acumular eventos
-        $('#resultsModal').off('hidden.bs.modal');
-    });
+	currentPage++;
+	updateVisibleOrdenadoresIndices();
+	displayOrdenadores();
 }
+
 
 
 
