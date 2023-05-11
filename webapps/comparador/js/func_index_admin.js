@@ -387,6 +387,10 @@ function mostrarUsuariosParaAdmin(accion) {
 
       console.log(`he rellenado los usuarios ` + window.usuariosArray[1]);
       // Show modal
+      const modal = document.querySelector('#adminModal');
+      const modalBootstrap = bootstrap.Modal.getInstance(modal);
+      modalBootstrap.hide();
+
       const resultsModal = new bootstrap.Modal(document.getElementById('adminAddModal'));
       resultsModal.show();
 
