@@ -27,7 +27,7 @@ body {
 .lista-ordenadores {
     position: absolute;
     right: 20px;
-    top: 20px;
+    top: 100px;
     width: 300px;
     z-index: 999;
 }
