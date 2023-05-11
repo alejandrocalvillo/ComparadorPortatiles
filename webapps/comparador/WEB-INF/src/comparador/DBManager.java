@@ -275,7 +275,10 @@ public class DBManager implements AutoCloseable {
         return new ArrayList<Ordenador>();
     }
 
-    //FUNCIONES PARA AÑADIR, MODIFICAR Y ELIMINAR ORDENADORES
+
+
+
+        //FUNCIONES PARA AÑADIR, MODIFICAR Y ELIMINAR ORDENADORES
 
     public String getMarcaId(String nombreMarca) throws SQLException {
         String id = "";
@@ -348,9 +351,9 @@ public class DBManager implements AutoCloseable {
     public String getDiscoId(String disco) throws SQLException {
         String discoId = "";
 
-        String tipoDisco = memoria.obtenerPrimeraCadena(disco);
+        String tipoDisco = obtenerPrimeraCadena(disco);
 
-        int capacidadDisco = (int) memoria.obtenerSegundaCadena(disco);
+        int capacidadDisco = Integer.parseint(obtenerSegundaCadena(disco));
 
         String query = "SELECT id FROM memorias WHERE tipo = ? AND capacidad = ?";
 
@@ -360,7 +363,7 @@ public class DBManager implements AutoCloseable {
             
             ResultSet resultSet = stmt.executeQuery();
             if (resultSet.next()) {
-                memoriaId = resultSet.getString("id");
+                String memoriaId = resultSet.getString("id");
             }
         } catch (SQLException ex) {
             System.out.println(" SQLException : " + ex.getMessage());
@@ -563,7 +566,6 @@ public class DBManager implements AutoCloseable {
         return capacidad;
     }
 
-
     /****************************************************************************
      * 
      * 
@@ -620,7 +622,7 @@ public class DBManager implements AutoCloseable {
     // hacer que devuelva un usuario si todo okey
     public Usuario insertUsuarioDB(String nombre, String contrasena, String email) throws SQLException {
         Usuario usuario = new Usuario();
-        
+        ;
         String query = "INSERT INTO usuarios (nombre, contrasena, correo) VALUES (?, PASSWORD(?), ?)";
 
         PreparedStatement stmt = null;
@@ -685,11 +687,10 @@ public class DBManager implements AutoCloseable {
         return new ArrayList<Usuario>();
     }
 
-    
     public void deleteUsuarioDB(String id) throws SQLException {
 
         String query = "DELETE FROM usuarios WHERE id = ? ";
-      
+
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(query);
@@ -703,13 +704,13 @@ public class DBManager implements AutoCloseable {
             System.out.println(" SQLState : " + ex.getSQLState());
 
         }
-       
+
     }
 
     public void changeNameUserDB(String id, String nombre) throws SQLException {
 
         String query = "UPDATE usuarios SET nombre = ? WHERE id = ? ";
-      
+
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(query);
@@ -724,13 +725,13 @@ public class DBManager implements AutoCloseable {
             System.out.println(" SQLState : " + ex.getSQLState());
 
         }
-       
+
     }
 
     public void changePasswordUserDB(String id, String contrasena) throws SQLException {
 
         String query = "UPDATE usuarios SET contrasena = PASSWORD(?) WHERE id = ? ";
-      
+
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(query);
@@ -745,7 +746,109 @@ public class DBManager implements AutoCloseable {
             System.out.println(" SQLState : " + ex.getSQLState());
 
         }
-       
+
     }
 
+    /****************************************************************************
+     * 
+     * 
+     * AQUI EMPIEZA LA PARTE DE ADMINISTRADORES
+     * 
+     * 
+     *****************************************************************************/
+
+    public List<Usuario> getAdministradores() {
+        String query = "SELECT * FROM usuarios u JOIN administradores a ON u.id = a.usuario_id ";
+        List<Usuario> usuarios = new ArrayList<Usuario>();
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            ResultSet resultSet = stmt.executeQuery();
+            while (resultSet.next()) {
+                Usuario usuario = new Usuario();
+                int id = resultSet.getInt("id");
+                String nom = resultSet.getString("nombre");
+                String con = resultSet.getString("contrasena");
+                String cor = resultSet.getString("correo");
+                usuario.setNombre(nom);
+                usuario.setCorreo(cor);
+                usuario.setContrasena(con);
+                usuario.setId(id);
+                usuarios.add(usuario);
+                System.out.println("nombre : " + usuario.getNombre() + "contraseña: " + usuario.getContrasena());
+            }
+            return usuarios;
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+        }
+
+        return new ArrayList<Usuario>();
+    }
+
+    public void declararAdmin(String id){
+
+        String query = "INSERT INTO administradores (usuario_id, es_admin) VALUES (?, 1);";
+
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+        }
+    }
+
+    public void deleteAdmin(String id){
+        String query = "DELETE FROM administradores WHERE usuario_id = ? ";
+
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+
+        }
+    }
+
+
+    public boolean isAdmin(String id){
+        String query = "SELECT * FROM administradores WHERE usuario_id = ?";
+
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, id);
+            ResultSet resultSet = stmt.executeQuery();
+   
+            if (resultSet != null) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+        }
+        return false;
+    }
 }
+
+
