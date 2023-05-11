@@ -41,10 +41,10 @@
 
 			<div class="input-group mt-1">
 				<div class="input-group-text bg-info">
-					<img src="img/login/icons/email.svg" alt="contraseña icono" style="height: 20px; width: 20px;">
+					<img src="img/login/icons/email.svg" alt="email icono" style="height: 20px; width: 20px;">
 				</div>
 				<div class="input-group-text bg-light">
-					<input type="form-control bg-light" placeholder="Email" name="email" id="email">
+					<input type="form-control bg-light email" placeholder="Email" name="email" id="email">
 				</div>
 			</div>
 
