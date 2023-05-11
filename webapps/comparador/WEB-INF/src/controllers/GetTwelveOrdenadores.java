@@ -48,7 +48,7 @@ public class GetTwelveOrdenadores extends HttpServlet {
 
         String paginaParameter = request.getParameter("pagina");
         int pagina;
-        if (paginaParameter == null) {
+        if (paginaParameter == null || paginaParameter.equals("0")) {
             pagina = 0;
         } else {
             pagina = Integer.parseInt(paginaParameter);
