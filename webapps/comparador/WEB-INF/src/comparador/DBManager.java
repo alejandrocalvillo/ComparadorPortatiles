@@ -322,9 +322,9 @@ public class DBManager implements AutoCloseable {
     public String getMemoriaId(String memoria) throws SQLException {
         String memoriaId = "";
 
-        String tipoMemoria = memoria.obtenerPrimeraCadena(memoria);
+        String tipoMemoria = obtenerPrimeraCadena(memoria);
 
-        int capacidadMemoria = (int) memoria.obtenerSegundaCadena(memoria);
+        int capacidadMemoria = Integer.parseInt(obtenerSegundaCadena(memoria));
 
         String query = "SELECT id FROM memorias WHERE tipo = ? AND capacidad = ?";
 
