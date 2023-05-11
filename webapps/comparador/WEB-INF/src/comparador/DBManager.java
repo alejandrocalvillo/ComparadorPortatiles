@@ -428,10 +428,10 @@ public class DBManager implements AutoCloseable {
 
             stmt = connection.prepareStatement(query);
             stmt.setString(1, modelo);
-            stmt.setInt(2, marcaId);
-            stmt.setInt(3, procesadorId);
-            stmt.setInt(4, memoriaId);
-            stmt.setInt(5, discoId);
+            stmt.setString(2, marcaId);
+            stmt.setString(3, procesadorId);
+            stmt.setString(4, memoriaId);
+            stmt.setString(5, discoId);
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
@@ -626,7 +626,7 @@ public class DBManager implements AutoCloseable {
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(query);
-            stmt.setString(1, modelo);
+            stmt.setString(1, nombre);
             stmt.setString(2, contrasena);
             stmt.setString(3, email);
             stmt.executeUpdate();
