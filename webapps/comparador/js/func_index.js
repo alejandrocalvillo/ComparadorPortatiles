@@ -263,27 +263,40 @@ function displayOrdenadores() {
 	// Show the table in the modal
 	document.getElementById('modalResultsContainer').innerHTML = tableHtml;
 
-    if (resultsModal) {
-        resultsModal.dispose();
-    
 	const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
 	resultsModal.show();
+
+	if (resultsModal) {
+        resultsModal.dispose();
+    }
+
+    // Creamos una nueva instancia del modal
+    resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
+
+    // Mostramos el modal
+    resultsModal.show()
 }
 
 function loadMoreOrdenadores() {
-	resultsModal.hide();
+    // Cerramos el modal actual
+    resultsModal.hide();
+    
+    // Añadimos un listener para el evento 'hidden.bs.modal'
     $('#resultsModal').on('hidden.bs.modal', function () {
+        // Incrementamos la página actual
         currentPage++;
+        
+        // Actualizamos los índices de ordenadores visibles
         updateVisibleOrdenadoresIndices();
+        
+        // Mostramos los ordenadores
         displayOrdenadores();
+        
         // Nos aseguramos de quitar el evento una vez se haya disparado para no acumular eventos
         $('#resultsModal').off('hidden.bs.modal');
     });
-	
-	currentPage++;
-	updateVisibleOrdenadoresIndices();
-	displayOrdenadores();
 }
+
 
 
 function detallesOrdenadorLoged(index) {
