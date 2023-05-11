@@ -51,7 +51,7 @@
 			</div>
 			<div id="cajaEsquina">
 				<a href="${pageContext.request.contextPath}/cerrar" class="btn btn-danger">Cerrar Sesión</a>
-				<a href="${pageContext.request.contextPath}//index" class="btn btn-primary">Pagina Principal</a>
+				<a href="${pageContext.request.contextPath}/index" class="btn btn-primary">Pagina Principal</a>
 			</div>
 
 			<!-- Los resultados de la busqueda USUARIOS -->
