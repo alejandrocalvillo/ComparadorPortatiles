@@ -77,7 +77,7 @@ public class DBManager implements AutoCloseable {
      * @throws SQLException If something fails with the DB.
      */
     public Ordenador getOrdenadorById(int id) throws SQLException {
-        Ordenador ordenador = null;
+        Ordenador ordenador = new Ordenador();
         String query = "SELECT ordenadores.modelo, marcas.nombre AS marca_nombre, procesadores.nombre AS procesador_nombre, memorias.tipo, memorias.capacidad AS capacidad_ram, discos.tipo, discos.capacidad AS capacidad_disco FROM ordenadores INNER JOIN marcas ON marca_id = marcas.id INNER JOIN procesadores ON procesador_id = procesadores.id INNER JOIN discos ON disco_id = discos.id INNER JOIN memorias ON memoria_id = memorias.id WHERE ordenadores.id = "
                 + id;
 
