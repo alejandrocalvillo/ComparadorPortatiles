@@ -390,14 +390,16 @@ function mostrarUsuariosParaAdmin(accion) {
       const resultsModal = new bootstrap.Modal(document.getElementById('adminAddModal'));
       resultsModal.show();
 
+      const modal1 = document.querySelector('#adminModal');
+      const modalBootstrap = bootstrap.Modal.getInstance(modal1);
+      modalBootstrap.hide();
+
     });
 }
 
 function seleccionarParaAdmin(index, accion) {
 
-  const modal1 = document.querySelector('#adminModal');
-  const modalBootstrap = bootstrap.Modal.getInstance(modal1);
-  modalBootstrap.hide();
+
   // Obtener los datos del formulario
   const usuario = window.usuariosArray[index];
   const formData = new FormData();
