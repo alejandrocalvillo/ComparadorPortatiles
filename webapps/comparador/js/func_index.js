@@ -263,6 +263,8 @@ function showOrdenadoresGroup() {
         // Show the table in the modal
         document.getElementById('modalResultsContainer').innerHTML = tableHtml;
 
+		const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
+		resultsModal.show();
         // Increment currentGroup index
         currentGroup++;
     }
