@@ -275,6 +275,295 @@ public class DBManager implements AutoCloseable {
         return new ArrayList<Ordenador>();
     }
 
+    //FUNCIONES PARA AÑADIR, MODIFICAR Y ELIMINAR ORDENADORES
+
+    public String getMarcaId(String nombreMarca) throws SQLException {
+        String id = "";
+
+        String query = "SELECT id FROM marcas WHERE nombre = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, nombreMarca);
+            ResultSet resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                id = resultSet.getString("id");
+            }
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+        }
+
+        return id;
+    }
+
+    public String getProcesadorId(String nombreProcesador) throws SQLException {
+        String id = "";
+
+        String query = "SELECT id FROM marcas WHERE nombre = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, nombreProcesador);
+            ResultSet resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                id = resultSet.getString("id");
+            }
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+        }
+
+        return id;
+    }
+
+    public String getMemoriaId(String memoria) throws SQLException {
+        String memoriaId = "";
+
+        String tipoMemoria = memoria.obtenerPrimeraCadena(memoria);
+
+        int capacidadMemoria = (int) memoria.obtenerSegundaCadena(memoria);
+
+        String query = "SELECT id FROM memorias WHERE tipo = ? AND capacidad = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, tipoMemoria);
+            stmt.setInt(2, capacidadMemoria);
+
+            ResultSet resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                memoriaId = resultSet.getString("id");
+            }
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+        }
+        return memoriaId;
+    }
+
+    public String getDiscoId(String disco) throws SQLException {
+        String discoId = "";
+
+        String tipoDisco = memoria.obtenerPrimeraCadena(disco);
+
+        int capacidadDisco = (int) memoria.obtenerSegundaCadena(disco);
+
+        String query = "SELECT id FROM memorias WHERE tipo = ? AND capacidad = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, tipoDisco);
+            stmt.setInt(2, capacidadDisco);
+            
+            ResultSet resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                memoriaId = resultSet.getString("id");
+            }
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+        }
+        return discoId;
+    }
+
+
+    public List<Ordenador> getOrdenadoresDB() throws SQLException {
+        List<Ordenador> ordenadores = new ArrayList<>();
+
+        String query = "SELECT ordenadores.id AS id, ordenadores.modelo, marcas.nombre AS marca_nombre, procesadores.nombre AS procesador_nombre, memorias.tipo AS memoria_tipo, memorias.capacidad AS capacidad_ram, discos.tipo AS disco_tipo, discos.capacidad AS capacidad_disco, puntos_de_venta.tienda, puntos_de_venta.precio FROM ordenadores INNER JOIN marcas ON marca_id = marcas.id INNER JOIN procesadores ON procesador_id = procesadores.id INNER JOIN discos ON disco_id = discos.id INNER JOIN memorias ON memoria_id = memorias.id INNER JOIN puntos_de_venta ON ordenadores.id = puntos_de_venta.ordenador_id";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            ResultSet resultSet = stmt.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String modelo = resultSet.getString("modelo");
+                String marca_nombre = resultSet.getString("marca_nombre");
+                String procesador_nombre = resultSet.getString("procesador_nombre");
+                String memoria_tipo = resultSet.getString("memoria_tipo");
+                int capacidad_ram = resultSet.getInt("capacidad_ram");
+                String disco_tipo = resultSet.getString("disco_tipo");
+                int capacidad_disco = resultSet.getInt("capacidad_disco");
+                String tienda = resultSet.getString("tienda");
+                double precio = resultSet.getDouble("precio");
+
+                Ordenador ordenador = new Ordenador();
+                ordenador.setId(id);
+                ordenador.setModelo(modelo);
+                ordenador.setMarca(marca_nombre);
+                ordenador.setProcesador(procesador_nombre);
+                ordenador.setMemoriaTipo(memoria_tipo);
+                ordenador.setMemoriaCapacidad(capacidad_ram);
+                ordenador.setDiscoTipo(disco_tipo);
+                ordenador.setDiscoCapacidad(capacidad_disco);
+                ordenador.setTienda(tienda);
+                ordenador.setPrecio(precio);
+
+                ordenadores.add(ordenador);
+            }
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+        }
+
+        return ordenadores;
+    }
+
+        // hacer que devuelva un ordenador si todo okey
+    public void insertOrdenadorDB(String modelo, String marcaId, String procesadorId, String memoriaId, String discoId) throws SQLException {
+
+        Ordenador ordenador = new Ordenador();
+        
+        String query = "INSERT INTO ordenadores (modelo, marca_id, procesador_id, memoria_id, disco_id)  VALUES VALUES (?, ?, ?, ?, ?)";
+
+
+        PreparedStatement stmt = null;
+        try {
+
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, modelo);
+            stmt.setInt(2, marcaId);
+            stmt.setInt(3, procesadorId);
+            stmt.setInt(4, memoriaId);
+            stmt.setInt(5, discoId);
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+
+        }
+
+    }
+
+    public void updateOrdenadorModelo(String id, String modelo) throws SQLException {
+        String query = "UPDATE ordenadores SET modelo = ? WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, modelo);
+            stmt.setString(2, id);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+                System.out.println("SQLException: " + ex.getMessage());
+                ex.printStackTrace();
+                System.out.println("VendorError: " + ex.getErrorCode());
+                System.out.println("SQLState: " + ex.getSQLState());
+        }
+    }
+
+    public void updateOrdenadorMarca(String ordenadorId, String marcaId) throws SQLException {
+
+        String query = "UPDATE ordenadores SET marca_id = ? WHERE id = ?";
+
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, marcaId);
+            stmt.setString(2, ordenadorId);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println("VendorError: " + ex.getErrorCode());
+            System.out.println("SQLState: " + ex.getSQLState());
+        }
+    }
+
+    public void updateOrdenadorProcesador(String ordenadorId, String marcaId) throws SQLException {
+
+        String query = "UPDATE ordenadores SET procesador_id = ? WHERE id = ?";
+
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, marcaId);
+            stmt.setString(2, ordenadorId);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println("VendorError: " + ex.getErrorCode());
+            System.out.println("SQLState: " + ex.getSQLState());
+        }
+    }
+
+    public void updateOrdenadorMemoria(String ordenadorId, String memoriaId) throws SQLException {
+
+        String query = "UPDATE ordenadores SET memoria_id = ? WHERE id = ?";
+
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, memoriaId);
+            stmt.setString(2, ordenadorId);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println("VendorError: " + ex.getErrorCode());
+            System.out.println("SQLState: " + ex.getSQLState());
+        }
+    }
+
+    public void updateOrdenadorDisco(String ordenadorId, String memoriaId) throws SQLException {
+
+        String query = "UPDATE ordenadores SET disco_id = ? WHERE id = ?";
+
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, memoriaId);
+            stmt.setString(2, ordenadorId);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println("VendorError: " + ex.getErrorCode());
+            System.out.println("SQLState: " + ex.getSQLState());
+        }
+    }
+
+    public void deleteOrdenadorDB(String id) throws SQLException {
+
+        String query = "DELETE FROM ordenadores WHERE id = ? ";
+      
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+
+        }
+       
+    }
+
+    public String obtenerPrimeraCadena(String memoria) {
+        String tipo ="";
+        String[] partes = memoria.split("-");
+        tipo = partes[0];
+        return tipo;
+    }
+
+    public String obtenerSegundaCadena(String memoria) {
+        String capacidad ="";
+        String[] partes = memoria.split("-");
+        capacidad = partes[1];
+        return capacidad;
+    }
+
+
     /****************************************************************************
      * 
      * 
@@ -331,13 +620,13 @@ public class DBManager implements AutoCloseable {
     // hacer que devuelva un usuario si todo okey
     public Usuario insertUsuarioDB(String nombre, String contrasena, String email) throws SQLException {
         Usuario usuario = new Usuario();
-        ;
+        
         String query = "INSERT INTO usuarios (nombre, contrasena, correo) VALUES (?, PASSWORD(?), ?)";
 
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(query);
-            stmt.setString(1, nombre);
+            stmt.setString(1, modelo);
             stmt.setString(2, contrasena);
             stmt.setString(3, email);
             stmt.executeUpdate();
@@ -396,10 +685,11 @@ public class DBManager implements AutoCloseable {
         return new ArrayList<Usuario>();
     }
 
+    
     public void deleteUsuarioDB(String id) throws SQLException {
 
         String query = "DELETE FROM usuarios WHERE id = ? ";
-
+      
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(query);
@@ -413,13 +703,13 @@ public class DBManager implements AutoCloseable {
             System.out.println(" SQLState : " + ex.getSQLState());
 
         }
-
+       
     }
 
     public void changeNameUserDB(String id, String nombre) throws SQLException {
 
         String query = "UPDATE usuarios SET nombre = ? WHERE id = ? ";
-
+      
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(query);
@@ -434,13 +724,13 @@ public class DBManager implements AutoCloseable {
             System.out.println(" SQLState : " + ex.getSQLState());
 
         }
-
+       
     }
 
     public void changePasswordUserDB(String id, String contrasena) throws SQLException {
 
         String query = "UPDATE usuarios SET contrasena = PASSWORD(?) WHERE id = ? ";
-
+      
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(query);
@@ -455,109 +745,7 @@ public class DBManager implements AutoCloseable {
             System.out.println(" SQLState : " + ex.getSQLState());
 
         }
-
+       
     }
 
-    /****************************************************************************
-     * 
-     * 
-     * AQUI EMPIEZA LA PARTE DE ADMINISTRADORES
-     * 
-     * 
-     *****************************************************************************/
-
-    public List<Usuario> getAdministradores() {
-        String query = "SELECT * FROM usuarios u JOIN administradores a ON u.id = a.usuario_id ";
-        List<Usuario> usuarios = new ArrayList<Usuario>();
-
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            ResultSet resultSet = stmt.executeQuery();
-            while (resultSet.next()) {
-                Usuario usuario = new Usuario();
-                int id = resultSet.getInt("id");
-                String nom = resultSet.getString("nombre");
-                String con = resultSet.getString("contrasena");
-                String cor = resultSet.getString("correo");
-                usuario.setNombre(nom);
-                usuario.setCorreo(cor);
-                usuario.setContrasena(con);
-                usuario.setId(id);
-                usuarios.add(usuario);
-                System.out.println("nombre : " + usuario.getNombre() + "contraseña: " + usuario.getContrasena());
-            }
-            return usuarios;
-        } catch (SQLException ex) {
-            System.out.println(" SQLException : " + ex.getMessage());
-            ex.printStackTrace();
-            System.out.println(" VendorError : " + ex.getErrorCode());
-            System.out.println(" SQLState : " + ex.getSQLState());
-        }
-
-        return new ArrayList<Usuario>();
-    }
-
-    public void declararAdmin(String id){
-
-        String query = "INSERT INTO administradores (usuario_id, es_admin) VALUES (?, 1);";
-
-        PreparedStatement stmt = null;
-
-        try {
-            stmt = connection.prepareStatement(query);
-            stmt.setString(1, id);
-            stmt.executeUpdate();
-
-        } catch (SQLException ex) {
-            System.out.println(" SQLException : " + ex.getMessage());
-            ex.printStackTrace();
-            System.out.println(" VendorError : " + ex.getErrorCode());
-            System.out.println(" SQLState : " + ex.getSQLState());
-        }
-    }
-
-    public void deleteAdmin(String id){
-        String query = "DELETE FROM administradores WHERE usuario_id = ? ";
-
-        PreparedStatement stmt = null;
-        try {
-            stmt = connection.prepareStatement(query);
-            stmt.setString(1, id);
-            stmt.executeUpdate();
-
-        } catch (SQLException ex) {
-            System.out.println(" SQLException : " + ex.getMessage());
-            ex.printStackTrace();
-            System.out.println(" VendorError : " + ex.getErrorCode());
-            System.out.println(" SQLState : " + ex.getSQLState());
-
-        }
-    }
-
-
-    public boolean isAdmin(String id){
-        String query = "SELECT * FROM administradores WHERE usuario_id = ?";
-
-        PreparedStatement stmt = null;
-
-        try {
-            stmt = connection.prepareStatement(query);
-            stmt.setString(1, id);
-            ResultSet resultSet = stmt.executeQuery();
-   
-            if (resultSet != null) {
-                return true;
-            } else {
-                return false;
-            }
-
-        } catch (SQLException ex) {
-            System.out.println(" SQLException : " + ex.getMessage());
-            ex.printStackTrace();
-            System.out.println(" VendorError : " + ex.getErrorCode());
-            System.out.println(" SQLState : " + ex.getSQLState());
-        }
-        return false;
-    }
 }
-
-
