@@ -248,7 +248,7 @@ function searchOrdenadoresLoged() {
 
 function detallesOrdenadorLoged(index) {
 	console.log('Detalles ' + index);
-	window.ordenadoresArray = ordenadores; //
+
 	const ordenador = window.ordenadoresArray[index];
 
 	detallesHTML = `
