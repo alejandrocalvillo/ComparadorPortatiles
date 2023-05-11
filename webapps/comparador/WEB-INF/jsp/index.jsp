@@ -281,7 +281,7 @@
 
               <section>
                 <div id="doceOrdenadores">
-                  <input type="button" class="btn btn-primary" id="loadMoreButton" onclick="loadOrdenadores();">
+                  <input type="button" value="Cargar mas" class="btn btn-primary" id="loadMoreButton" onclick="loadOrdenadores();">
                 </div>
               </section>
 
