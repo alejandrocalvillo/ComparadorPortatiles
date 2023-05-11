@@ -45,8 +45,10 @@ public class GetTwelveOrdenadores extends HttpServlet {
 
         int discoCapacidad = Integer.parseInt(request.getParameter("capacidadDisco"));
         System.out.println("Disco Capacidad: " + discoCapacidad);
-        
-        int pagina = Integer.parseInt(request.getParameter("pagina"));
+
+        String paginaParameter = request.getParameter("pagina");
+        int pagina = paginaParameter != null ? Integer.parseInt(paginaParameter) : 0;
+
 
         try (DBManager dbManager = new DBManager()) {
             List<Ordenador> ordenadores = dbManager.getOrdenadores(pagina * 12, 12);
