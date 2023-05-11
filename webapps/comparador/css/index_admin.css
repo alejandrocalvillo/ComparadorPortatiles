@@ -49,3 +49,6 @@
         right: 120px;
       }	
 	 
+	  .alFrente {
+		z-index: 9000000;
+	  }

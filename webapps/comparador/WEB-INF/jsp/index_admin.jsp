@@ -32,6 +32,7 @@
 						<button id="botonUsuarios" onclick="searchPuntos('buscar')">Mostrar</button>
 					</div>
 				</div>
+
 				<div class="box">
 					<h2>USUARIOS</h2>
 					<div class="buttons">
@@ -82,7 +83,7 @@
 
 			<!-- Modal para cambiar detalles usuarios -->
 			<section>
-				<div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="detallesModalLabel"
+				<div class="modal fade alFrente" id="detallesModal" tabindex="-1" aria-labelledby="detallesModalLabel"
 					aria-hidden="true">
 					<div class="modal-dialog modal-lg">
 						<div class="modal-content">
