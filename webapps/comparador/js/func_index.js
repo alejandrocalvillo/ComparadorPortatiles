@@ -263,11 +263,23 @@ function displayOrdenadores() {
 	// Show the table in the modal
 	document.getElementById('modalResultsContainer').innerHTML = tableHtml;
 
+    if (resultsModal) {
+        resultsModal.dispose();
+    
 	const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
 	resultsModal.show();
 }
 
 function loadMoreOrdenadores() {
+	resultsModal.hide();
+    $('#resultsModal').on('hidden.bs.modal', function () {
+        currentPage++;
+        updateVisibleOrdenadoresIndices();
+        displayOrdenadores();
+        // Nos aseguramos de quitar el evento una vez se haya disparado para no acumular eventos
+        $('#resultsModal').off('hidden.bs.modal');
+    });
+	
 	currentPage++;
 	updateVisibleOrdenadoresIndices();
 	displayOrdenadores();
