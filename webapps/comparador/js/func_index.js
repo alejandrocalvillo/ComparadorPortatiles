@@ -197,79 +197,88 @@ function comparar() {
 
 
 // Usuarios Logueados
-
-let ordenadores = []; // This array will store all fetched computers
-let visibleOrdenadores = []; // This array will store computers that are currently displayed
-let currentPage = 0; // This will keep track of the current page
-let itemsPerPage = 12; // This will set the number of items to display per page
+let ordenadoresGroups = [];
+let currentGroup = 0;
 
 function searchOrdenadoresLoged() {
-	// Send AJAX request
-	fetch('buscar', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-		},
-		body: new URLSearchParams(new FormData(document.getElementById("filtros"))).toString(),
-	})
-		.then(response => response.json())
-		.then(data => {
-			ordenadores = data;
-			visibleOrdenadores = ordenadores.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
-			displayOrdenadores(visibleOrdenadores);
-		});
+    // Send AJAX request
+    fetch('buscar', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        },
+        body: new URLSearchParams(new FormData(document.getElementById("filtros"))).toString(),
+    })
+        .then(response => response.json())
+        .then(ordenadores => {
+            // Dividir el arreglo de ordenadores en grupos de 12
+            ordenadoresGroups = [];
+            for (let i = 0; i < ordenadores.length; i += 12) {
+                ordenadoresGroups.push(ordenadores.slice(i, i + 12));
+            }
+
+            // Reset currentGroup index
+            currentGroup = 0;
+
+            // Show the first group
+            showOrdenadoresGroup();
+        });
 }
 
-function displayOrdenadores(ordenadores) {
-	// Generate table HTML
-	let tableHtml = `
-	  <table id="tabla" class="table table-striped">
-	  <thead>
-		<tr>
-		  <th>Marca</th>
-		  <th>Modelo</th>
-		  <th></th>
-		  <th></th>
-		</tr>
-	  </thead>
-	  <tbody>`;
+function showOrdenadoresGroup() {
+    if (currentGroup < ordenadoresGroups.length) {
+        let ordenadores = ordenadoresGroups[currentGroup];
 
-	ordenadores.forEach((ordenador, index) => {
-		tableHtml += `
-		<tr>
-		  <td>${ordenador.marca}</td>
-		  <td>${ordenador.modelo}</td>
-		  <td><button onclick="detallesOrdenadorLoged(${index + currentPage * itemsPerPage})" class="btn btn-info">Detalles</button></td>
-		  <td><button onclick="seleccionarOrdenador(${index + currentPage * itemsPerPage})" class="btn btn-primary">Seleccionar</button></td>
-		</tr>`;
-	});
+        // Generate table HTML
+        let tableHtml = `
+        <table id="tabla" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>`;
 
-	tableHtml += `
-	  </tbody>
-	  </table>`;
+        ordenadores.forEach((ordenador, index) => {
+            tableHtml += `
+            <tr>
+                <td>${ordenador.marca}</td>
+                <td>${ordenador.modelo}</td>
+                <td><button onclick="detallesOrdenadorLoged(${index})" class="btn btn-info">Detalles</button></td>
+                <td><button onclick="seleccionarOrdenador(${index})" class="btn btn-primary">Seleccionar</button></td>
+            </tr>`;
+        });
 
-	if (ordenadores.length < itemsPerPage) {
-		tableHtml += `<button id="loadMoreButton" class="btn btn-secondary" style="display: none;">Mostrar más</button>`;
-	} else {
-		tableHtml += `<button id="loadMoreButton" class="btn btn-secondary" onclick="loadMoreOrdenadores()">Mostrar más</button>`;
-	}
+        tableHtml += `</tbody></table>`;
 
-	// Show the table in the modal
-	document.getElementById('modalResultsContainer').innerHTML = tableHtml;
+        // If there are more groups, add a "Show More" button
+        if (currentGroup < ordenadoresGroups.length - 1) {
+            tableHtml += `<button onclick="showMore()" class="btn btn-primary">Mostrar más</button>`;
+        }
 
+        // Show the table in the modal
+        document.getElementById('modalResultsContainer').innerHTML = tableHtml;
+		window.ordenadoresArray = ordenadores; // Save ordenadores array in a global variable
+		const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
+		resultsModal.show();
+        // Increment currentGroup index
+        currentGroup++;
+    }
+}
+
+function showMore() {
 	const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
 	resultsModal.show();
+    showOrdenadoresGroup();
 }
 
-function loadMoreOrdenadores() {
-	currentPage++;
-	visibleOrdenadores = ordenadores.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
-	displayOrdenadores(visibleOrdenadores);
-}
 
 function detallesOrdenadorLoged(index) {
 	console.log('Detalles ' + index);
-
+	window.ordenadoresArray = ordenadores; //
 	const ordenador = window.ordenadoresArray[index];
 
 	detallesHTML = `
