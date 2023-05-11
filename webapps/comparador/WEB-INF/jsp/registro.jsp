@@ -20,7 +20,7 @@
 		<div class="d-flex justify-content-center">
 			<img src="img/login/Imagen_de_login.png" alt="login image" style="height: 7rem" />
 		</div>
-		<div class="text-center fs-1 fw-bold">Iniciar Sesion</div>
+		<div class="text-center fs-1 fw-bold">Registrate</div>
 		<form action="${pageContext.request.contextPath}/registro" method="POST" onsubmit="return validarFormulario()">
 			<div class="input-group mt-4">
 				<div class="input-group-text bg-info">
