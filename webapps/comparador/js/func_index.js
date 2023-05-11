@@ -34,7 +34,7 @@ function loadOrdenadores() {
         tableHtml += `</tbody></table>`;
         document.getElementById('doceOrdenadores').innerHTML = tableHtml;
     });
-	page++;
+	pagina++;
 }
 
 // document.getElementById('loadMoreButton').addEventListener('click', function() {
