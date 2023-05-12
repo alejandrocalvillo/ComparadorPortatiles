@@ -68,6 +68,7 @@ public class Puntos_de_venta extends HttpServlet {
                     ordenadorJson.put("id", ordenador.getId());
                     ordenadorJson.put("modelo", ordenador.getModelo());
                     ordenadorJson.put("tienda", ordenador.getTienda());
+                    ordenadorJson.put("precio", ordenador.getPrecio());
                     ordenadoresJsonArray.put(ordenadorJson);
                 }
     
