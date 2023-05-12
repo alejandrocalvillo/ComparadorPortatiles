@@ -45,25 +45,15 @@ public class GetTwelveOrdenadores extends HttpServlet {
             for (Ordenador ordenador : ordenadores) {
                 JSONObject ordenadorJson = new JSONObject();
                 ordenadorJson.put("id", ordenador.getId());
-                System.out.println("id: " + ordenadorJson.get("id"));
                 ordenadorJson.put("modelo", ordenador.getModelo());
-                System.out.println("modelo: " + ordenadorJson.get("modelo"));
                 ordenadorJson.put("marca", ordenador.getMarca());
-                System.out.println("marca: " + ordenadorJson.get("marca"));
                 ordenadorJson.put("procesador", ordenador.getProcesador());
-                System.out.println("procesador: " + ordenadorJson.get("procesador"));
                 ordenadorJson.put("memoriaTipo", ordenador.getMemoriaTipo());
-                System.out.println("memoriaTipo: " + ordenadorJson.get("memoriaTipo"));
                 ordenadorJson.put("memoriaCapacidad", ordenador.getMemoriaCapacidad());
-                System.out.println("memoriaCapacidad: " + ordenadorJson.get("memoriaCapacidad"));
                 ordenadorJson.put("discoTipo", ordenador.getDiscoTipo());
-                System.out.println("discoTipo: " + ordenadorJson.get("discoTipo"));
                 ordenadorJson.put("discoCapacidad", ordenador.getDiscoCapacidad());
-                System.out.println("discoCapacidad: " + ordenadorJson.get("discoCapacidad"));
                 ordenadorJson.put("tienda", ordenador.getTienda());
-                System.out.println("tienda: " + ordenadorJson.get("tienda"));
                 ordenadorJson.put("precio", ordenador.getPrecio());
-                System.out.println("precio: " + ordenadorJson.get("precio"));
                 doceOrdenadoresjsonArray.put(ordenadorJson);
             }
 

@@ -813,11 +813,11 @@ function eliminarAdmin(index, accion) {
 
 
 function seleccionarOrdenador(index, accion) {
-console.log('Detalles ' + index);
+  console.log('Detalles ' + index);
 
-const ordenador = window.ordenadoresArray[index];
+  const ordenador = window.ordenadoresArray[index];
 
-detallesHTML = `
+  detallesHTML = `
 	  <table id="tabla" border="2">
 		<tr>
 		  <th> Marca  </th>
@@ -845,7 +845,7 @@ detallesHTML = `
   // Muestra el modal de detalles
 
   detallesCambioHTML = `
-              <form  onsubmit="cambiarDatos(event, ${ordenador.id})" class="float-start">
+              <form  onsubmit="cambiarDatosOrdenador(event, ${ordenador.id})" class="float-start">
 									  <p>
 										<label for="unittype">Selecciona el parametro a cambiar</label>
 										<select id="unittype" name="unittype">
@@ -902,22 +902,33 @@ function eliminarOrdenador(index, accion) {
 
 function anadirOrdenador(accion) {
 
-  const formData = new FormData();
-  formData.append('accion', accion);
-  formData.append('modelo', modelo);
-  formData.append('marca', marca);
-  formData.append('procesador', procesador);
-  formData.append('memoria', memoria);
-  formData.append('disco', memoria);
+  const modeloSelect = document.getElementById('modelo').value;
+  const marcaSelect = document.getElementById('marca').value;
+  const procesadorSelect = document.getElementById('procesador').value;
+  const memoriaSelect = document.getElementById('memoria').value;
+  const discoelect = document.getElementById('disco').value;
 
-  console.log(modelo);
+  const formData = new FormData();
+
+  formData.append('accion', accion);
+  formData.append('modelo', modeloSelect);
+  formData.append('marca', marcaSelect);
+  formData.append('procesador', procesadorSelect);
+  formData.append('memoria', memoriaSelect);
+  formData.append('disco', discoelect);
+
+  console.log('La accion es ' + accion);
+
+  console.log(modeloSelect);
+
+  console.log(marcaSelect);
 
   fetch('ordenadores', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     },
-    body: formData
+    body: new URLSearchParams(formData).toString(),
   })
   .then(data => {
     console.log('Ordenador agregado:', data);

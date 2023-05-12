@@ -44,16 +44,16 @@ public class Ordenadores extends HttpServlet {
         
         String accion = request.getParameter("accion");
 
+        System.out.println("La accion que me llega a ordenadores es :" + accion);
+        
         if (accion.equals("buscar")) {
 
 
             try (DBManager dbManager = new DBManager()) {
-                System.out.println("Holita estoy aqui");
                 List<Ordenador> ordenadores = dbManager.getOrdenadoresDB();
     
                 JSONArray ordenadoresJsonArray = new JSONArray();
     
-                System.out.println("Cree el JSONArray");
                 for (Ordenador ordenador : ordenadores) {
                     JSONObject ordenadorJson = new JSONObject();
                     ordenadorJson.put("id", ordenador.getId());
@@ -109,6 +109,8 @@ public class Ordenadores extends HttpServlet {
             try (DBManager db = new DBManager()) {
                 //Empezamos contando marcas en el index
 
+            System.out.println("Entro en el añadir");    
+
             String modelo_str = request.getParameter("modelo");    
 
             String marca_str = request.getParameter("marca");
@@ -116,11 +118,13 @@ public class Ordenadores extends HttpServlet {
             String memoria_str = request.getParameter("memoria");
             String disco_str = request.getParameter("disco");
             //String puntoVenta_str = request.getParameter("puntoVenta");
+
+            System.out.println("El modelo es:" + modelo_str);    
             
             String marcaId = db.getMarcaId(marca_str);
-            String procesadorId = db.getMarcaId(procesador_str);
-            String memoriaId = db.getMarcaId(memoria_str);
-            String discoId = db.getMarcaId(disco_str);
+            String procesadorId = db.getProcesadorId(procesador_str);
+            String memoriaId = db.getMemoriaId(memoria_str);
+            String discoId = db.getDiscoId(disco_str);
 
              if(modelo_str!=null && marcaId!=null && procesadorId!=null && memoriaId!=null && discoId!=null)
                 {

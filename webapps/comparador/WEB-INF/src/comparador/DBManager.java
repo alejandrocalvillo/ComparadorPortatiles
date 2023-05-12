@@ -310,15 +310,12 @@ public class DBManager implements AutoCloseable {
        //FUNCIONES PARA AÑADIR, MODIFICAR Y ELIMINAR ORDENADORES
 
        public List<String> listMarcas() {
-        System.out.println("VOY A HACER LA CONSULTA");
+
         String query = "SELECT * FROM marcas";
 
         try (Statement stmt = connection.createStatement()) {
 
-            System.out.println("HAGO LA CONSULTA");
             ResultSet resultSet = stmt.executeQuery(query);
-
-            System.out.println("SACO SUS DATOS");
 
             List<String> marcas= new ArrayList<String>();
 
@@ -432,7 +429,9 @@ public class DBManager implements AutoCloseable {
     public String getProcesadorId(String nombreProcesador) throws SQLException {
         String id = "";
 
-        String query = "SELECT id FROM marcas WHERE nombre = ?";
+        String query = "SELECT id FROM procesadores WHERE nombre = ? LIMIT 1";
+
+        System.out.println("EL PROCESADOR ES: " + nombreProcesador);
 
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, nombreProcesador);
@@ -457,7 +456,7 @@ public class DBManager implements AutoCloseable {
 
         int capacidadMemoria = Integer.parseInt(obtenerSegundaCadena(memoria));
 
-        String query = "SELECT id FROM memorias WHERE tipo = ? AND capacidad = ?";
+        String query = "SELECT id FROM memorias WHERE tipo = ? AND capacidad = ? LIMIT 1";
 
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, tipoMemoria);
@@ -483,7 +482,7 @@ public class DBManager implements AutoCloseable {
 
         int capacidadDisco = Integer.parseInt(obtenerSegundaCadena(disco));
 
-        String query = "SELECT id FROM memorias WHERE tipo = ? AND capacidad = ?";
+        String query = "SELECT id FROM discos WHERE tipo = ? AND capacidad = ? LIMIT 1";
 
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, tipoDisco);
@@ -553,7 +552,7 @@ public class DBManager implements AutoCloseable {
 
         Ordenador ordenador = new Ordenador();
         
-        String query = "INSERT INTO ordenadores (modelo, marca_id, procesador_id, memoria_id, disco_id)  VALUES VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO ordenadores (modelo, marca_id, procesador_id, memoria_id, disco_id) VALUES (?, ?, ?, ?, ?)";
 
         System.out.println("modelo:" + modelo + ", marcaid:" + marcaId + ", procesadorId:" + procesadorId + ", memoriaId:" + memoriaId + ", discoId:" + discoId);
 
@@ -566,6 +565,9 @@ public class DBManager implements AutoCloseable {
             stmt.setString(3, procesadorId);
             stmt.setString(4, memoriaId);
             stmt.setString(5, discoId);
+
+            System.out.println(stmt);
+
             stmt.executeUpdate();
 
             System.out.println("TODO CORRECTO PARA EL MODELO:" + modelo+ ", Y YO QUE ME ALEGRO");
@@ -734,12 +736,10 @@ public class DBManager implements AutoCloseable {
                 String nom = resultSet.getString("nombre");
                 String cor = resultSet.getString("correo");
                 String con = resultSet.getString("contrasena");
-                System.out.println("nombre : " + nom + "contraseña: " + con);
                 usuario.setNombre(nom);
                 usuario.setCorreo(cor);
                 usuario.setContrasena(con);
                 usuario.setId(id);
-                System.out.println("nombre : " + usuario.getNombre() + "contraseña: " + usuario.getContrasena());
 
             }
             return usuario;
@@ -807,7 +807,6 @@ public class DBManager implements AutoCloseable {
                 usuario.setContrasena(con);
                 usuario.setId(id);
                 usuarios.add(usuario);
-                System.out.println("nombre : " + usuario.getNombre() + "contraseña: " + usuario.getContrasena());
 
             }
             return usuarios;
@@ -908,7 +907,6 @@ public class DBManager implements AutoCloseable {
                 usuario.setContrasena(con);
                 usuario.setId(id);
                 usuarios.add(usuario);
-                System.out.println("nombre : " + usuario.getNombre() + "contraseña: " + usuario.getContrasena());
             }
             return usuarios;
         } catch (SQLException ex) {

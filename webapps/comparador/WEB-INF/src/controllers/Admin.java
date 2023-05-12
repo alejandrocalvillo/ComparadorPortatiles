@@ -37,8 +37,6 @@ public class Admin extends HttpServlet {
                 List<String> listMemorias = new ArrayList<String>();
                 List<String> listDiscos = new ArrayList<String>();
 
-                System.out.println("ANTES DE HACER LA PRIMERA CONSULTA");
-
                 listMarcas = db.listMarcas();
                 request.setAttribute("listMarcas", listMarcas);
 
@@ -66,8 +64,6 @@ public class Admin extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        System.out.println("Entro en el Post");
 
         String accion = request.getParameter("accion");
 
