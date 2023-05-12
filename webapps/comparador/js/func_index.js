@@ -16,9 +16,13 @@ function loadOrdenadores() {
         <table class="table table-striped">
         <thead>
             <tr>
-                <th>Modelo</th>
-				<th></th>
-				<th></th>
+			<th>Marca</th>
+			<th>Modelo</th>
+			<th>Procesador</th>
+			<th>Memoria Tipo</th>
+			<th>Memoria Capacidad</th>
+			<th>Disco Tipo</th>
+			<th>Disco Capacidad</th>
             </tr>
         </thead>
         <tbody>`;
@@ -26,13 +30,18 @@ function loadOrdenadores() {
 			console.log(ordenador.modelo);
             tableHtml += `
             <tr>
-                <td>${ordenador.modelo}</td>
-				<td><button onclick="detallesOrdenador(${index})" class="btn btn-info">Detalles</button></td>
-				<td><button onclick="seleccionarOrdenador(${index})" class="btn btn-primary">Seleccionar</button></td>
+			<td>${ordenador.marca}</td>
+			<td>${ordenador.modelo}</td>
+			<td>${ordenador.procesador}</td>
+			<td>${ordenador.memoriaTipo}</td>
+			<td>${ordenador.memoriaCapacidad}</td>
+			<td>${ordenador.discoTipo}</td>
+			<td>${ordenador.discoCapacidad}</td>
             </tr>`;
         });
         tableHtml += `</tbody></table>`;
-		tableHtml += `<button id="loadMoreButton" class="btn btn-primary">Cargar más</button>`;
+		tableHtml += `<input type="button" value="Cargar mas" class="btn btn-primary" id="loadMoreButton" onclick="loadOrdenadores();">
+		`;
         document.getElementById('doceOrdenadores').innerHTML = tableHtml;
     });
 	pagina++;
