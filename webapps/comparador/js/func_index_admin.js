@@ -820,8 +820,13 @@ const ordenador = window.ordenadoresArray[index];
 detallesHTML = `
 	  <table id="tabla" border="2">
 		<tr>
-		  <th> Nombre   </th>
-		  <th> Contraseña </th>
+		  <th> Marca  </th>
+		  <th> Modelo </th>
+      <th> Procesador </th>
+      <th> Tipo de memoria </th>
+      <th> Capacidad de memoria </th>
+      <th> Tipo de disco </th>
+      <th> Capacidad de disco </th>
 		  
 		</tr>
 		<tr>
