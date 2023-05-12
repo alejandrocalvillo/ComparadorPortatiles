@@ -645,7 +645,7 @@ function searchPuntosVacios(accion) {
             <td>${ordenador.modelo}</td>
             <td>${ordenador.tienda}</td>
             <td>${ordenador.precio}</td>
-            <td><button onclick="seleccionarPunto(${index}, 'seleccionar')" class="btn btn-primary">Seleccionar</button></td>
+            <td><button onclick="aniadirPunto(${index}, 'seleccionar')" class="btn btn-primary">Seleccionar</button></td>
             <td><button onclick="eliminarPunto(${index}, 'eliminar')" class="btn btn-danger">Eliminar</button></td>
           </tr>`;
       });
