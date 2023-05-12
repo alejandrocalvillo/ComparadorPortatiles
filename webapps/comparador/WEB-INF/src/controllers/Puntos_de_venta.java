@@ -60,26 +60,26 @@ public class Puntos_de_venta extends HttpServlet {
                 System.out.println("Holita estoy aqui");
                 List<Ordenador> ordendores = dbManager.getPuntosVentaDB();
     
-                JSONArray puntosJsonArray = new JSONArray();
+                JSONArray ordenadoresJsonArray = new JSONArray();
     
                 System.out.println("Cree el JSONArray");
-                for (Ordenador punto : ordendores) {
-                    JSONObject puntoJson = new JSONObject();
-                    puntoJson.put("id", punto.getId());
+                for (Ordenador ordenador : ordendores) {
+                    JSONObject ordenadorJson = new JSONObject();
+                    ordenadorJson.put("id", ordenador.getId());
 
-                    puntoJson.put("tienda", punto.getTienda());
-                    puntoJson.put("direccion", punto.getPrecio());
-                    puntosJsonArray.put(puntoJson);
+                    ordenadorJson.put("tienda", ordenador.getTienda());
+                    ordenadorJson.put("direccion", ordenador.getPrecio());
+                    ordenadoresJsonArray.put(ordenadorJson);
                 }
     
-                String puntosJson = puntosJsonArray.toString();
+                String ordenadoresJson = ordenadoresJsonArray.toString();
     
                 // Set response content type and charset
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
     
                 // Write JSON string to response
-                response.getWriter().write(puntosJson);
+                response.getWriter().write(ordenadoresJson);
             } catch (SQLException | NamingException ex) {
                 ex.printStackTrace();
                 String errorMessage = "Error: " + ex.getMessage();
