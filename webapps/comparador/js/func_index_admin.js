@@ -1098,8 +1098,9 @@ function eliminarOrdenador(index, accion) {
     })
       //.then(response => response.json())
       .then(data => {
-        const ordenadoresModal = new bootstrap.Modal(document.getElementById('ordenadoresModal'));
-        ordenadoresModal.hide();
+        const modal = document.querySelector('#ordenadoresModal');
+        const modalBootstrap = bootstrap.Modal.getInstance(modal);
+        modalBootstrap.hide();
 
         adminModal.addEventListener('hidden.bs.modal', function() {
           // Show adminAddModal
