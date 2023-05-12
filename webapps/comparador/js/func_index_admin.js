@@ -1103,12 +1103,12 @@ function eliminarOrdenador(index, accion) {
 
         adminModal.addEventListener('hidden.bs.modal', function() {
           // Show adminAddModal
-          searchOrdenadores('buscar');
+
           // Remove the event listener to prevent it from triggering next time adminModal is hidden
           adminModal.removeEventListener('hidden.bs.modal', arguments.callee);
         });
         // Actualizar la tabla de odenadores
-
+        searchOrdenadores('buscar');
         
       })
       .catch(error => {
