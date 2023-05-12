@@ -1011,8 +1011,10 @@ public class DBManager implements AutoCloseable {
                 int id = resultSet.getInt("id");
                 String modelo = resultSet.getString("modelo");
                 String tienda = resultSet.getString("tienda");
+                Double precio = resultSet.getDouble("precio");
                 ordenador.setModelo(modelo);
                 ordenador.setTienda(tienda);
+                ordenador.setPrecio(precio);
                 ordenador.setId(id);
                 ordenadores.add(ordenador);
 
