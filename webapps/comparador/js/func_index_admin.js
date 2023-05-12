@@ -798,7 +798,7 @@ function cambiarDatosTienda(event, index) {
 
 
 
-function aniadirPunto(){
+function aniadirPunto(index, accion){
   console.log('Detalles ' + index);
 
   const punto = window.ordenadoresTienda[index];
