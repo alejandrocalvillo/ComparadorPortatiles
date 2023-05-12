@@ -1,5 +1,8 @@
 <%@ page language='java' contentType='text/html;charset=utf-8' %>
-	<%@ page import='comparador.Ordenador' %>
+  <%@ page import='comparador.Ordenador' %>
+    <%@page import='comparador.Usuario' %>
+      <%@ page import='java.util.ArrayList' %>
+        <%@ page import='java.util.List' %>
 
 		<!DOCTYPE html>
 		<html>
@@ -19,11 +22,9 @@
 		<body>
 			<div class="container">
 				<div class="box">
-					<h2>PORTÁTILES</h2>
+					<h2>ORDENADORES</h2>
 					<div class="buttons">
-						<button>Añadir</button>
-						<button>Modificar</button>
-						<button>Eliminar</button>
+						<button id="botonOrdenadores" onclick="searchOrdenadores('buscar')">Mostrar</button>
 					</div>
 				</div>
 				<div class="box">
@@ -273,6 +274,122 @@
 				  </div>
 				</div>
 			  </div>
+
+			<!-- Los resultados de la busqueda ORDENADORES -->
+			<section class="mb-4">
+				<div id="ordenadoresContainer"></div>
+				<!-- Modal -->
+				<div class="modal fade" id="ordenadoresModal" tabindex="-1" aria-labelledby="ordenadoresModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="ordenadoresModalLabel">Ordenadores </h5>
+								<button type="button"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addOrdenadorModal">Añadir</button>
+								
+								<button type="button" class="btn-close close-button" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<div id="modalOrdenadoresContainer"></div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Modal para cambiar propiedades ordenador -->
+			<section>
+				<div class="modal fade" id="detallesOrdenadorModal" tabindex="-1" aria-labelledby="detallesOrdenadorModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="detallesOrdenadorModalLabel">Detalles del ordenador</h5>
+								<button type="button" class="btn-close close-button" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<div id="popUpDetallesOrdenador"></div>
+							</div>
+							<div class="modal-footer">
+								<div id="cambioDetallesOrdenador"></div>								
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Modal para añadir ordenadores -->
+			<div class="modal fade" id="addOrdenadorModal" tabindex="-1" aria-labelledby="addOrdenadorModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <h5 class="modal-title" id="addOrdenadorModalLabel">Agregar ordenador</h5>
+					  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+					  <form id="anadirOrdenador">
+						<div class="mb-3">
+						  <label for="modelo" class="form-label">Modelo</label>
+							<input type="text" class="form-control" id="modelo" name="modelo" value="">
+						</div>
+						<div class="mb-3">
+						  <label for="marca" class="form-label">marca</label>
+						  <select class="form-select" id="marca" name="marca">
+							<% List<String> marcas = (List<String>) request.getAttribute("listMarcas"); %>
+							<% for (String marca : marcas) { %>
+							  <option value="<%= marca %>">
+								<%= marca %>
+							  </option>
+							<% } %>
+						  </select>						  
+						</div>
+						<div class="mb-3">
+						  <label for="procesador" class="form-label">Procesador</label>
+							<select class="form-select" id="procesador" name="procesador">
+								<% List<String> procesadores = (List<String>) request.getAttribute("listProcesadores"); %>
+								<% for (String procesador : procesadores) { %>
+								  <option value="<%= procesador %>">
+									<%= procesador %>
+								  </option>
+								<% } %>
+						  </select>
+						</div>
+						<div class="mb-3">
+							<label for="memoria" class="form-label">Memoria</label>
+							<select class="form-select" id="memoria" name="memoria">
+								<% List<String> memorias = (List<String>) request.getAttribute("listMemorias"); %>
+									<% for (String memoria : memorias) { %>
+									  <option value="<%= memoria%>">
+										<%= memoria %>
+									  </option>
+									<% } %>
+							</select>
+						</div>
+						<div class="mb-3">
+							<label for="disco" class="form-label">Disco</label>
+							<select class="form-select" id="disco" name="disco">
+								<% List<String> discos = (List<String>) request.getAttribute("listDiscos"); %>
+									<% for (String disco : discos) { %>
+									  <option value="<%= disco%>">
+										<%= disco %>
+									  </option>
+									<% } %>
+							</select>
+						</div>
+					  </form>
+					</div>
+					<div class="modal-footer">
+					  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+					  <button type="button" class="btn btn-primary" onclick="anadirOrdenador('anadir')">Agregar</button>
+					</div>
+				  </div>
+				</div>
+			</div>
 			<!-- Add Bootstrap 5 JS CDN -->
 			<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>

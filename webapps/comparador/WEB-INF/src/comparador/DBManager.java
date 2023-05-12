@@ -306,6 +306,400 @@ public class DBManager implements AutoCloseable {
         return new ArrayList<Ordenador>();
     }
 
+
+       //FUNCIONES PARA AÑADIR, MODIFICAR Y ELIMINAR ORDENADORES
+
+       public List<String> listMarcas() {
+        System.out.println("VOY A HACER LA CONSULTA");
+        String query = "SELECT * FROM marcas";
+
+        try (Statement stmt = connection.createStatement()) {
+
+            System.out.println("HAGO LA CONSULTA");
+            ResultSet resultSet = stmt.executeQuery(query);
+
+            System.out.println("SACO SUS DATOS");
+
+            List<String> marcas= new ArrayList<String>();
+
+            while (resultSet.next()) {
+                String marca = resultSet.getString("nombre");
+                marcas.add(marca);
+            }
+
+            return marcas;
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+        }
+        return new ArrayList<String>();
+    }
+
+
+    public List<String> listProcesadores() {
+
+        String query = "SELECT * FROM procesadores";
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet resultSet = stmt.executeQuery(query);
+
+            List<String> procesadores= new ArrayList<String>();
+
+            while (resultSet.next()) {
+                String procesador = resultSet.getString("nombre");
+                procesadores.add(procesador);
+            }
+            return procesadores;
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+        }
+        return new ArrayList<String>();
+    }
+
+    public List<String> listMemorias() {
+
+        String query = "SELECT * FROM memorias";
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet resultSet = stmt.executeQuery(query);
+
+            List<String> memorias= new ArrayList<String>();
+
+            while (resultSet.next()) {
+                String tipo = resultSet.getString("tipo");
+                String capacidad = resultSet.getString("capacidad");
+                String memoria = tipo + "-" + capacidad;
+                memorias.add(memoria);
+            }
+            return memorias;
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+        }
+        return new ArrayList<String>();
+    }
+
+    public List<String> listDiscos() {
+
+        String query = "SELECT * FROM discos";
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet resultSet = stmt.executeQuery(query);
+
+            List<String> discos= new ArrayList<String>();
+
+            while (resultSet.next()) {
+                String tipo = resultSet.getString("tipo");
+                String capacidad = resultSet.getString("capacidad");
+                String disco = tipo + "-" + capacidad;
+                discos.add(disco);
+            }
+            return discos;
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+        }
+        return new ArrayList<String>();
+    }
+
+    public String getMarcaId(String nombreMarca) throws SQLException {
+        String id = "";
+
+        String query = "SELECT id FROM marcas WHERE nombre = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, nombreMarca);
+            ResultSet resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                id = resultSet.getString("id");
+            }
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+        }
+
+        return id;
+    }
+
+    public String getProcesadorId(String nombreProcesador) throws SQLException {
+        String id = "";
+
+        String query = "SELECT id FROM marcas WHERE nombre = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, nombreProcesador);
+            ResultSet resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                id = resultSet.getString("id");
+            }
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+        }
+
+        return id;
+    }
+
+    public String getMemoriaId(String memoria) throws SQLException {
+        String memoriaId = "";
+
+        String tipoMemoria = obtenerPrimeraCadena(memoria);
+
+        int capacidadMemoria = Integer.parseInt(obtenerSegundaCadena(memoria));
+
+        String query = "SELECT id FROM memorias WHERE tipo = ? AND capacidad = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, tipoMemoria);
+            stmt.setInt(2, capacidadMemoria);
+
+            ResultSet resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                memoriaId = resultSet.getString("id");
+            }
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+        }
+        return memoriaId;
+    }
+
+    public String getDiscoId(String disco) throws SQLException {
+        String discoId = "";
+
+        String tipoDisco = obtenerPrimeraCadena(disco);
+
+        int capacidadDisco = Integer.parseInt(obtenerSegundaCadena(disco));
+
+        String query = "SELECT id FROM memorias WHERE tipo = ? AND capacidad = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, tipoDisco);
+            stmt.setInt(2, capacidadDisco);
+            
+            ResultSet resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                discoId = resultSet.getString("id");
+            }
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+        }
+        return discoId;
+    }
+
+
+    public List<Ordenador> getOrdenadoresDB() throws SQLException {
+        List<Ordenador> ordenadores = new ArrayList<>();
+
+        String query = "SELECT ordenadores.id AS id, ordenadores.modelo, marcas.nombre AS marca_nombre, procesadores.nombre AS procesador_nombre, memorias.tipo AS memoria_tipo, memorias.capacidad AS capacidad_ram, discos.tipo AS disco_tipo, discos.capacidad AS capacidad_disco, puntos_de_venta.tienda, puntos_de_venta.precio FROM ordenadores INNER JOIN marcas ON marca_id = marcas.id INNER JOIN procesadores ON procesador_id = procesadores.id INNER JOIN discos ON disco_id = discos.id INNER JOIN memorias ON memoria_id = memorias.id INNER JOIN puntos_de_venta ON ordenadores.id = puntos_de_venta.ordenador_id";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            ResultSet resultSet = stmt.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String modelo = resultSet.getString("modelo");
+                String marca_nombre = resultSet.getString("marca_nombre");
+                String procesador_nombre = resultSet.getString("procesador_nombre");
+                String memoria_tipo = resultSet.getString("memoria_tipo");
+                int capacidad_ram = resultSet.getInt("capacidad_ram");
+                String disco_tipo = resultSet.getString("disco_tipo");
+                int capacidad_disco = resultSet.getInt("capacidad_disco");
+                String tienda = resultSet.getString("tienda");
+                double precio = resultSet.getDouble("precio");
+
+                Ordenador ordenador = new Ordenador();
+                ordenador.setId(id);
+                ordenador.setModelo(modelo);
+                ordenador.setMarca(marca_nombre);
+                ordenador.setProcesador(procesador_nombre);
+                ordenador.setMemoriaTipo(memoria_tipo);
+                ordenador.setMemoriaCapacidad(capacidad_ram);
+                ordenador.setDiscoTipo(disco_tipo);
+                ordenador.setDiscoCapacidad(capacidad_disco);
+                ordenador.setTienda(tienda);
+                ordenador.setPrecio(precio);
+
+                ordenadores.add(ordenador);
+            }
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+        }
+
+        return ordenadores;
+    }
+
+        // hacer que devuelva un ordenador si todo okey
+    public void insertOrdenadorDB(String modelo, String marcaId, String procesadorId, String memoriaId, String discoId) throws SQLException {
+
+        System.out.println("ENTRO A INSERTAR");
+
+        Ordenador ordenador = new Ordenador();
+        
+        String query = "INSERT INTO ordenadores (modelo, marca_id, procesador_id, memoria_id, disco_id)  VALUES VALUES (?, ?, ?, ?, ?)";
+
+        System.out.println("modelo:" + modelo + ", marcaid:" + marcaId + ", procesadorId:" + procesadorId + ", memoriaId:" + memoriaId + ", discoId:" + discoId);
+
+        PreparedStatement stmt = null;
+        try {
+
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, modelo);
+            stmt.setString(2, marcaId);
+            stmt.setString(3, procesadorId);
+            stmt.setString(4, memoriaId);
+            stmt.setString(5, discoId);
+            stmt.executeUpdate();
+
+            System.out.println("TODO CORRECTO PARA EL MODELO:" + modelo+ ", Y YO QUE ME ALEGRO");
+
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+
+        }
+
+    }
+
+    public void updateOrdenadorModelo(String id, String modelo) throws SQLException {
+        String query = "UPDATE ordenadores SET modelo = ? WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, modelo);
+            stmt.setString(2, id);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+                System.out.println("SQLException: " + ex.getMessage());
+                ex.printStackTrace();
+                System.out.println("VendorError: " + ex.getErrorCode());
+                System.out.println("SQLState: " + ex.getSQLState());
+        }
+    }
+
+    public void updateOrdenadorMarca(String ordenadorId, String marcaId) throws SQLException {
+
+        String query = "UPDATE ordenadores SET marca_id = ? WHERE id = ?";
+
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, marcaId);
+            stmt.setString(2, ordenadorId);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println("VendorError: " + ex.getErrorCode());
+            System.out.println("SQLState: " + ex.getSQLState());
+        }
+    }
+
+    public void updateOrdenadorProcesador(String ordenadorId, String marcaId) throws SQLException {
+
+        String query = "UPDATE ordenadores SET procesador_id = ? WHERE id = ?";
+
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, marcaId);
+            stmt.setString(2, ordenadorId);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println("VendorError: " + ex.getErrorCode());
+            System.out.println("SQLState: " + ex.getSQLState());
+        }
+    }
+
+    public void updateOrdenadorMemoria(String ordenadorId, String memoriaId) throws SQLException {
+
+        String query = "UPDATE ordenadores SET memoria_id = ? WHERE id = ?";
+
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, memoriaId);
+            stmt.setString(2, ordenadorId);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println("VendorError: " + ex.getErrorCode());
+            System.out.println("SQLState: " + ex.getSQLState());
+        }
+    }
+
+    public void updateOrdenadorDisco(String ordenadorId, String memoriaId) throws SQLException {
+
+        String query = "UPDATE ordenadores SET disco_id = ? WHERE id = ?";
+
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, memoriaId);
+            stmt.setString(2, ordenadorId);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println("VendorError: " + ex.getErrorCode());
+            System.out.println("SQLState: " + ex.getSQLState());
+        }
+    }
+
+    public void deleteOrdenadorDB(String id) throws SQLException {
+
+        String query = "DELETE FROM ordenadores WHERE id = ? ";
+      
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+
+        }
+       
+    }
+
+    public String obtenerPrimeraCadena(String memoria) {
+        String tipo ="";
+        String[] partes = memoria.split("-");
+        tipo = partes[0];
+        return tipo;
+    }
+
+    public String obtenerSegundaCadena(String memoria) {
+        String capacidad ="";
+        String[] partes = memoria.split("-");
+        capacidad = partes[1];
+        return capacidad;
+    }
+
+
     /****************************************************************************
      * 
      * 

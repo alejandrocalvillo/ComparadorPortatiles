@@ -27,29 +27,19 @@ public class Ordenadores extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-        try (DBManager db = new DBManager()) {
-
-        if(usuario!=null && db.isAdmin(String.valueOf(usuario.getId()))) {
-                RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/index_admin.jsp");
-                rd.forward(request, response);
-            } else {
-                response.sendRedirect(request.getContextPath() + "/index");
-            }
-        }catch (SQLException | NamingException ex) {
-            ex.printStackTrace();
-            String errorMessage = "Error: " + ex.getMessage();
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            response.setContentType("text/plain");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(errorMessage);
+        if (usuario != null && usuario.getNombre().equals("admin")
+                && usuario.getContrasena().equals("*00A51F3F48415C7D4E8908980D443C29C69B60C9")) {
+            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/index_admin.jsp");
+            rd.forward(request, response);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/index");
         }
-         
 
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-/* 
+
         System.out.println("Entro en el Post");
         
         String accion = request.getParameter("accion");
@@ -187,6 +177,6 @@ public class Ordenadores extends HttpServlet {
         }  else {
           // Acción desconocida
           response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Acción desconocida");
-        }*/
+        }
     }
 }

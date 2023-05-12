@@ -31,6 +31,27 @@ public class Admin extends HttpServlet {
 
         try (DBManager db = new DBManager()) {
             if(usuario!=null && db.isAdmin(String.valueOf(usuario.getId()))) {
+
+                List<String> listMarcas = new ArrayList<String>();
+                List<String> listProcesadores = new ArrayList<String>();
+                List<String> listMemorias = new ArrayList<String>();
+                List<String> listDiscos = new ArrayList<String>();
+
+                System.out.println("ANTES DE HACER LA PRIMERA CONSULTA");
+
+                listMarcas = db.listMarcas();
+                request.setAttribute("listMarcas", listMarcas);
+
+                listProcesadores = db.listProcesadores();
+                request.setAttribute("listProcesadores", listProcesadores);
+
+                listMemorias = db.listMemorias();
+                request.setAttribute("listMemorias", listMemorias);
+
+                listDiscos = db.listDiscos();
+                request.setAttribute("listDiscos", listDiscos);
+
+                
                 RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/index_admin.jsp");
                 rd.forward(request, response);
             } else {
