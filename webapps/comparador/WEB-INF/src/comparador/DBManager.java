@@ -1089,7 +1089,7 @@ public class DBManager implements AutoCloseable {
     public void insertPuntoDB(String argumento, String id, String accion) throws SQLException {
 
         if (accion.equals("tienda")) {
-            String query = "INSERT INTO puntos_de_venta (ordenador_id, tienda) VALUES (?, ?)";
+            String query = "INSERT INTO puntos_de_venta (ordenador_id, tienda, direccion, precio) VALUES (?, ?, '-', 0)";
             PreparedStatement stmt = null;
             try {
                 stmt = connection.prepareStatement(query);
@@ -1106,7 +1106,7 @@ public class DBManager implements AutoCloseable {
 
             }
         } else if (accion.equals("precio")) {
-            String query = "INSERT INTO puntos_de_venta (ordenador_id, precio) VALUES (?, ?)";
+            String query = "INSERT INTO puntos_de_venta (ordenador_id,tienda, direccion, precio) VALUES (?,'Rellenar con tienda','-', ?)";
             PreparedStatement stmt = null;
             try {
                 stmt = connection.prepareStatement(query);
