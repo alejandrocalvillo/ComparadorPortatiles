@@ -825,7 +825,7 @@ detallesHTML = `
 		  
 		</tr>
 		<tr>
-		  <td>${odemador.marca}</td>
+		  <td>${ordenador.marca}</td>
 		  <td>${ordenador.modelo}</td>
       <td>${ordenador.procesador}</td>
       <td>${ordenador.memoriaTipo}</td>
