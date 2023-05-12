@@ -1006,12 +1006,11 @@ public void deleteOrdenadorDB(String id) throws SQLException {
      * @throws SQLException If something fails with the DB.
      */
 
-     
-    public List<PuntosVenta> getPuntosVentaDB() throws SQLException {
+     public List<Ordenador> getPuntosVentaDB() throws SQLException {
 
-        String query = "SELECT id, tienda, direccion FROM puntos_de_venta_sin_ordenador";
+        String query = "SELECT ordenadores.id, ordenadores.modelo, puntos_de_venta.tienda, puntos_de_venta.precio FROM ordenadores INNER JOIN puntos_de_venta ON ordenadores.id = puntos_de_venta.ordenador_id";
 
-        List<PuntosVenta> puntos = new ArrayList<PuntosVenta>();
+        List<Ordenador> ordenadores = new ArrayList<Ordenador>();
         PreparedStatement stmt = null;
         try {
 
@@ -1019,18 +1018,19 @@ public void deleteOrdenadorDB(String id) throws SQLException {
             ResultSet resultSet = stmt.executeQuery();
 
             while (resultSet.next()) {
-                PuntosVenta punto = new PuntosVenta();
+                Ordenador ordenador = new Ordenador();
                 int id = resultSet.getInt("id");
+                String modelo = resultSet.getString("modelo");
                 String tienda = resultSet.getString("tienda");
-                String direccion = resultSet.getString("direccion");
-                punto.setTienda(tienda);
-                punto.setDireccion(direccion);
-                punto.setId(id);
-                puntos.add(punto);
-                
+                Double precio = resultSet.getDouble("precio");
+                ordenador.setModelo(modelo);
+                ordenador.setTienda(tienda);
+                ordenador.setPrecio(precio);
+                ordenador.setId(id);
+                ordenadores.add(ordenador);
 
             }
-            return puntos;
+            return ordenadores;
         } catch (SQLException ex) {
             System.out.println(" SQLException : " + ex.getMessage());
             ex.printStackTrace();
@@ -1038,15 +1038,48 @@ public void deleteOrdenadorDB(String id) throws SQLException {
             System.out.println(" SQLState : " + ex.getSQLState());
 
         }
-        return new ArrayList<PuntosVenta>();
+        return new ArrayList<Ordenador>();
     }
 
+    public List<Ordenador> getPuntosVentaNullDB() throws SQLException {
 
-    
+        String query = "SELECT ordenadores.id, ordenadores.modelo, puntos_de_venta.tienda, puntos_de_venta.precio FROM ordenadores LEFT JOIN puntos_de_venta ON ordenadores.id = puntos_de_venta.ordenador_id WHERE puntos_de_venta.ordenador_id IS NULL";
+
+        List<Ordenador> ordenadores = new ArrayList<Ordenador>();
+        PreparedStatement stmt = null;
+        try {
+
+            stmt = connection.prepareStatement(query);
+            ResultSet resultSet = stmt.executeQuery();
+
+            while (resultSet.next()) {
+                Ordenador ordenador = new Ordenador();
+                int id = resultSet.getInt("id");
+                String modelo = resultSet.getString("modelo");
+                String tienda = resultSet.getString("tienda");
+                Double precio = resultSet.getDouble("precio");
+                ordenador.setModelo(modelo);
+                ordenador.setTienda(tienda);
+                ordenador.setPrecio(precio);
+                ordenador.setId(id);
+                ordenadores.add(ordenador);
+
+            }
+            return ordenadores;
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+
+        }
+        return new ArrayList<Ordenador>();
+    }
+
     public void deletePuntoDB(String id) throws SQLException {
 
-        String query = "DELETE FROM puntos_de_venta_sin_ordenador WHERE id = ? ";
-      
+        String query = "DELETE FROM puntos_de_venta WHERE ordenador_id = ? ";
+
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(query);
@@ -1060,54 +1093,62 @@ public void deleteOrdenadorDB(String id) throws SQLException {
             System.out.println(" SQLState : " + ex.getSQLState());
 
         }
-       
-    }
 
-    
+    }
 
     // hacer que devuelva un usuario si todo okey
-    public PuntosVenta insertPuntoDB(String tienda, String direccion) throws SQLException {
-        PuntosVenta punto = new PuntosVenta();
-        
-        String query = "INSERT INTO puntos_de_venta_sin_ordenador (tienda, direccion) VALUES (?, ?)";
+    public void insertPuntoDB(String argumento, String id, String accion) throws SQLException {
 
-        PreparedStatement stmt = null;
-        try {
-            stmt = connection.prepareStatement(query);
-            stmt.setString(1, tienda);
-            stmt.setString(2, direccion);
-            stmt.executeUpdate();
+        if (accion.equals("tienda")) {
+            String query = "INSERT INTO puntos_de_venta (ordenador_id, tienda, direccion, precio) VALUES (?, ?, '-', 0)";
+            PreparedStatement stmt = null;
+            try {
+                stmt = connection.prepareStatement(query);
+                stmt.setString(1, id);
+                stmt.setString(2, argumento);
 
-        } catch (SQLException ex) {
-            System.out.println(" SQLException : " + ex.getMessage());
-            ex.printStackTrace();
-            System.out.println(" VendorError : " + ex.getErrorCode());
-            System.out.println(" SQLState : " + ex.getSQLState());
+                stmt.executeUpdate();
 
+            } catch (SQLException ex) {
+                System.out.println(" SQLException : " + ex.getMessage());
+                ex.printStackTrace();
+                System.out.println(" VendorError : " + ex.getErrorCode());
+                System.out.println(" SQLState : " + ex.getSQLState());
+
+            }
+        } else if (accion.equals("precio")) {
+            String query = "INSERT INTO puntos_de_venta (ordenador_id,tienda, direccion, precio) VALUES (?,'Rellenar con tienda','-', ?)";
+            PreparedStatement stmt = null;
+            try {
+                stmt = connection.prepareStatement(query);
+                stmt.setString(1, id);
+                stmt.setString(2, argumento);
+                stmt.executeUpdate();
+
+            } catch (SQLException ex) {
+                System.out.println(" SQLException : " + ex.getMessage());
+                ex.printStackTrace();
+                System.out.println(" VendorError : " + ex.getErrorCode());
+                System.out.println(" SQLState : " + ex.getSQLState());
+
+            }
         }
-        punto.setTienda(tienda);
-        punto.setDireccion(direccion);
-        punto.setId(20);
-        // cuando la otra funcion vaya llamamos a la consulta de usuario para que nos
-        // devuelva un usuario completo con id correspondiente en vez de hacer nosotros
-        // los set
-        return punto;
-
     }
+    // cuando la otra funcion vaya llamamos a la consulta de usuario para que nos
+    // devuelva un usuario completo con id correspondiente en vez de hacer nosotros
+    // los set
 
-    
     public void changeNameShopDB(String id, String nombre) throws SQLException {
 
-        String query = "UPDATE puntos_de_venta_sin_ordenador SET tienda = ? WHERE id = ? ";
-      
+        String query = "UPDATE puntos_de_venta SET tienda = ? WHERE ordenador_id = ? ";
+
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(query);
             stmt.setString(1, nombre);
             stmt.setString(2, id);
             stmt.executeUpdate();
-            System.out.println(" nombre tienda db" + nombre );
-
+            System.out.println(" nombre tienda db" + nombre);
 
         } catch (SQLException ex) {
             System.out.println(" SQLException : " + ex.getMessage());
@@ -1116,18 +1157,17 @@ public void deleteOrdenadorDB(String id) throws SQLException {
             System.out.println(" SQLState : " + ex.getSQLState());
 
         }
-       
+
     }
 
-    
-    public void changeAddressShopDB(String id, String direccion) throws SQLException {
+    public void changePriceShopDB(String id, String precio) throws SQLException {
 
-        String query = "UPDATE puntos_de_venta_sin_ordenador SET direccion = ? WHERE id = ? ";
-      
+        String query = "UPDATE puntos_de_venta SET precio = ? WHERE ordenador_id = ? ";
+
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(query);
-            stmt.setString(1, direccion);
+            stmt.setDouble(1, Double.parseDouble(precio));
             stmt.setString(2, id);
             stmt.executeUpdate();
 
@@ -1138,8 +1178,9 @@ public void deleteOrdenadorDB(String id) throws SQLException {
             System.out.println(" SQLState : " + ex.getSQLState());
 
         }
-       
+
     }
 }
+
 
 

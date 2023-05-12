@@ -30,6 +30,7 @@
 				<div class="box">
 					<h2>PUNTOS DE VENTA</h2>
 					<div class="buttons">
+						<button id="botonUsuarios" onclick="searchPuntosVacios('buscarNull')">Crear Punto de Venta</button>
 						<button id="botonUsuarios" onclick="searchPuntos('buscar')">Mostrar</button>
 					</div>
 				</div>
