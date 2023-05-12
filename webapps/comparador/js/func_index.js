@@ -47,10 +47,10 @@ function loadOrdenadores() {
 	pagina++;
 }
 
-// document.getElementById('loadMoreButton').addEventListener('click', function() {
-//     page++;
-//     loadOrdenadores();
-// });
+document.addEventListener("DOMContentLoaded", function() {
+	loadOrdenadores();
+  });
+  
 
 
 function searchOrdenadores() {
