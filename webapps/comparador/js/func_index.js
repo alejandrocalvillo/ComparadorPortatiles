@@ -32,6 +32,7 @@ function loadOrdenadores() {
             </tr>`;
         });
         tableHtml += `</tbody></table>`;
+		tableHtml += `<button id="loadMoreButton" class="btn btn-primary">Cargar más</button>`;
         document.getElementById('doceOrdenadores').innerHTML = tableHtml;
     });
 	pagina++;
