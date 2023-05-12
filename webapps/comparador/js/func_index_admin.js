@@ -840,7 +840,7 @@ detallesHTML = `
   // Muestra el modal de detalles
 
   detallesCambioHTML = `
-              <form  onsubmit="cambiarDatos(event, ${usuario.id})" class="float-start">
+              <form  onsubmit="cambiarDatos(event, ${ordenador.id})" class="float-start">
 									  <p>
 										<label for="unittype">Selecciona el parametro a cambiar</label>
 										<select id="unittype" name="unittype">
