@@ -215,7 +215,12 @@
                     </div>
                 </form>
               </section>
-
+              <!-- Los doce ultimos ordenadores -->
+              <section>
+                <div id="doceOrdenadores">
+                  <input type="button" value="Cargar mas" class="btn btn-primary" id="loadMoreButton" onclick="loadOrdenadores();">
+                </div>
+              </section>
               <!-- Los resultados de la busqueda -->
               <section class="mb-4">
                 <div id="resultsContainer"></div>
@@ -279,11 +284,7 @@
                 </div>
               </section>
 
-              <section>
-                <div id="doceOrdenadores">
-                  <input type="button" value="Cargar mas" class="btn btn-primary" id="loadMoreButton" onclick="loadOrdenadores();">
-                </div>
-              </section>
+
 
               <!-- Add Bootstrap 5 JS CDN -->
               <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
