@@ -1032,7 +1032,7 @@ public class DBManager implements AutoCloseable {
     
     public List<Ordenador> getPuntosVentaNullDB() throws SQLException {
 
-        String query = "SELECT ordenadores.id, ordenadores.modelo FROM ordenadores LEFT JOIN puntos_de_venta ON ordenadores.id = puntos_de_venta.ordenador_id WHERE puntos_de_venta.ordenador_id IS NULL";
+        String query = "SELECT ordenadores.id, ordenadores.modelo, puntos_de_venta.tienda, puntos_de_venta.precio FROM ordenadores LEFT JOIN puntos_de_venta ON ordenadores.id = puntos_de_venta.ordenador_id WHERE puntos_de_venta.ordenador_id IS NULL";
 
         List<Ordenador> ordenadores = new ArrayList<Ordenador>();
         PreparedStatement stmt = null;
