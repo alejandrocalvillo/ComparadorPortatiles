@@ -818,32 +818,49 @@ console.log('Detalles ' + index);
 const ordenador = window.ordenadoresArray[index];
 
 detallesHTML = `
-  <table id="tabla" border="2">
-  <tr>
-      <th>Marca</th>
-      <th>Modelo</th>
-      <th>Procesador</th>
-      <th>Tipo de memoria</th>
-      <th>Capacidad de memoria</th>
-      <th>Tipo de disco</th>
-      <th>Capacidad de disco</th>    
-  </tr>
-  <tr>
-    <td>${ordenador.marca}</td>
-    <td>${ordenador.modelo}</td>
-    <td>${ordenador.procesador}</td>
-    <td>${ordenador.memoriaTipo}</td>
-    <td>${ordenador.memoriaCapacidad}</td>
-    <td>${ordenador.discoTipo}</td>
-    <td>${ordenador.discoCapacidad}</td>
-  </tr>
-  </table>`;
+	  <table id="tabla" border="2">
+		<tr>
+		  <th> Nombre   </th>
+		  <th> Contraseña </th>
+		  
+		</tr>
+		<tr>
+		  <td>${odemador.marca}</td>
+		  <td>${ordenador.modelo}</td>
+      <td>${ordenador.procesador}</td>
+      <td>${ordenador.memoriaTipo}</td>
+      <td>${ordenador.memoriaCapacidad}</td>
+      <td>${ordenador.discoTipo}</td>
+      <td>${ordenador.discoCapacidad}</td>
+		</tr>
+	  </table>`;
 
-document.getElementById('popUpDetallesOrdenador').innerHTML = detallesHTML;
+  document.getElementById('popUpDetalles').innerHTML = detallesHTML;
 
-// Muestra el modal de detalles
-var detallesModal = new bootstrap.Modal(document.getElementById('detallesOrdenadorModal'));
-detallesModal.show();
+  // Muestra el modal de detalles
+
+  detallesCambioHTML = `
+              <form  onsubmit="cambiarDatos(event, ${usuario.id})" class="float-start">
+									  <p>
+										<label for="unittype">Selecciona el parametro a cambiar</label>
+										<select id="unittype" name="unittype">
+										  <option value="1" selected> marca </option>
+										  <option value="2"> modelo </option>
+                      <option value="3"> procesador </option>
+                      <option value="4"> memoriaTipo </option>
+                      <option value="5"> memoriaCapacidad </option>
+                      <option value="6"> discoTipo </option>
+                      <option value="7"> discoCapacidad </option>
+										</select>
+										<div id="editar-parametro"></div>
+									</p>
+									<button type="submit" class="btn btn-primary">Cambiar</button>
+								  </form>`;
+
+
+  document.getElementById('cambioDetalles').innerHTML = detallesCambioHTML;
+  var detallesModal = new bootstrap.Modal(document.getElementById('detallesModal'));
+  detallesModal.show();
 }
 
 function eliminarOrdenador(index, accion) {
