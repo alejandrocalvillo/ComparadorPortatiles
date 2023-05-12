@@ -391,7 +391,7 @@ function mostrarUsuariosParaAdmin(accion) {
       const adminAddModalBootstrap = bootstrap.Modal.getInstance(adminAddModal);
 
       // When adminModal has been hidden...
-      adminModal.addEventListener('hidden.bs.modal', function () {
+      adminModal.addEventListener('hidden.bs.modal', function() {
         // Show adminAddModal
         adminAddModalBootstrap.show();
         // Remove the event listener to prevent it from triggering next time adminModal is hidden
@@ -482,119 +482,117 @@ function eliminarAdmin(index, accion) {
 
 
 //EMPIEZA TODO LO DE PUNTOS DE VENTA
-//
-//
-//
-//             PUNTOS VENTA
-
-let ordenadoresTienda = [];
-let ordenadoresSinTienda = [];
-function searchPuntos(accion) {
-  // Send AJAX request
-  fetch('puntosventa', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-    },
-    body: new URLSearchParams({
-      accion: accion // Agregar el parámetro de acción
-    }).toString(),
-
-  })
-    .then(response => response.json())
-    .then(ordenadores => {
-      // Generate table HTML
-      let tablePuntosHtml = `
-        <table id="tabla" class="table table-striped">
-        <thead>
-          <tr>
-            <th> Modelo </th>
-            <th> Tienda </th>
-            <th> Precio </th>
-
-          </tr>
-        </thead>
-        <tbody>`;
-
-      ordenadores.forEach((ordenador, index) => {
-        tablePuntosHtml += `
-          <tr>
-            <td>${ordenador.modelo}</td>
-            <td>${ordenador.tienda}</td>
-            <td>${ordenador.precio}</td>
-            <td><button onclick="seleccionarPunto(${index}, 'seleccionar')" class="btn btn-primary">Seleccionar</button></td>
-            <td><button onclick="eliminarPunto(${index}, 'eliminar')" class="btn btn-danger">Eliminar</button></td>
-          </tr>`;
-      });
-
-      tablePuntosHtml += '</tbody></table>';
-
-      // Update results container
-      document.getElementById('modalResultsContainerPuntos').innerHTML = tablePuntosHtml;
+  //
+  //
+  //
+  //             PUNTOS VENTA
 
 
-      // Save usuarios array in a global variable
-      window.ordenadoresTienda = ordenadores;
-
-      // Show modal
-      const resultsModalPuntos = new bootstrap.Modal(document.getElementById('resultsModalPuntos'));
-      resultsModalPuntos.show();
-    });
-}
-
-
-function eliminarPunto(index, accion) {
-  // Obtener el usuario a eliminar
-  const punto = window.puntosArray[index];
-
-  // Mostrar confirmación de eliminación
-  if (confirm(`¿Estás seguro de que deseas eliminar el punto de venta "${punto.tienda}"?`)) {
-    // Enviar solicitud AJAX para eliminar el usuario
+  function searchPuntos(accion) {
+    // Send AJAX request
     fetch('puntosventa', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       },
-      body: new URLSearchParams({
-        id: punto.id, // Enviar el ID del usuario a eliminar
-        accion: accion
-      }).toString(),
+    body: new URLSearchParams({
+      accion: accion // Agregar el parámetro de acción
+    }).toString(),
+     
     })
-      //.then(response => response.json())
-      .then(data => {
-        // Actualizar la tabla de usuarios
-
-        searchPuntos('buscar');
-        // Cerrar el modal
-        const modal = document.querySelector('#resultsModalPuntos');
-        const modalBootstrap = bootstrap.Modal.getInstance(modal);
-        modalBootstrap.hide();
-
-      })
-      .catch(error => {
-        // Mostrar mensaje de error
-        console.error('Error al eliminar punto de venta:', error);
-        alert('Error al eliminar punto de venta. Por favor, inténtelo de nuevo más tarde.');
-        searchUsuarios('buscar');
+      .then(response => response.json())
+      .then(puntos => {
+        // Generate table HTML
+        let tablePuntosHtml = `
+        <table id="tabla" class="table table-striped">
+        <thead>
+          <tr>
+            <th>Tienda</th>
+            <th>Direccion</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>`;
+    
+        puntos.forEach((puntos, index) => {
+          tablePuntosHtml += `
+          <tr>
+            <td>${puntos.tienda}</td>
+            <td>${puntos.direccion}</td>
+            <td><button onclick="seleccionarPunto(${index}, 'seleccionar')" class="btn btn-primary">Seleccionar</button></td>
+            <td><button onclick="eliminarPunto(${index}, 'eliminar')" class="btn btn-danger">Eliminar</button></td>
+          </tr>`;
+        });
+    
+        tablePuntosHtml += '</tbody></table>';
+    
+        // Update results container
+        document.getElementById('modalResultsContainerPuntos').innerHTML = tablePuntosHtml;
+    
+        
+        // Save usuarios array in a global variable
+        window.puntosArray = puntos;
+  
+        // Show modal
+        const resultsModalPuntos = new bootstrap.Modal(document.getElementById('resultsModalPuntos'));
+        resultsModalPuntos.show();
       });
   }
-}
-
-
-function anadirPunto(accion) {
-
-  // Obtener los datos del formulario
-  const formData = new FormData(document.getElementById("anadirPunto"));
-  formData.append('accion', accion);
-
-  // Send AJAX request
-  fetch('puntosventa', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-    },
-    body: new URLSearchParams(formData).toString(),
-  })
+  
+  
+  function eliminarPunto(index, accion) {
+    // Obtener el usuario a eliminar
+    const punto = window.puntosArray[index];
+  
+    // Mostrar confirmación de eliminación
+    if (confirm(`¿Estás seguro de que deseas eliminar el punto de venta "${punto.tienda}"?`)) {
+      // Enviar solicitud AJAX para eliminar el usuario
+      fetch('puntosventa', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        },
+        body: new URLSearchParams({
+          id: punto.id, // Enviar el ID del usuario a eliminar
+          accion:accion
+        }).toString(),
+      })
+        //.then(response => response.json())
+        .then(data => {
+          // Actualizar la tabla de usuarios
+  
+          searchPuntos('buscar');
+          // Cerrar el modal
+          const modal = document.querySelector('#resultsModalPuntos');
+          const modalBootstrap = bootstrap.Modal.getInstance(modal);
+          modalBootstrap.hide();
+          
+        })
+        .catch(error => {
+          // Mostrar mensaje de error
+          console.error('Error al eliminar punto de venta:', error);
+          alert('Error al eliminar punto de venta. Por favor, inténtelo de nuevo más tarde.');
+          searchUsuarios('buscar');
+        });
+    }
+  }
+  
+  
+  function anadirPunto(accion) {
+  
+    // Obtener los datos del formulario
+    const formData = new FormData(document.getElementById("anadirPunto"));
+    formData.append('accion', accion);
+  
+    // Send AJAX request
+    fetch('puntosventa', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        },
+        body: new URLSearchParams(formData).toString(),
+    })
     .then(data => {
       console.log('Tienda agregada:', data);
       // Actualizar la tabla de usuarios con el nuevo usuario
@@ -603,74 +601,23 @@ function anadirPunto(accion) {
       const modal = document.querySelector('#exampleModalPuntos');
       const modalBootstrap = bootstrap.Modal.getInstance(modal);
       modalBootstrap.hide();
-
-
+  
+      
     })
     .catch(error => {
       console.error('Error al agregar punto de venta:', error);
       alert('Error al agregar punto de venta');
     });
-}
-
-function searchPuntosVacios(accion) {
-  // Send AJAX request
-  fetch('puntosventa', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-    },
-    body: new URLSearchParams({
-      accion: accion // Agregar el parámetro de acción
-    }).toString(),
-
-  })
-    .then(response => response.json())
-    .then(ordenadores => {
-      // Generate table HTML
-      let tablePuntosHtml = `
-        <table id="tabla" class="table table-striped">
-        <thead>
-          <tr>
-            <th> Modelo </th>
-            <th> Tienda </th>
-            <th> Precio </th>
-
-          </tr>
-        </thead>
-        <tbody>`;
-
-      ordenadores.forEach((ordenador, index) => {
-        tablePuntosHtml += `
-          <tr>
-            <td>${ordenador.modelo}</td>
-            <td>${ordenador.tienda}</td>
-            <td>${ordenador.precio}</td>
-            <td><button onclick="aniadirPunto(${index}, 'seleccionar')" class="btn btn-primary">Seleccionar</button></td>
-            <td><button onclick="eliminarPunto(${index}, 'eliminar')" class="btn btn-danger">Eliminar</button></td>
-          </tr>`;
-      });
-
-      tablePuntosHtml += '</tbody></table>';
-
-      // Update results container
-      document.getElementById('modalResultsContainerPuntos').innerHTML = tablePuntosHtml;
-
-
-      // Save usuarios array in a global variable
-      window.ordenadoresTienda = ordenadores;
-
-      // Show modal
-      const resultsModalPuntos = new bootstrap.Modal(document.getElementById('resultsModalPuntos'));
-      resultsModalPuntos.show();
-    });
-}
-
-function seleccionarPunto(index, accion) {
-  console.log('Detalles ' + index);
-
-  const punto = window.ordenadoresTienda[index];
-
-  detallesPuntosHTML = `
+  }
+  
+  
+  
+  function seleccionarPunto(index, accion) {
+    console.log('Detalles ' + index);
+  
+    const punto = window.puntosArray[index];
+    
+    detallesPuntosHTML = `
       <table id="tabla" border="2">
       <tr>
         <th> Tienda   </th>
@@ -679,273 +626,143 @@ function seleccionarPunto(index, accion) {
       </tr>
       <tr>
         <td>${punto.tienda}</td>
-        <td>${punto.precio}</td>
+        <td>${punto.direccion}</td>
       </tr>
       </table>`;
-
-  document.getElementById('popUpDetallesPuntos').innerHTML = detallesPuntosHTML;
-
-  // Muestra el modal de detalles
-
-  detallesCambioPuntosHTML = `
+     
+    document.getElementById('popUpDetallesPuntos').innerHTML = detallesPuntosHTML;
+    
+    // Muestra el modal de detalles
+    
+    detallesCambioPuntosHTML = `
                 <form  onsubmit="cambiarDatosTienda(event, ${punto.id})" class="float-start">
                       <p>
                       <label for="unittype">Selecciona el parametro a cambiar</label>
                       <select id="unittype" name="unittype">
                         <option value="1" selected> Tienda </option>
-                        <option value="2"> Precio </option>
+                        <option value="2"> Direccion </option>
                       </select>
                       <div id="editar-parametro"></div>
                     </p>
                     <button type="submit" class="btn btn-primary">Cambiar</button>
                     </form>`;
-
-
-  document.getElementById('cambioDetallesPunto').innerHTML = detallesCambioPuntosHTML;
-  var detallesModal = new bootstrap.Modal(document.getElementById('detallesModalPuntos'));
-  detallesModal.show();
-}
-
-
-
-function cambiarDatosTienda(event, index) {
-  event.preventDefault(); // evitar que el formulario se envíe
-
-  // Obtener el usuario a actualizar
-
-
-  const parametro = document.getElementById("unittype").value;
-  if (parametro === "1") {
-    // mostrar cuadro de diálogo para cambiar el nombre
-    const nuevaTienda = prompt("Ingrese nueva tienda");
-    console.log(`Nuevo nombre ingresado: ${nuevaTienda}`);
-
-
-    fetch('puntosventa', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-      },
-      body: new URLSearchParams({
-        id: index,
-        tienda: nuevaTienda, // Enviar el nuevo nombre
-        accion: 'actualizarTienda',
-      }).toString(),
-    })
-      .then(data => {
-        // Actualizar la tabla de usuarios
-        searchPuntos('buscar');
-        alert('Los cambios se aplicaron correctamente.');
-        const modal = document.querySelector('#detallesModalPuntos');
-        const modalBootstrap = bootstrap.Modal.getInstance(modal);
-        modalBootstrap.hide();
-        const modal2 = document.querySelector('#resultsModalPuntos');
-        const modalBootstrap2 = bootstrap.Modal.getInstance(modal2);
-        modalBootstrap2.hide();
-        // Mostrar mensaje de éxito
-
-      })
-      .catch(error => {
-        // Mostrar mensaje de error
-        console.error('Error al cambiar datos de la tienda:', error);
-        alert('Error al cambiar datos de la tienda. Por favor, inténtelo de nuevo más tarde.');
-      });
-
-
-  } else if (parametro === "2") {
-    // mostrar cuadro de diálogo para cambiar la contraseña
-    const nuevoPrecio= prompt("Ingrese un nuevo Precio:");
-
-
-
-    fetch('puntosventa', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-      },
-      body: new URLSearchParams({
-        id: index,
-        precio: nuevoPrecio, // Enviar el nuevo nombre
-        accion: 'actualizarPrecio',
-      }).toString(),
-    })
-      .then(data => {
-        // Actualizar la tabla de usuarios
-        searchPuntos('buscar');
-        alert('Los cambios se aplicaron correctamente.');
-        const modal = document.querySelector('#detallesModalPuntos');
-        const modalBootstrap = bootstrap.Modal.getInstance(modal);
-        modalBootstrap.hide();
-        const modal2 = document.querySelector('#resultsModalPuntos');
-        const modalBootstrap2 = bootstrap.Modal.getInstance(modal2);
-        modalBootstrap2.hide();
-        // Mostrar mensaje de éxito
-
-      })
-      .catch(error => {
-        // Mostrar mensaje de error
-        console.error('Error al cambiar datos de la tienda:', error);
-        alert('Error al cambiar datos de la tienda. Por favor, inténtelo de nuevo más tarde.');
-
-      });
-
-
-  } else {
-    // manejar caso en el que se seleccione una opción no válida
-    console.log("Opción no válida seleccionada");
-  }
-}
-
-
-
-function aniadirPunto(){
-  console.log('Detalles ' + index);
-
-  const punto = window.ordenadoresTienda[index];
-
-  detallesPuntosHTML = `
-      <table id="tabla" border="2">
-      <tr>
-        <th> Tienda   </th>
-        <th> Direccion </th>
+  
+  
+    document.getElementById('cambioDetallesPunto').innerHTML = detallesCambioPuntosHTML;
+    var detallesModal = new bootstrap.Modal(document.getElementById('detallesModalPuntos'));
+    detallesModal.show();
+    }
+  
+  
+  
+    function cambiarDatosTienda(event, index) {
+      event.preventDefault(); // evitar que el formulario se envíe
+      
+       // Obtener el usuario a actualizar
+      
+  
+      const parametro = document.getElementById("unittype").value;
+      if (parametro === "1") {
+        // mostrar cuadro de diálogo para cambiar el nombre
+        const nuevaTienda = prompt("Ingrese nueva tienda");
+        console.log(`Nuevo nombre ingresado: ${nuevaTienda}`);
+  
+  
+        fetch('puntosventa', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          },
+          body: new URLSearchParams({
+            id:index,
+            tienda: nuevaTienda, // Enviar el nuevo nombre
+            accion: 'actualizarTienda',
+          }).toString(),
+        })
+          .then(data => {
+            // Actualizar la tabla de usuarios
+            searchPuntos('buscar');
+            alert('Los cambios se aplicaron correctamente.');
+            const modal = document.querySelector('#detallesModalPuntos');
+            const modalBootstrap = bootstrap.Modal.getInstance(modal);
+            modalBootstrap.hide();
+            const modal2 = document.querySelector('#resultsModalPuntos');
+            const modalBootstrap2 = bootstrap.Modal.getInstance(modal2);
+            modalBootstrap2.hide();
+            // Mostrar mensaje de éxito
+            
+          })
+          .catch(error => {
+            // Mostrar mensaje de error
+            console.error('Error al cambiar datos de la tienda:', error);
+            alert('Error al cambiar datos de la tienda. Por favor, inténtelo de nuevo más tarde.');
+          });
+  
+  
+      } else if (parametro === "2") {
+        // mostrar cuadro de diálogo para cambiar la contraseña
+        const nuevaDireccion = prompt("Ingrese una nueva direccion:");
         
-      </tr>
-      <tr>
-        <td>${punto.tienda}</td>
-        <td>${punto.precio}</td>
-      </tr>
-      </table>`;
-
-  document.getElementById('popUpDetallesPuntos').innerHTML = detallesPuntosHTML;
-
-  // Muestra el modal de detalles
-
-  detallesCambioPuntosHTML = `
-                <form  onsubmit="aniadirDatosTienda(event, ${punto.id})" class="float-start">
-                      <p>
-                      <label for="unittype">Selecciona el parametro a cambiar</label>
-                      <select id="unittype" name="unittype">
-                        <option value="1" selected> Tienda </option>
-                        <option value="2"> Precio </option>
-                      </select>
-                      <div id="editar-parametro"></div>
-                    </p>
-                    <button type="submit" class="btn btn-primary">Cambiar</button>
-                    </form>`;
-
-
-  document.getElementById('cambioDetallesPunto').innerHTML = detallesCambioPuntosHTML;
-  var detallesModal = new bootstrap.Modal(document.getElementById('detallesModalPuntos'));
-  detallesModal.show();
-}
-
-
-function aniadirDatosTienda (event, index) {
-  event.preventDefault(); // evitar que el formulario se envíe
-
-  // Obtener el usuario a actualizar
-
-
-  const parametro = document.getElementById("unittype").value;
-  if (parametro === "1") {
-    // mostrar cuadro de diálogo para cambiar el nombre
-    const nuevaTienda = prompt("Ingrese nueva tienda");
-    console.log(`Nuevo nombre ingresado: ${nuevaTienda}`);
+  
+  
+        fetch('puntosventa', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          },
+          body: new URLSearchParams({
+            id:index,
+            direccion: nuevaDireccion, // Enviar el nuevo nombre
+            accion: 'actualizarDireccion',
+          }).toString(),
+        })
+          .then(data => {
+            // Actualizar la tabla de usuarios
+            searchPuntos('buscar');
+            alert('Los cambios se aplicaron correctamente.');
+            const modal = document.querySelector('#detallesModalPuntos');
+            const modalBootstrap = bootstrap.Modal.getInstance(modal);
+            modalBootstrap.hide();
+            const modal2 = document.querySelector('#resultsModalPuntos');
+            const modalBootstrap2 = bootstrap.Modal.getInstance(modal2);
+            modalBootstrap2.hide();
+            // Mostrar mensaje de éxito
+           
+          })
+          .catch(error => {
+            // Mostrar mensaje de error
+            console.error('Error al cambiar datos de la tienda:', error);
+            alert('Error al cambiar datos de la tienda. Por favor, inténtelo de nuevo más tarde.');
+            
+          });
+  
+  
+      } else {
+        // manejar caso en el que se seleccione una opción no válida
+        console.log("Opción no válida seleccionada");
+      }
+    }
 
 
-    fetch('puntosventa', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-      },
-      body: new URLSearchParams({
-        id: index,
-        tienda: nuevaTienda, // Enviar el nuevo nombre
-        accion: 'aniadirTienda',
-      }).toString(),
-    })
-      .then(data => {
-        // Actualizar la tabla de usuarios
-        searchPuntos('buscar');
-        alert('Los cambios se aplicaron correctamente.');
-        const modal = document.querySelector('#detallesModalPuntos');
-        const modalBootstrap = bootstrap.Modal.getInstance(modal);
-        modalBootstrap.hide();
-        const modal2 = document.querySelector('#resultsModalPuntos');
-        const modalBootstrap2 = bootstrap.Modal.getInstance(modal2);
-        modalBootstrap2.hide();
-        // Mostrar mensaje de éxito
-
-      })
-      .catch(error => {
-        // Mostrar mensaje de error
-        console.error('Error al cambiar datos de la tienda:', error);
-        alert('Error al cambiar datos de la tienda. Por favor, inténtelo de nuevo más tarde.');
-      });
-
-
-  } else if (parametro === "2") {
-    // mostrar cuadro de diálogo para cambiar la contraseña
-    const nuevoPrecio= prompt("Ingrese un nuevo Precio:");
-
-
-
-    fetch('puntosventa', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-      },
-      body: new URLSearchParams({
-        id: index,
-        precio: nuevoPrecio, // Enviar el nuevo nombre
-        accion: 'aniadirPrecio',
-      }).toString(),
-    })
-      .then(data => {
-        // Actualizar la tabla de usuarios
-        searchPuntos('buscar');
-        alert('Los cambios se aplicaron correctamente.');
-        const modal = document.querySelector('#detallesModalPuntos');
-        const modalBootstrap = bootstrap.Modal.getInstance(modal);
-        modalBootstrap.hide();
-        const modal2 = document.querySelector('#resultsModalPuntos');
-        const modalBootstrap2 = bootstrap.Modal.getInstance(modal2);
-        modalBootstrap2.hide();
-        // Mostrar mensaje de éxito
-
-      })
-      .catch(error => {
-        // Mostrar mensaje de error
-        console.error('Error al cambiar datos de la tienda:', error);
-        alert('Error al cambiar datos de la tienda. Por favor, inténtelo de nuevo más tarde.');
-
-      });
-
-
-  } else {
-    // manejar caso en el que se seleccione una opción no válida
-    console.log("Opción no válida seleccionada");
-  }
-}
 //EMPIEZA TODO LO DE PUNTOS DE ORDENADORES
-//
-//
-//
-//             ORDENADORES
+  //
+  //
+  //
+  //             ORDENADORES
+  
+   ///////////////////////////////////////////////////////////////Apartir de aqui va la parte de Ordenadores/////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////Apartir de aqui va la parte de Ordenadores/////////////////////////////////////////////////////////////////
-
-function searchOrdenadores(accion) {
+ function searchOrdenadores(accion) {
   // Send AJAX request
   fetch('ordenadores', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
     },
-    body: new URLSearchParams({
-      accion: accion // Agregar el parámetro de acción
-    }).toString(),
-
+  body: new URLSearchParams({
+    accion: accion // Agregar el parámetro de acción
+  }).toString(),
+   
   })
     .then(response => response.json())
     .then(ordenadores => {
@@ -964,7 +781,7 @@ function searchOrdenadores(accion) {
         </tr>
       </thead>
       <tbody>`;
-
+  
       ordenadores.forEach((ordenador, index) => {
         tableOrdenadoresHtml += `
         <tr>
@@ -979,15 +796,15 @@ function searchOrdenadores(accion) {
           <td><button onclick="eliminarOrdenador(${index}, 'eliminar')" class="btn btn-danger">Eliminar</button></td>
         </tr>`;
       });
-
+  
       tableOrdenadoresHtml += '</tbody></table>';
-
+  
       // Update results container
       document.getElementById('modalOrdenadoresContainer').innerHTML = tableOrdenadoresHtml;
-
+  
       // Save ordenadores array in a global variable
       window.ordenadoresArray = ordenadores;
-
+  
       // Show modal
       const ordenadoresModal = new bootstrap.Modal(document.getElementById('ordenadoresModal'));
       ordenadoresModal.show();
@@ -1055,6 +872,8 @@ function eliminarOrdenador(index, accion) {
   // Obtener el ordenador a eliminar
   const ordenador = window.ordenadoresArray[index];
 
+  console.log('Estoy en eliminar para el indec' + index);
+
   // Mostrar confirmación de eliminación
   if (confirm(`¿Estás seguro de que deseas eliminar el ordenador "${ordenador.marca}" modelo "${ordenador.modelo}"?`)) {
     // Enviar solicitud AJAX para eliminar el ordenador
@@ -1064,15 +883,15 @@ function eliminarOrdenador(index, accion) {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       },
       body: new URLSearchParams({
-        id: index, // Enviar el ID del ordenador a eliminar
-        accion: accion
+        id: ordenador.id, // Enviar el ID del ordenador a eliminar
+        accion:accion
       }).toString(),
     })
       //.then(response => response.json())
       .then(data => {
         // Actualizar la tabla de odenadores
         searchOrdenadores('buscar');
-
+        
       })
       .catch(error => {
         // Mostrar mensaje de error
@@ -1113,18 +932,18 @@ function anadirOrdenador(accion) {
     },
     body: new URLSearchParams(formData).toString(),
   })
-    .then(data => {
-      console.log('Ordenador agregado:', data);
-      // Actualizar la tabla de Ordenadores con el nuevo Ordenador
-      searchOrdenadores('buscar');
-      // Cerrar el modal
-      const modal = document.querySelector('#addOrdenadorModal');
-      const modalBootstrap = bootstrap.Modal.getInstance(modal);
-      modalBootstrap.show();
-
-    })
-    .catch(error => {
-      console.error('Error al agregar ordenador:', error);
-      alert('Error al agregar ordenador');
-    });
+  .then(data => {
+    console.log('Ordenador agregado:', data);
+    // Actualizar la tabla de Ordenadores con el nuevo Ordenador
+    searchOrdenadores('buscar');
+    // Cerrar el modal
+    const modal = document.querySelector('#addOrdenadorModal');
+    const modalBootstrap = bootstrap.Modal.getInstance(modal);
+    modalBootstrap.show();
+    
+  })
+  .catch(error => {
+    console.error('Error al agregar ordenador:', error);
+    alert('Error al agregar ordenador');
+  });
 }

@@ -12,7 +12,6 @@ public class Ordenador {
     private String tienda;
     private double precio;
 
-
     public int getId() {
         return id;
     }

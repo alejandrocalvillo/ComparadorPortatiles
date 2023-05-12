@@ -89,6 +89,9 @@ public class Ordenadores extends HttpServlet {
         } else if (accion.equals("eliminar")) {
             try (DBManager dbManager = new DBManager()) {
                 String id = request.getParameter("id");
+
+                System.out.println("ENTRO EN ELIMINAR");
+
                 dbManager.deleteOrdenadorDB(id);
     
                 // Set response content type and charset
