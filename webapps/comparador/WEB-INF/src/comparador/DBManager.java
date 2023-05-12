@@ -1029,7 +1029,7 @@ public class DBManager implements AutoCloseable {
         }
         return new ArrayList<Ordenador>();
     }
-    
+
     public List<Ordenador> getPuntosVentaNullDB() throws SQLException {
 
         String query = "SELECT ordenadores.id, ordenadores.modelo, puntos_de_venta.tienda, puntos_de_venta.precio FROM ordenadores LEFT JOIN puntos_de_venta ON ordenadores.id = puntos_de_venta.ordenador_id WHERE puntos_de_venta.ordenador_id IS NULL";
@@ -1086,34 +1086,49 @@ public class DBManager implements AutoCloseable {
     }
 
     // hacer que devuelva un usuario si todo okey
-    public PuntosVenta insertPuntoDB(String tienda, String direccion) throws SQLException {
+    public void insertPuntoDB(String argumento, String id, String accion) throws SQLException {
         PuntosVenta punto = new PuntosVenta();
+        if (accion.equals("tienda")) {
+            String query = "INSERT INTO puntos_de_venta (ordenador_id, tienda, direccion, precio) VALUES (?, ?, ?, ?)";
+            PreparedStatement stmt = null;
+            try {
+                stmt = connection.prepareStatement(query);
+                stmt.setString(1, id);
+                stmt.setString(2, argumento);
+                stmt.setString(3, "null");
+                stmt.setString(4, "0");
+                stmt.executeUpdate();
 
-        String query = "INSERT INTO puntos_de_venta_sin_ordenador (tienda, direccion) VALUES (?, ?)";
+            } catch (SQLException ex) {
+                System.out.println(" SQLException : " + ex.getMessage());
+                ex.printStackTrace();
+                System.out.println(" VendorError : " + ex.getErrorCode());
+                System.out.println(" SQLState : " + ex.getSQLState());
 
-        PreparedStatement stmt = null;
-        try {
-            stmt = connection.prepareStatement(query);
-            stmt.setString(1, tienda);
-            stmt.setString(2, direccion);
-            stmt.executeUpdate();
+            }
+        } else if (accion.equals("precio")) {
+            String query = "INSERT INTO puntos_de_venta (ordenador_id, tienda, direccion, precio) VALUES (?, ?, ?, ?)";
+            PreparedStatement stmt = null;
+            try {
+                stmt = connection.prepareStatement(query);
+                stmt.setString(1, id);
+                stmt.setString(2, "null");
+                stmt.setString(3, "null");
+                stmt.setString(4, argumento);
+                stmt.executeUpdate();
 
-        } catch (SQLException ex) {
-            System.out.println(" SQLException : " + ex.getMessage());
-            ex.printStackTrace();
-            System.out.println(" VendorError : " + ex.getErrorCode());
-            System.out.println(" SQLState : " + ex.getSQLState());
+            } catch (SQLException ex) {
+                System.out.println(" SQLException : " + ex.getMessage());
+                ex.printStackTrace();
+                System.out.println(" VendorError : " + ex.getErrorCode());
+                System.out.println(" SQLState : " + ex.getSQLState());
 
+            }
         }
-        punto.setTienda(tienda);
-        punto.setDireccion(direccion);
-        punto.setId(20);
-        // cuando la otra funcion vaya llamamos a la consulta de usuario para que nos
-        // devuelva un usuario completo con id correspondiente en vez de hacer nosotros
-        // los set
-        return punto;
-
     }
+    // cuando la otra funcion vaya llamamos a la consulta de usuario para que nos
+    // devuelva un usuario completo con id correspondiente en vez de hacer nosotros
+    // los set
 
     public void changeNameShopDB(String id, String nombre) throws SQLException {
 
