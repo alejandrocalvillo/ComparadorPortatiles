@@ -746,6 +746,136 @@ function cambiarDatosTienda(event, index) {
 }
 
 
+
+function aniadirPunto(){
+  console.log('Detalles ' + index);
+
+  const punto = window.ordenadoresTienda[index];
+
+  detallesPuntosHTML = `
+      <table id="tabla" border="2">
+      <tr>
+        <th> Tienda   </th>
+        <th> Direccion </th>
+        
+      </tr>
+      <tr>
+        <td>${punto.tienda}</td>
+        <td>${punto.precio}</td>
+      </tr>
+      </table>`;
+
+  document.getElementById('popUpDetallesPuntos').innerHTML = detallesPuntosHTML;
+
+  // Muestra el modal de detalles
+
+  detallesCambioPuntosHTML = `
+                <form  onsubmit="aniadirDatosTienda(event, ${punto.id})" class="float-start">
+                      <p>
+                      <label for="unittype">Selecciona el parametro a cambiar</label>
+                      <select id="unittype" name="unittype">
+                        <option value="1" selected> Tienda </option>
+                        <option value="2"> Precio </option>
+                      </select>
+                      <div id="editar-parametro"></div>
+                    </p>
+                    <button type="submit" class="btn btn-primary">Cambiar</button>
+                    </form>`;
+
+
+  document.getElementById('cambioDetallesPunto').innerHTML = detallesCambioPuntosHTML;
+  var detallesModal = new bootstrap.Modal(document.getElementById('detallesModalPuntos'));
+  detallesModal.show();
+}
+
+
+function aniadirDatosTienda () {
+  event.preventDefault(); // evitar que el formulario se envíe
+
+  // Obtener el usuario a actualizar
+
+
+  const parametro = document.getElementById("unittype").value;
+  if (parametro === "1") {
+    // mostrar cuadro de diálogo para cambiar el nombre
+    const nuevaTienda = prompt("Ingrese nueva tienda");
+    console.log(`Nuevo nombre ingresado: ${nuevaTienda}`);
+
+
+    fetch('puntosventa', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      body: new URLSearchParams({
+        id: index,
+        tienda: nuevaTienda, // Enviar el nuevo nombre
+        accion: 'aniadirTienda',
+      }).toString(),
+    })
+      .then(data => {
+        // Actualizar la tabla de usuarios
+        searchPuntos('buscar');
+        alert('Los cambios se aplicaron correctamente.');
+        const modal = document.querySelector('#detallesModalPuntos');
+        const modalBootstrap = bootstrap.Modal.getInstance(modal);
+        modalBootstrap.hide();
+        const modal2 = document.querySelector('#resultsModalPuntos');
+        const modalBootstrap2 = bootstrap.Modal.getInstance(modal2);
+        modalBootstrap2.hide();
+        // Mostrar mensaje de éxito
+
+      })
+      .catch(error => {
+        // Mostrar mensaje de error
+        console.error('Error al cambiar datos de la tienda:', error);
+        alert('Error al cambiar datos de la tienda. Por favor, inténtelo de nuevo más tarde.');
+      });
+
+
+  } else if (parametro === "2") {
+    // mostrar cuadro de diálogo para cambiar la contraseña
+    const nuevoPrecio= prompt("Ingrese un nuevo Precio:");
+
+
+
+    fetch('puntosventa', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      body: new URLSearchParams({
+        id: index,
+        precio: nuevoPrecio, // Enviar el nuevo nombre
+        accion: 'aniadirPrecio',
+      }).toString(),
+    })
+      .then(data => {
+        // Actualizar la tabla de usuarios
+        searchPuntos('buscar');
+        alert('Los cambios se aplicaron correctamente.');
+        const modal = document.querySelector('#detallesModalPuntos');
+        const modalBootstrap = bootstrap.Modal.getInstance(modal);
+        modalBootstrap.hide();
+        const modal2 = document.querySelector('#resultsModalPuntos');
+        const modalBootstrap2 = bootstrap.Modal.getInstance(modal2);
+        modalBootstrap2.hide();
+        // Mostrar mensaje de éxito
+
+      })
+      .catch(error => {
+        // Mostrar mensaje de error
+        console.error('Error al cambiar datos de la tienda:', error);
+        alert('Error al cambiar datos de la tienda. Por favor, inténtelo de nuevo más tarde.');
+
+      });
+
+
+  } else {
+    // manejar caso en el que se seleccione una opción no válida
+    console.log("Opción no válida seleccionada");
+  }
+}
 //EMPIEZA TODO LO DE PUNTOS DE ORDENADORES
 //
 //
