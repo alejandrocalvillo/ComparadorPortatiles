@@ -1109,7 +1109,7 @@ public class DBManager implements AutoCloseable {
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(query);
-            stmt.setString(1, precio);
+            stmt.setDouble(1, Double.parseDouble(precio));
             stmt.setString(2, id);
             stmt.executeUpdate();
 

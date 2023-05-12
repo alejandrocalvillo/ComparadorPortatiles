@@ -157,6 +157,7 @@ public class Puntos_de_venta extends HttpServlet {
                 System.out.println("Precio: "+precio_str);
                 if(id !=null && precio_str !=null  )
                     {
+                    System.out.println("Entro en el if");
                     db.changePriceShopDB(id, precio_str);
                     }  
             
