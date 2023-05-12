@@ -1104,7 +1104,7 @@ public class DBManager implements AutoCloseable {
 
     public void changePriceShopDB(String id, String precio) throws SQLException {
 
-        String query = "UPDATE puntos_de_venta SET direccion = ? WHERE ordenador_id = ? ";
+        String query = "UPDATE puntos_de_venta SET precio = ? WHERE ordenador_id = ? ";
 
         PreparedStatement stmt = null;
         try {
