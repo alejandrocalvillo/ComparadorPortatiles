@@ -1010,8 +1010,7 @@ function seleccionarOrdenador(index, accion) {
       <th> Tipo de memoria </th>
       <th> Capacidad de memoria </th>
       <th> Tipo de disco </th>
-      <th> Capacidad de disco </th>
-		  
+      <th> Capacidad de disco </th>		  
 		</tr>
 		<tr>
 		  <td>${ordenador.marca}</td>
@@ -1024,33 +1023,56 @@ function seleccionarOrdenador(index, accion) {
 		</tr>
 	  </table>`;
 
-  document.getElementById('popUpDetalles').innerHTML = detallesHTML;
+  document.getElementById('popUpDetallesOrdenador').innerHTML = detallesHTML;
 
   // Muestra el modal de detalles
 
-  detallesCambioHTML = `
-              <form  onsubmit="cambiarDatosOrdenador(event, ${ordenador.id})" class="float-start">
-									  <p>
-										<label for="unittype">Selecciona el parametro a cambiar</label>
-										<select id="unittype" name="unittype">
-										  <option value="1" selected> marca </option>
-										  <option value="2"> modelo </option>
-                      <option value="3"> procesador </option>
-                      <option value="4"> memoriaTipo </option>
-                      <option value="5"> memoriaCapacidad </option>
-                      <option value="6"> discoTipo </option>
-                      <option value="7"> discoCapacidad </option>
-										</select>
-										<div id="editar-parametro"></div>
-									</p>
-									<button type="submit" class="btn btn-primary">Cambiar</button>
-								  </form>`;
+  detallesCambioHTML = `<button onclick="editarOrdenador(${ordenador.id}, 'editar')" class="btn btn-danger">Guardar</button>`;
 
-
-  document.getElementById('cambioDetalles').innerHTML = detallesCambioHTML;
-  var detallesModal = new bootstrap.Modal(document.getElementById('detallesModal'));
+  document.getElementById('cambioDetallesOrdenador').innerHTML = detallesCambioHTML;
+  var detallesModal = new bootstrap.Modal(document.getElementById('detallesOrdenadorModal'));
   detallesModal.show();
 }
+
+function editarOrdenador(id, accion) {
+
+  
+  const modeloSelect = document.getElementById('modeloEditar').value;
+  const marcaSelect = document.getElementById('marcaEditar').value;
+  const procesadorSelect = document.getElementById('procesadorEditar').value;
+  const memoriaSelect = document.getElementById('memoriaEditar').value;
+  const discoelect = document.getElementById('discoEditar').value;
+  console.log(procesadorSelect+'procesador');
+  const formData = new FormData();
+
+  formData.append('id', id);
+  formData.append('accion', accion);
+  formData.append('modelo', modeloSelect);
+  formData.append('marca', marcaSelect);
+  formData.append('procesador', procesadorSelect);
+  formData.append('memoria', memoriaSelect);
+  formData.append('disco', discoelect);
+
+
+  fetch('ordenadores', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    },
+    body: new URLSearchParams(formData).toString(),
+  })
+  .then(data => {
+    // Actualizar la tabla de Ordenadores con el nuevo Ordenador
+    searchOrdenadores('buscar');
+    
+  })
+  .catch(error => {
+    console.error('Error al editar ordenador:', error);
+    alert('Error al editar ordenador');
+  });
+
+
+} 
 
 function eliminarOrdenador(index, accion) {
   // Obtener el ordenador a eliminar
@@ -1073,6 +1095,8 @@ function eliminarOrdenador(index, accion) {
     })
       //.then(response => response.json())
       .then(data => {
+        const ordenadoresModal = new bootstrap.Modal(document.getElementById('ordenadoresModal'));
+        ordenadoresModal.hide();
         // Actualizar la tabla de odenadores
         searchOrdenadores('buscar');
         

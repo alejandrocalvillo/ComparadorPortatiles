@@ -315,6 +315,58 @@
 							<div class="modal-body">
 								<div id="popUpDetallesOrdenador"></div>
 							</div>
+							<div class="modal-body">
+								<div id="seleccionablesOrdenador">
+									<div class="mb-3">
+										<label for="modelo" class="form-label">Modelo</label>
+										  <input type="text" class="form-control" id="modeloEditar" name="modeloEditar" value="">
+									  </div>
+									  <div class="mb-3">
+										<label for="marcaEditar" class="form-label">marca</label>
+										<select class="form-select" id="marcaEditar" name="marcaEditar">
+										  <% List<String> marcasEditar = (List<String>) request.getAttribute("listMarcas"); %>
+										  <% for (String marcaEditar : marcasEditar) { %>
+											<option value="<%= marcaEditar %>">
+											  <%= marcaEditar %>
+											</option>
+										  <% } %>
+										</select>						  
+									  </div>
+									  <div class="mb-3">
+										<label for="procesadorEditar" class="form-label">Procesador</label>
+										  <select class="form-select" id="procesadorEditar" name="procesadorEditar">
+											  <% List<String> procesadoresEditar = (List<String>) request.getAttribute("listProcesadores"); %>
+											  <% for (String procesadorEditar : procesadoresEditar) { %>
+												<option value="<%= procesadorEditar %>">
+												  <%= procesadorEditar %>
+												</option>
+											  <% } %>
+										</select>
+									  </div>
+									  <div class="mb-3">
+										  <label for="memoriaEditar" class="form-label">Memoria</label>
+										  <select class="form-select" id="memoriaEditar" name="memoriaEditar">
+											  <% List<String> memoriasEditar = (List<String>) request.getAttribute("listMemorias"); %>
+												  <% for (String memoriaEditar : memoriasEditar) { %>
+													<option value="<%= memoriaEditar%>">
+													  <%= memoriaEditar %>
+													</option>
+												  <% } %>
+										  </select>
+									  </div>
+									  <div class="mb-3">
+										  <label for="discoEditar" class="form-label">Disco</label>
+										  <select class="form-select" id="discoEditar" name="discoEditar">
+											  <% List<String> discosEditar = (List<String>) request.getAttribute("listDiscos"); %>
+												  <% for (String discoEditar : discosEditar) { %>
+													<option value="<%= discoEditar%>">
+													  <%= discoEditar %>
+													</option>
+												  <% } %>
+										  </select>
+									  </div>
+								</div>
+							</div>
 							<div class="modal-footer">
 								<div id="cambioDetallesOrdenador"></div>								
 							</div>

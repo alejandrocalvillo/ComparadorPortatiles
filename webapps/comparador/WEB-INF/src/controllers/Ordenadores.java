@@ -112,7 +112,8 @@ public class Ordenadores extends HttpServlet {
             try (DBManager db = new DBManager()) {
                 //Empezamos contando marcas en el index
 
-            System.out.println("Entro en el añadir");    
+            System.out.println("Entro en el añadir"); 
+               
 
             String modelo_str = request.getParameter("modelo");    
 
@@ -158,11 +159,13 @@ public class Ordenadores extends HttpServlet {
             String memoria_str = request.getParameter("memoria");
             String disco_str = request.getParameter("disco");
             //String puntoVenta_str = request.getParameter("puntoVenta");
-            
+            System.out.println("modelo : "+modelo_str  + ", su marcaiD es "+marca_str + ", su procesadorId es "+procesador_str + ", su memoriaId es "+memoria_str + ", su discoId es " + disco_str);
+        
             String marcaId = db.getMarcaId(marca_str);
-            String procesadorId = db.getMarcaId(procesador_str);
-            String memoriaId = db.getMarcaId(memoria_str);
-            String discoId = db.getMarcaId(disco_str);
+            String procesadorId = db.getProcesadorId(procesador_str);
+            String memoriaId = db.getMemoriaId(memoria_str);
+            String discoId = db.getDiscoId(disco_str);
+            System.out.println("modelo : "+modelo_str  + ", su marcaiD es "+marcaId + ", su procesadorId es "+procesadorId + ", su memoriaId es "+memoriaId + ", su discoId es " + discoId);
 
             if(modelo_str!=null && marcaId!=null && procesadorId!=null && memoriaId!=null && discoId!=null)
             {
