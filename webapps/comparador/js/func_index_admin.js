@@ -642,7 +642,7 @@ function seleccionarPunto(index, accion) {
                       <label for="unittype">Selecciona el parametro a cambiar</label>
                       <select id="unittype" name="unittype">
                         <option value="1" selected> Tienda </option>
-                        <option value="2"> precio </option>
+                        <option value="2"> Precio </option>
                       </select>
                       <div id="editar-parametro"></div>
                     </p>

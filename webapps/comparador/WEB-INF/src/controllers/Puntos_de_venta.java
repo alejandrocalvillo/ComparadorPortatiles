@@ -90,6 +90,42 @@ public class Puntos_de_venta extends HttpServlet {
             }
 
 
+        } else if(accion.equals("buscarNull")){
+
+            try (DBManager dbManager = new DBManager()) {
+                System.out.println("Holita estoy aqui");
+                List<Ordenador> ordendores = dbManager.getPuntosVentaNullDB();
+    
+                JSONArray ordenadoresJsonArray = new JSONArray();
+    
+                System.out.println("Cree el JSONArray");
+                for (Ordenador ordenador : ordendores) {
+                    JSONObject ordenadorJson = new JSONObject();
+                    ordenadorJson.put("id", ordenador.getId());
+                    ordenadorJson.put("modelo", ordenador.getModelo());
+                    ordenadorJson.put("tienda", ordenador.getTienda());
+                    ordenadorJson.put("precio", ordenador.getPrecio());
+                    ordenadoresJsonArray.put(ordenadorJson);
+                }
+    
+                String ordenadoresJson = ordenadoresJsonArray.toString();
+    
+                // Set response content type and charset
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+    
+                // Write JSON string to response
+                response.getWriter().write(ordenadoresJson);
+            } catch (SQLException | NamingException ex) {
+                ex.printStackTrace();
+                String errorMessage = "Error: " + ex.getMessage();
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                response.setContentType("text/plain");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(errorMessage);
+            }
+
+
         } else if (accion.equals("eliminar")) {
             try (DBManager dbManager = new DBManager()) {
                 String id = request.getParameter("id");

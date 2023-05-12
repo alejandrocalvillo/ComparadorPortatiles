@@ -1029,10 +1029,45 @@ public class DBManager implements AutoCloseable {
         }
         return new ArrayList<Ordenador>();
     }
+    
+    public List<Ordenador> getPuntosVentaNullDB() throws SQLException {
+
+        String query = "SELECT ordenadores.id, ordenadores.modelo FROM ordenadores LEFT JOIN puntos_de_venta ON ordenadores.id = puntos_de_venta.ordenador_id WHERE puntos_de_venta.ordenador_id IS NULL";
+
+        List<Ordenador> ordenadores = new ArrayList<Ordenador>();
+        PreparedStatement stmt = null;
+        try {
+
+            stmt = connection.prepareStatement(query);
+            ResultSet resultSet = stmt.executeQuery();
+
+            while (resultSet.next()) {
+                Ordenador ordenador = new Ordenador();
+                int id = resultSet.getInt("id");
+                String modelo = resultSet.getString("modelo");
+                String tienda = resultSet.getString("tienda");
+                Double precio = resultSet.getDouble("precio");
+                ordenador.setModelo(modelo);
+                ordenador.setTienda(tienda);
+                ordenador.setPrecio(precio);
+                ordenador.setId(id);
+                ordenadores.add(ordenador);
+
+            }
+            return ordenadores;
+        } catch (SQLException ex) {
+            System.out.println(" SQLException : " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println(" VendorError : " + ex.getErrorCode());
+            System.out.println(" SQLState : " + ex.getSQLState());
+
+        }
+        return new ArrayList<Ordenador>();
+    }
 
     public void deletePuntoDB(String id) throws SQLException {
 
-        String query = "DELETE FROM puntos_de_venta_sin_ordenador WHERE id = ? ";
+        String query = "DELETE FROM puntos_de_venta WHERE ordenador_id = ? ";
 
         PreparedStatement stmt = null;
         try {
