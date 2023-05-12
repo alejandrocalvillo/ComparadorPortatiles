@@ -521,7 +521,7 @@ function searchPuntos(accion) {
           <tr>
             <td>${ordenador.modelo}</td>
             <td>${ordenador.tienda}</td>
-            <td>${ordenador.precio}</
+            <td>${ordenador.precio}</td>
             <td><button onclick="seleccionarPunto(${index}, 'seleccionar')" class="btn btn-primary">Seleccionar</button></td>
             <td><button onclick="eliminarPunto(${index}, 'eliminar')" class="btn btn-danger">Eliminar</button></td>
           </tr>`;
@@ -703,7 +703,7 @@ function cambiarDatosTienda(event, index) {
 
   } else if (parametro === "2") {
     // mostrar cuadro de diálogo para cambiar la contraseña
-    const nuevaDireccion = prompt("Ingrese una nueva direccion:");
+    const nuevoPrecio= prompt("Ingrese un nuevo Precio:");
 
 
 
@@ -714,7 +714,7 @@ function cambiarDatosTienda(event, index) {
       },
       body: new URLSearchParams({
         id: index,
-        precio: nuevaDireccion, // Enviar el nuevo nombre
+        precio: nuevoPrecio, // Enviar el nuevo nombre
         accion: 'actualizarPrecio',
       }).toString(),
     })

@@ -154,7 +154,7 @@ public class Puntos_de_venta extends HttpServlet {
                 String id=request.getParameter("id");
                 String precio_str =request.getParameter("precio");
 
-
+                System.out.println("Precio: "+precio_str);
                 if(id !=null && precio_str !=null  )
                     {
                     db.changePriceShopDB(id, precio_str);
