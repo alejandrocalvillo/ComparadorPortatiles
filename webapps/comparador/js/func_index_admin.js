@@ -511,6 +511,7 @@ function searchPuntos(accion) {
             <th> Modelo </th>
             <th> Tienda </th>
             <th> Precio </th>
+            
           </tr>
         </thead>
         <tbody>`;
