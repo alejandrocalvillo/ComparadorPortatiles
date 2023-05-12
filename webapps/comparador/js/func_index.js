@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
 function loadOrdenadoresMenos() {
-	pagina--;
+	pagina=pagina-1;
 	loadOrdenadores();
 }
 
