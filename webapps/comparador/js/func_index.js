@@ -41,7 +41,7 @@ function loadOrdenadores() {
         });
         tableHtml += `</tbody></table>`;
 		if (pagina>1){
-			tableHtml += `<input type="button" value="Cargar mas" class="btn btn-danger" id="loadMoreButton" onclick="loadOrdenadoresMenos();">`;
+			tableHtml += `<input type="button" value="Atras" class="btn btn-danger" id="loadMoreButton" onclick="loadOrdenadoresMenos();">`;
 			tableHtml += `<input type="button" value="Cargar mas" class="btn btn-primary" id="loadMoreButton" onclick="loadOrdenadores();">`;
 		} else {
 			tableHtml += `<input type="button" value="Cargar mas" class="btn btn-primary" id="loadMoreButton" onclick="loadOrdenadores();">`;
@@ -56,7 +56,7 @@ function loadOrdenadores() {
 document.addEventListener("DOMContentLoaded", function() {
 	loadOrdenadores();
   });
-  
+
 function loadOrdenadoresMenos() {
 	pagina--;
 	loadOrdenadores();
