@@ -141,24 +141,6 @@ public class Puntos_de_venta extends HttpServlet {
                 response.setCharacterEncoding("UTF-8");
                 response.getWriter().write(errorMessage);
             }
-        } else if (accion.equals("anadir")) {
-
-            try (DBManager db = new DBManager()) {
-                // Empezamos contando marcas en el index
-
-                String tienda_str = request.getParameter("tienda");
-                String direccion_str = request.getParameter("direccion");
-
-                if (tienda_str != null && direccion_str != null) {
-                    PuntosVenta punto = db.insertPuntoDB(tienda_str, direccion_str);
-
-                }
-
-            } catch (SQLException | NamingException e) {
-                e.printStackTrace();
-                response.sendError(500);
-            }
-
         } else if (accion.equals("actualizarTienda")) {
 
             try (DBManager db = new DBManager()) {
