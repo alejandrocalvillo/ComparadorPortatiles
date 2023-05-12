@@ -147,16 +147,16 @@ public class Puntos_de_venta extends HttpServlet {
                     response.sendError(500);
             }
     
-         }else if (accion.equals("actualizarDireccion")) {
+         }else if (accion.equals("actualizarPrecio")) {
 
             try (DBManager db = new DBManager()) {
                 String id=request.getParameter("id");
-                String direccion_str =request.getParameter("direccion");
+                String precio_str =request.getParameter("precio");
 
 
-                if(id !=null && direccion_str !=null  )
+                if(id !=null && precio_str !=null  )
                     {
-                    db.changeAddressShopDB(id, direccion_str);
+                    db.changePriceShopDB(id, precio_str);
                     }  
             
             } catch (SQLException | NamingException e) {

@@ -676,7 +676,7 @@ function cambiarDatosTienda(event, index) {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       },
       body: new URLSearchParams({
-        id: index,
+        id: window.ordenadoresTienda[index].id,
         tienda: nuevaTienda, // Enviar el nuevo nombre
         accion: 'actualizarTienda',
       }).toString(),
@@ -713,8 +713,8 @@ function cambiarDatosTienda(event, index) {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       },
       body: new URLSearchParams({
-        id: index,
-        precio: nuevoPrecio, // Enviar el nuevo nombre
+        id: window.ordenadoresTienda[index].id,
+        precio: nuevaDireccion, // Enviar el nuevo nombre
         accion: 'actualizarPrecio',
       }).toString(),
     })

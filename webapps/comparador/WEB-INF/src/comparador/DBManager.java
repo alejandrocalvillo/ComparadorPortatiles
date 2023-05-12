@@ -1082,7 +1082,7 @@ public class DBManager implements AutoCloseable {
 
     public void changeNameShopDB(String id, String nombre) throws SQLException {
 
-        String query = "UPDATE puntos_de_venta_sin_ordenador SET tienda = ? WHERE id = ? ";
+        String query = "UPDATE puntos_de_venta SET tienda = ? WHERE ordenador_id = ? ";
 
         PreparedStatement stmt = null;
         try {
@@ -1102,14 +1102,14 @@ public class DBManager implements AutoCloseable {
 
     }
 
-    public void changeAddressShopDB(String id, String direccion) throws SQLException {
+    public void changePriceShopDB(String id, String precio) throws SQLException {
 
-        String query = "UPDATE puntos_de_venta_sin_ordenador SET direccion = ? WHERE id = ? ";
+        String query = "UPDATE puntos_de_venta SET direccion = ? WHERE ordenador_id = ? ";
 
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(query);
-            stmt.setString(1, direccion);
+            stmt.setString(1, precio);
             stmt.setString(2, id);
             stmt.executeUpdate();
 
