@@ -612,7 +612,58 @@ function anadirPunto(accion) {
     });
 }
 
+function searchPuntosVacios(accion) {
+  // Send AJAX request
+  fetch('puntosventa', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+    },
+    body: new URLSearchParams({
+      accion: accion // Agregar el parámetro de acción
+    }).toString(),
 
+  })
+    .then(response => response.json())
+    .then(ordenadores => {
+      // Generate table HTML
+      let tablePuntosHtml = `
+        <table id="tabla" class="table table-striped">
+        <thead>
+          <tr>
+            <th> Modelo </th>
+            <th> Tienda </th>
+            <th> Precio </th>
+
+          </tr>
+        </thead>
+        <tbody>`;
+
+      ordenadores.forEach((ordenador, index) => {
+        tablePuntosHtml += `
+          <tr>
+            <td>${ordenador.modelo}</td>
+            <td>${ordenador.tienda}</td>
+            <td>${ordenador.precio}</td>
+            <td><button onclick="seleccionarPunto(${index}, 'seleccionar')" class="btn btn-primary">Seleccionar</button></td>
+            <td><button onclick="eliminarPunto(${index}, 'eliminar')" class="btn btn-danger">Eliminar</button></td>
+          </tr>`;
+      });
+
+      tablePuntosHtml += '</tbody></table>';
+
+      // Update results container
+      document.getElementById('modalResultsContainerPuntos').innerHTML = tablePuntosHtml;
+
+
+      // Save usuarios array in a global variable
+      window.ordenadoresTienda = ordenadores;
+
+      // Show modal
+      const resultsModalPuntos = new bootstrap.Modal(document.getElementById('resultsModalPuntos'));
+      resultsModalPuntos.show();
+    });
+}
 
 function seleccionarPunto(index, accion) {
   console.log('Detalles ' + index);
@@ -789,7 +840,7 @@ function aniadirPunto(){
 }
 
 
-function aniadirDatosTienda () {
+function aniadirDatosTienda (event, index) {
   event.preventDefault(); // evitar que el formulario se envíe
 
   // Obtener el usuario a actualizar
