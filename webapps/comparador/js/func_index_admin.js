@@ -487,7 +487,8 @@ function eliminarAdmin(index, accion) {
   //
   //             PUNTOS VENTA
 
-
+let ordenadoresTienda = [];
+let ordenadoresSinTienda = [];
   function searchPuntos(accion) {
     // Send AJAX request
     fetch('puntosventa', {
@@ -501,25 +502,27 @@ function eliminarAdmin(index, accion) {
      
     })
       .then(response => response.json())
-      .then(puntos => {
+      .then(ordenadores => {
         // Generate table HTML
         let tablePuntosHtml = `
         <table id="tabla" class="table table-striped">
         <thead>
           <tr>
-            <th>Tienda</th>
-            <th>Direccion</th>
-            <th></th>
-            <th></th>
+            <th> Marca </th>
+            <th> Tienda </th>
+            <th> Calle </th>
+            <th> Precio </th>
           </tr>
         </thead>
         <tbody>`;
     
-        puntos.forEach((puntos, index) => {
+        ordenadores.forEach((ordenador, index) => {
           tablePuntosHtml += `
           <tr>
-            <td>${puntos.tienda}</td>
-            <td>${puntos.direccion}</td>
+            <td>${ordenador.modelo}</td>
+            <td>${ordenador.tienda}</td>
+            <td>${ordenador.direccion}</
+            <td>${ordenador.precio}</
             <td><button onclick="seleccionarPunto(${index}, 'seleccionar')" class="btn btn-primary">Seleccionar</button></td>
             <td><button onclick="eliminarPunto(${index}, 'eliminar')" class="btn btn-danger">Eliminar</button></td>
           </tr>`;
@@ -532,7 +535,7 @@ function eliminarAdmin(index, accion) {
     
         
         // Save usuarios array in a global variable
-        window.puntosArray = puntos;
+        window.ordenadoresTienda = ordenadores;
   
         // Show modal
         const resultsModalPuntos = new bootstrap.Modal(document.getElementById('resultsModalPuntos'));

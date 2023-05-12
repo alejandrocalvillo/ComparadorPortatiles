@@ -58,16 +58,17 @@ public class Puntos_de_venta extends HttpServlet {
 
             try (DBManager dbManager = new DBManager()) {
                 System.out.println("Holita estoy aqui");
-                List<PuntosVenta> puntos = dbManager.getPuntosVentaDB();
+                List<Ordenador> ordendores = dbManager.getPuntosVentaDB();
     
                 JSONArray puntosJsonArray = new JSONArray();
     
                 System.out.println("Cree el JSONArray");
-                for (PuntosVenta punto : puntos) {
+                for (Ordenador punto : ordendores) {
                     JSONObject puntoJson = new JSONObject();
                     puntoJson.put("id", punto.getId());
+
                     puntoJson.put("tienda", punto.getTienda());
-                    puntoJson.put("direccion", punto.getDireccion());
+                    puntoJson.put("direccion", punto.getPrecio());
                     puntosJsonArray.put(puntoJson);
                 }
     

@@ -40,13 +40,15 @@ public class DBManager implements AutoCloseable {
 
     /**
      * Return a list with all the 12 first computers in the DB.
+     * 
      * @param start
      * @param limit
      * @return
      */
     public List<Ordenador> getOrdenadores(int start, int limit) {
         List<Ordenador> ordenadores = new ArrayList<>();
-        String query = "SELECT ordenadores.id AS id, ordenadores.modelo, marcas.nombre AS marca_nombre, procesadores.nombre AS procesador_nombre, memorias.tipo AS memoria_tipo, memorias.capacidad AS capacidad_ram, discos.tipo AS disco_tipo, discos.capacidad AS capacidad_disco, puntos_de_venta.tienda, puntos_de_venta.precio FROM ordenadores INNER JOIN marcas ON marca_id = marcas.id INNER JOIN procesadores ON procesador_id = procesadores.id INNER JOIN discos ON disco_id = discos.id INNER JOIN memorias ON memoria_id = memorias.id LEFT JOIN puntos_de_venta ON ordenadores.id = puntos_de_venta.ordenador_id ORDER BY id DESC LIMIT "+start+", "+limit+"";
+        String query = "SELECT ordenadores.id AS id, ordenadores.modelo, marcas.nombre AS marca_nombre, procesadores.nombre AS procesador_nombre, memorias.tipo AS memoria_tipo, memorias.capacidad AS capacidad_ram, discos.tipo AS disco_tipo, discos.capacidad AS capacidad_disco, puntos_de_venta.tienda, puntos_de_venta.precio FROM ordenadores INNER JOIN marcas ON marca_id = marcas.id INNER JOIN procesadores ON procesador_id = procesadores.id INNER JOIN discos ON disco_id = discos.id INNER JOIN memorias ON memoria_id = memorias.id LEFT JOIN puntos_de_venta ON ordenadores.id = puntos_de_venta.ordenador_id ORDER BY id DESC LIMIT "
+                + start + ", " + limit + "";
         try (Statement stmt = connection.createStatement()) {
             ResultSet resultSet = stmt.executeQuery(query);
             while (resultSet.next()) {
@@ -68,7 +70,7 @@ public class DBManager implements AutoCloseable {
         }
         return ordenadores;
     }
-    
+
     /**
      * Return a Computer from his id
      *
@@ -306,10 +308,9 @@ public class DBManager implements AutoCloseable {
         return new ArrayList<Ordenador>();
     }
 
+    // FUNCIONES PARA AÑADIR, MODIFICAR Y ELIMINAR ORDENADORES
 
-       //FUNCIONES PARA AÑADIR, MODIFICAR Y ELIMINAR ORDENADORES
-
-       public List<String> listMarcas() {
+    public List<String> listMarcas() {
 
         String query = "SELECT * FROM marcas";
 
@@ -317,7 +318,7 @@ public class DBManager implements AutoCloseable {
 
             ResultSet resultSet = stmt.executeQuery(query);
 
-            List<String> marcas= new ArrayList<String>();
+            List<String> marcas = new ArrayList<String>();
 
             while (resultSet.next()) {
                 String marca = resultSet.getString("nombre");
@@ -334,14 +335,13 @@ public class DBManager implements AutoCloseable {
         return new ArrayList<String>();
     }
 
-
     public List<String> listProcesadores() {
 
         String query = "SELECT * FROM procesadores";
         try (Statement stmt = connection.createStatement()) {
             ResultSet resultSet = stmt.executeQuery(query);
 
-            List<String> procesadores= new ArrayList<String>();
+            List<String> procesadores = new ArrayList<String>();
 
             while (resultSet.next()) {
                 String procesador = resultSet.getString("nombre");
@@ -363,7 +363,7 @@ public class DBManager implements AutoCloseable {
         try (Statement stmt = connection.createStatement()) {
             ResultSet resultSet = stmt.executeQuery(query);
 
-            List<String> memorias= new ArrayList<String>();
+            List<String> memorias = new ArrayList<String>();
 
             while (resultSet.next()) {
                 String tipo = resultSet.getString("tipo");
@@ -387,7 +387,7 @@ public class DBManager implements AutoCloseable {
         try (Statement stmt = connection.createStatement()) {
             ResultSet resultSet = stmt.executeQuery(query);
 
-            List<String> discos= new ArrayList<String>();
+            List<String> discos = new ArrayList<String>();
 
             while (resultSet.next()) {
                 String tipo = resultSet.getString("tipo");
@@ -487,7 +487,7 @@ public class DBManager implements AutoCloseable {
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, tipoDisco);
             stmt.setInt(2, capacidadDisco);
-            
+
             ResultSet resultSet = stmt.executeQuery();
             if (resultSet.next()) {
                 discoId = resultSet.getString("id");
@@ -500,7 +500,6 @@ public class DBManager implements AutoCloseable {
         }
         return discoId;
     }
-
 
     public List<Ordenador> getOrdenadoresDB() throws SQLException {
         List<Ordenador> ordenadores = new ArrayList<>();
@@ -545,16 +544,18 @@ public class DBManager implements AutoCloseable {
         return ordenadores;
     }
 
-        // hacer que devuelva un ordenador si todo okey
-    public void insertOrdenadorDB(String modelo, String marcaId, String procesadorId, String memoriaId, String discoId) throws SQLException {
+    // hacer que devuelva un ordenador si todo okey
+    public void insertOrdenadorDB(String modelo, String marcaId, String procesadorId, String memoriaId, String discoId)
+            throws SQLException {
 
         System.out.println("ENTRO A INSERTAR");
 
         Ordenador ordenador = new Ordenador();
-        
+
         String query = "INSERT INTO ordenadores (modelo, marca_id, procesador_id, memoria_id, disco_id) VALUES (?, ?, ?, ?, ?)";
 
-        System.out.println("modelo:" + modelo + ", marcaid:" + marcaId + ", procesadorId:" + procesadorId + ", memoriaId:" + memoriaId + ", discoId:" + discoId);
+        System.out.println("modelo:" + modelo + ", marcaid:" + marcaId + ", procesadorId:" + procesadorId
+                + ", memoriaId:" + memoriaId + ", discoId:" + discoId);
 
         PreparedStatement stmt = null;
         try {
@@ -570,7 +571,7 @@ public class DBManager implements AutoCloseable {
 
             stmt.executeUpdate();
 
-            System.out.println("TODO CORRECTO PARA EL MODELO:" + modelo+ ", Y YO QUE ME ALEGRO");
+            System.out.println("TODO CORRECTO PARA EL MODELO:" + modelo + ", Y YO QUE ME ALEGRO");
 
         } catch (SQLException ex) {
             System.out.println(" SQLException : " + ex.getMessage());
@@ -589,10 +590,10 @@ public class DBManager implements AutoCloseable {
             stmt.setString(2, id);
             stmt.executeUpdate();
         } catch (SQLException ex) {
-                System.out.println("SQLException: " + ex.getMessage());
-                ex.printStackTrace();
-                System.out.println("VendorError: " + ex.getErrorCode());
-                System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("SQLException: " + ex.getMessage());
+            ex.printStackTrace();
+            System.out.println("VendorError: " + ex.getErrorCode());
+            System.out.println("SQLState: " + ex.getSQLState());
         }
     }
 
@@ -671,10 +672,11 @@ public class DBManager implements AutoCloseable {
     public void deleteOrdenadorDB(String id) throws SQLException {
 
         String query = "DELETE FROM ordenadores WHERE id = ? ";
-      
+        String query2 = "DELETE FROM puntos_de_venta WHERE ordenador_id = ? ";
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(query);
+            stmt = connection.prepareStatement(query2);
             stmt.setString(1, id);
             stmt.executeUpdate();
         } catch (SQLException ex) {
@@ -684,23 +686,22 @@ public class DBManager implements AutoCloseable {
             System.out.println(" SQLState : " + ex.getSQLState());
 
         }
-       
+
     }
 
     public String obtenerPrimeraCadena(String memoria) {
-        String tipo ="";
+        String tipo = "";
         String[] partes = memoria.split("-");
         tipo = partes[0];
         return tipo;
     }
 
     public String obtenerSegundaCadena(String memoria) {
-        String capacidad ="";
+        String capacidad = "";
         String[] partes = memoria.split("-");
         capacidad = partes[1];
         return capacidad;
     }
-
 
     /****************************************************************************
      * 
@@ -919,7 +920,7 @@ public class DBManager implements AutoCloseable {
         return new ArrayList<Usuario>();
     }
 
-    public void declararAdmin(String id){
+    public void declararAdmin(String id) {
 
         String query = "INSERT INTO administradores (usuario_id, es_admin) VALUES (?, 1);";
 
@@ -938,7 +939,7 @@ public class DBManager implements AutoCloseable {
         }
     }
 
-    public void deleteAdmin(String id){
+    public void deleteAdmin(String id) {
         String query = "DELETE FROM administradores WHERE usuario_id = ? ";
 
         PreparedStatement stmt = null;
@@ -956,10 +957,9 @@ public class DBManager implements AutoCloseable {
         }
     }
 
-
-    public boolean isAdmin(String id){
+    public boolean isAdmin(String id) {
         String query = "SELECT * FROM administradores WHERE usuario_id = ?";
-    
+
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, id);
             try (ResultSet resultSet = stmt.executeQuery()) {
@@ -969,7 +969,7 @@ public class DBManager implements AutoCloseable {
                     return false;
                 }
             }
-    
+
         } catch (SQLException ex) {
             System.out.println(" SQLException : " + ex.getMessage());
             ex.printStackTrace();
@@ -979,10 +979,6 @@ public class DBManager implements AutoCloseable {
         return false;
     }
 
-
-
-
-      
     /****************************************************************************
      * 
      * 
@@ -999,12 +995,11 @@ public class DBManager implements AutoCloseable {
      * @throws SQLException If something fails with the DB.
      */
 
-     
-    public List<PuntosVenta> getPuntosVentaDB() throws SQLException {
+    public List<Ordenador> getPuntosVentaDB() throws SQLException {
 
-        String query = "SELECT id, tienda, direccion FROM puntos_de_venta_sin_ordenador";
+        String query = "SELECT ordenadores.id, ordenadores.modelo, puntos_de_venta.tienda, puntos_de_venta.direccion FROM ordenadores INNER JOIN puntos_de_venta ON ordenadores.id = puntos_de_venta.ordenador_id";
 
-        List<PuntosVenta> puntos = new ArrayList<PuntosVenta>();
+        List<Ordenador> ordenadores = new ArrayList<Ordenador>();
         PreparedStatement stmt = null;
         try {
 
@@ -1012,18 +1007,17 @@ public class DBManager implements AutoCloseable {
             ResultSet resultSet = stmt.executeQuery();
 
             while (resultSet.next()) {
-                PuntosVenta punto = new PuntosVenta();
+                Ordenador ordenador = new Ordenador();
                 int id = resultSet.getInt("id");
+                String modelo = resultSet.getString("modelo");
                 String tienda = resultSet.getString("tienda");
-                String direccion = resultSet.getString("direccion");
-                punto.setTienda(tienda);
-                punto.setDireccion(direccion);
-                punto.setId(id);
-                puntos.add(punto);
-                
+                ordenador.setModelo(modelo);
+                ordenador.setTienda(tienda);
+                ordenador.setId(id);
+                ordenadores.add(ordenador);
 
             }
-            return puntos;
+            return ordenadores;
         } catch (SQLException ex) {
             System.out.println(" SQLException : " + ex.getMessage());
             ex.printStackTrace();
@@ -1031,15 +1025,13 @@ public class DBManager implements AutoCloseable {
             System.out.println(" SQLState : " + ex.getSQLState());
 
         }
-        return new ArrayList<PuntosVenta>();
+        return new ArrayList<Ordenador>();
     }
 
-
-    
     public void deletePuntoDB(String id) throws SQLException {
 
         String query = "DELETE FROM puntos_de_venta_sin_ordenador WHERE id = ? ";
-      
+
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(query);
@@ -1053,15 +1045,13 @@ public class DBManager implements AutoCloseable {
             System.out.println(" SQLState : " + ex.getSQLState());
 
         }
-       
-    }
 
-    
+    }
 
     // hacer que devuelva un usuario si todo okey
     public PuntosVenta insertPuntoDB(String tienda, String direccion) throws SQLException {
         PuntosVenta punto = new PuntosVenta();
-        
+
         String query = "INSERT INTO puntos_de_venta_sin_ordenador (tienda, direccion) VALUES (?, ?)";
 
         PreparedStatement stmt = null;
@@ -1088,19 +1078,17 @@ public class DBManager implements AutoCloseable {
 
     }
 
-    
     public void changeNameShopDB(String id, String nombre) throws SQLException {
 
         String query = "UPDATE puntos_de_venta_sin_ordenador SET tienda = ? WHERE id = ? ";
-      
+
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(query);
             stmt.setString(1, nombre);
             stmt.setString(2, id);
             stmt.executeUpdate();
-            System.out.println(" nombre tienda db" + nombre );
-
+            System.out.println(" nombre tienda db" + nombre);
 
         } catch (SQLException ex) {
             System.out.println(" SQLException : " + ex.getMessage());
@@ -1109,14 +1097,13 @@ public class DBManager implements AutoCloseable {
             System.out.println(" SQLState : " + ex.getSQLState());
 
         }
-       
+
     }
 
-    
     public void changeAddressShopDB(String id, String direccion) throws SQLException {
 
         String query = "UPDATE puntos_de_venta_sin_ordenador SET direccion = ? WHERE id = ? ";
-      
+
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(query);
@@ -1131,8 +1118,6 @@ public class DBManager implements AutoCloseable {
             System.out.println(" SQLState : " + ex.getSQLState());
 
         }
-       
+
     }
 }
-
-
