@@ -511,7 +511,7 @@ function searchPuntos(accion) {
             <th> Modelo </th>
             <th> Tienda </th>
             <th> Precio </th>
-            
+
           </tr>
         </thead>
         <tbody>`;
@@ -617,7 +617,7 @@ function anadirPunto(accion) {
 function seleccionarPunto(index, accion) {
   console.log('Detalles ' + index);
 
-  const punto = window.puntosArray[index];
+  const punto = window.ordenadoresTienda[index];
 
   detallesPuntosHTML = `
       <table id="tabla" border="2">
@@ -628,7 +628,7 @@ function seleccionarPunto(index, accion) {
       </tr>
       <tr>
         <td>${punto.tienda}</td>
-        <td>${punto.direccion}</td>
+        <td>${punto.precio}</td>
       </tr>
       </table>`;
 
@@ -642,7 +642,7 @@ function seleccionarPunto(index, accion) {
                       <label for="unittype">Selecciona el parametro a cambiar</label>
                       <select id="unittype" name="unittype">
                         <option value="1" selected> Tienda </option>
-                        <option value="2"> Direccion </option>
+                        <option value="2"> precio </option>
                       </select>
                       <div id="editar-parametro"></div>
                     </p>
@@ -714,8 +714,8 @@ function cambiarDatosTienda(event, index) {
       },
       body: new URLSearchParams({
         id: index,
-        direccion: nuevaDireccion, // Enviar el nuevo nombre
-        accion: 'actualizarDireccion',
+        precio: nuevoPrecio, // Enviar el nuevo nombre
+        accion: 'actualizarPrecio',
       }).toString(),
     })
       .then(data => {
